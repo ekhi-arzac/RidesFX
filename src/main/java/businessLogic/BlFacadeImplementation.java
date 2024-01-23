@@ -2,7 +2,6 @@ package businessLogic;
 
 import java.util.Date;
 import java.util.List;
-import java.util.ResourceBundle;
 import java.util.Vector;
 
 import javax.jws.WebMethod;
@@ -12,8 +11,6 @@ import configuration.ConfigXML;
 import dataAccess.DataAccess;
 import domain.Driver;
 import domain.Ride;
-import exceptions.EventFinished;
-import exceptions.QuestionAlreadyExist;
 import exceptions.RideAlreadyExistException;
 import exceptions.RideMustBeLaterThanTodayException;
 
