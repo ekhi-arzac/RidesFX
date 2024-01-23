@@ -36,13 +36,7 @@ public interface BlFacade  {
 	 */
 	@WebMethod public List<Date> getThisMonthDatesWithRides(String from, String to, Date date);
 
-	/*
-	 * This method retrieves all the events of a given date 
-	 * 
-	 * @param date in which events are retrieved
-	 * @return collection of events */
 
-	  @WebMethod public Vector<Ride> getRides(Date date);
 
 	/**
 	 * This method retrieves from the database the dates in a month for which there are events

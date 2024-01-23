@@ -11,8 +11,6 @@ import javax.jws.WebService;
 import configuration.ConfigXML;
 import dataAccess.DataAccess;
 import domain.Driver;
-import domain.Event;
-import domain.Question;
 import domain.Ride;
 import exceptions.EventFinished;
 import exceptions.QuestionAlreadyExist;
@@ -78,20 +76,6 @@ public class BlFacadeImplementation implements BlFacade {
 		List<Date>  dates=dbManager.getThisMonthDatesWithRides(from, to, date);
 		dbManager.close();
 		return dates;
-	}
-
-	/**
-	 * This method invokes the data access to retrieve the events of a given date
-	 *
-	 * @param date in which events are retrieved
-	 * @return collection of events
-	 */
-	@WebMethod
-	public Vector<Ride> getRides(Date date)  {
-		dbManager.open(false);
-		Vector<Ride>  events = dbManager.getEvents(date);
-		dbManager.close();
-		return events;
 	}
 
 

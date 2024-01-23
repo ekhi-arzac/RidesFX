@@ -10,10 +10,7 @@ import javax.persistence.TypedQuery;
 import configuration.ConfigXML;
 import configuration.UtilDate;
 import domain.Driver;
-import domain.Event;
-import domain.Question;
 import domain.Ride;
-import exceptions.QuestionAlreadyExist;
 import exceptions.RideAlreadyExistException;
 import exceptions.RideMustBeLaterThanTodayException;
 
@@ -91,55 +88,6 @@ public class DataAccess {
         }
     }
 
-
-    /**
-     * This method creates a question for an event, with a question text and the minimum bet
-     *
-     * @param event      to which question is added
-     * @param question   text of the question
-     * @param betMinimum minimum quantity of the bet
-     * @return the created question, or null, or an exception
-     * @throws QuestionAlreadyExist if the same question already exists for the event
-     */
-    public Question createQuestion(Event event, String question, float betMinimum)
-            throws QuestionAlreadyExist {
-        System.out.println(">> DataAccess: createQuestion=> event = " + event + " question = " +
-                question + " minimum bet = " + betMinimum);
-
-        Event ev = db.find(Event.class, event.getEventNumber());
-
-        if (ev.doesQuestionExist(question)) throw new QuestionAlreadyExist(
-                ResourceBundle.getBundle("Etiquetas").getString("ErrorQuestionAlreadyExists"));
-
-        db.getTransaction().begin();
-        Question q = ev.addQuestion(question, betMinimum);
-        //db.persist(q);
-        db.persist(ev); // db.persist(q) not required when CascadeType.PERSIST is added
-        // in questions property of Event class
-        // @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
-        db.getTransaction().commit();
-        return q;
-    }
-
-    /**
-     * This method retrieves from the database the events of a given date
-     *
-     * @param date in which events are retrieved
-     * @return collection of events
-     */
-    public Vector<Ride> getEvents(Date date) {
-        System.out.println(">> DataAccess: getEvents");
-        Vector<Ride> res = new Vector<>();
-        TypedQuery<Ride> query = db.createQuery("SELECT ride FROM Ride ride WHERE ride.date=?1",
-                Ride.class);
-        query.setParameter(1, date);
-        List<Ride> events = query.getResultList();
-        for (Ride ride : events) {
-            System.out.println(ride.toString());
-            res.add(ride);
-        }
-        return res;
-    }
 
     /**
      * This method retrieves from the database the dates in a month for which there are events
