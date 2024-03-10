@@ -8,7 +8,7 @@
 
 <BorderPane fx:id="mainPane" prefHeight="561.0" prefWidth="779.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.MainGUIController">
    <left>
-      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" BorderPane.alignment="RIGHT">
          <children>
             <Label fx:id="selectOptionLbl" text="%SelectUseCase" />
             <Button fx:id="queryRidesBtn" mnemonicParsing="false" onAction="#queryRides" prefHeight="26.0" prefWidth="156.0" text="%QueryRides">
