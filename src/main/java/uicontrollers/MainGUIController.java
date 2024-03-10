@@ -59,7 +59,6 @@ public class MainGUIController implements Controller{
 
     @FXML
     void initialize() {
-
             // set current driver name
             lblDriver.setText(businessLogic.getCurrentDriver().getName());
     }
