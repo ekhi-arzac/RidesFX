@@ -6,12 +6,12 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="mainPane" prefHeight="561.0" prefWidth="779.0" style="-fx-background-color: #F8F8FF;" stylesheets="@MainGUI.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.MainGUIController">
+<BorderPane fx:id="mainPane" prefHeight="561.0" prefWidth="779.0" style="-fx-background-color: #F8F8FF;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.MainGUIController">
    <left>
-      <VBox id="mainBorderpane" alignment="CENTER" stylesheets="@MainGUI.css" BorderPane.alignment="CENTER">
+      <VBox id="mainBorderpane" alignment="CENTER" styleClass="borderpane" stylesheets="@main.css" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="selectOptionLbl" text="%SelectUseCase" />
-            <Button fx:id="queryRidesBtn" mnemonicParsing="false" onAction="#queryRides" prefHeight="26.0" prefWidth="156.0" styleClass="btn_bootstrap" stylesheets="@MainGUI.css" text="%QueryRides">
+            <Button fx:id="queryRidesBtn" mnemonicParsing="false" onAction="#queryRides" prefHeight="26.0" prefWidth="156.0" styleClass="btn_bootstrap" stylesheets="@main.css" text="%QueryRides">
                <VBox.margin>
                   <Insets bottom="50.0" />
                </VBox.margin>
