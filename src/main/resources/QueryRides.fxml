@@ -11,11 +11,11 @@
     <children>
         <DatePicker fx:id="datepicker" layoutX="39.0" layoutY="190.0" />
         <Label layoutX="39.0" layoutY="161.0" text="%EventDate" />
-        <TableView fx:id="tblRides" layoutX="394.0" layoutY="70.0" prefHeight="200.0" prefWidth="445.0">
+        <TableView fx:id="tblRides" layoutX="382.0" layoutY="70.0" prefHeight="200.0" prefWidth="469.0" styleClass="tableview_bootstrap" stylesheets="@main.css">
             <columns>
-                <TableColumn fx:id="qc1" prefWidth="223.5" text="%FindRidesGUI.Driver" />
-                <TableColumn fx:id="qc2" prefWidth="97.5" text="%FindRidesGUI.NPlaces" />
-            <TableColumn fx:id="qc3" prefWidth="70.0" text="%FindRidesGUI.Price" />
+                <TableColumn fx:id="qc1" prefWidth="223.5" styleClass="tableview_column_bootstrap" text="%FindRidesGUI.Driver" />
+                <TableColumn fx:id="qc2" prefWidth="97.5" styleClass="tableview_column_bootstrap" text="%FindRidesGUI.NPlaces" />
+            <TableColumn fx:id="qc3" prefWidth="70.0" styleClass="tableview_column_bootstrap" text="%FindRidesGUI.Price" />
             </columns>
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -25,7 +25,7 @@
         <Label layoutX="751.0" layoutY="21.0" text="%RideDate" />
       <Label layoutX="39.0" layoutY="58.0" text="%DepartCity" />
       <Label layoutX="39.0" layoutY="106.0" text="%ArrivalCity" />
-      <ComboBox fx:id="comboDepartCity" layoutX="126.0" layoutY="54.0" prefWidth="150.0" />
-      <ComboBox fx:id="comboArrivalCity" layoutX="126.0" layoutY="101.0" prefWidth="150.0" />
+      <ComboBox fx:id="comboDepartCity" layoutX="149.0" layoutY="54.0" prefWidth="150.0" styleClass="comb_bootstrap" />
+      <ComboBox fx:id="comboArrivalCity" layoutX="149.0" layoutY="102.0" prefWidth="150.0" styleClass="comb_bootstrap" />
     </children>
 </AnchorPane>
