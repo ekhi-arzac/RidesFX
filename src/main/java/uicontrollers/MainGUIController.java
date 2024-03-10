@@ -1,8 +1,7 @@
 package uicontrollers;
 
+
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 import businessLogic.BlFacade;
@@ -10,9 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
-import javafx.stage.Stage;
+import javafx.scene.layout.BorderPane;
 import ui.MainGUI;
 
 public class MainGUIController implements Controller{
@@ -37,6 +34,8 @@ public class MainGUIController implements Controller{
     @FXML
     private URL location;
 
+    @FXML
+    private BorderPane mainPane;
     private MainGUI mainGUI;
 
     private BlFacade businessLogic;
@@ -49,12 +48,12 @@ public class MainGUIController implements Controller{
 
     @FXML
     void queryRides(ActionEvent event) {
-        mainGUI.showQueryRides();
+        mainPane.setCenter(mainGUI.getQueryRidesLag().getUi());
     }
 
     @FXML
     void createRide(ActionEvent event) {
-        mainGUI.showCreateRide();
+        mainPane.setCenter(mainGUI.getCreateRideLag().getUi());
     }
 
 

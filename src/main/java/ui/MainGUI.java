@@ -41,9 +41,13 @@ public class MainGUI {
     }
 
 
-    class Window {
+    public class Window {
         Controller c;
         Parent ui;
+
+        public Parent getUi() {
+            return ui;
+        }
     }
 
     private Window load(String fxmlfile) throws IOException {
@@ -76,37 +80,34 @@ public class MainGUI {
 
     }
 
-//  public void start(Stage stage) throws IOException {
-//      init(stage);
-//  }
-
+    public Window getQueryRidesLag() {
+        return queryRidesLag;
+    }
+    public Window getCreateRideLag() {
+        return createRideLag;
+    }
 
     public void showMain() {
-        setupScene(mainLag.ui, "MainTitle", 320, 250);
+        setupScene(mainLag.ui, "MainTitle", 1050, 450);
     }
 
-    public void showQueryRides() {
-        setupScene(queryRidesLag.ui, "QueryRides", 1000, 500);
-    }
-
-    public void showCreateRide() {
-        setupScene(createRideLag.ui, "CreateRide", 550, 400);
-    }
 
     private void setupScene(Parent ui, String title, int width, int height) {
+
         if (scene == null) {
             scene = new Scene(ui, width, height);
             scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
             stage.setScene(scene);
         }
+        stage.setMinWidth(width);
+        stage.setMinHeight(height);
+
         stage.setWidth(width);
         stage.setHeight(height);
         stage.setTitle(ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString(title));
+
         scene.setRoot(ui);
         stage.show();
     }
 
-//  public static void main(String[] args) {
-//    launch();
-//  }
 }

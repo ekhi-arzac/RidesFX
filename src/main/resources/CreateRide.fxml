@@ -15,7 +15,6 @@
       <TextField fx:id="txtDepartCity" layoutX="137.0" layoutY="96.0" prefHeight="26.0" prefWidth="359.0" />
       <TextField fx:id="txtNumberOfSeats" layoutX="137.0" layoutY="180.0" prefHeight="26.0" prefWidth="106.0" />
       <Button fx:id="btnCreateRide" layoutX="120.0" layoutY="320.0" mnemonicParsing="false" onAction="#createRideClick" prefHeight="26.0" prefWidth="130.0" text="%CreateRide" />
-      <Button layoutX="310.0" layoutY="321.0" mnemonicParsing="false" onAction="#closeClick" prefHeight="26.0" prefWidth="88.0" text="%Back" />
       <Label fx:id="lblErrorMessage" layoutX="250.0" layoutY="274.0" />
       <Label fx:id="lblErrorMinBet" layoutX="250.0" layoutY="265.0" />
       <Label layoutX="56.0" layoutY="142.0" text="%ArrivalCity" />
