@@ -2,23 +2,28 @@
     -fx-background-color: #9DB2D0;
 
 }
-.text {
-    -fx-font: 20px onest;
-    -fx-font-size: 11pt;
-    -fx-margins: 4pt;
+
+@font-face {
+    font-family: 'Onest';
+    src: url('font/Onest-VariableFont_wght.ttf');
 }
-.btn_bootstrap{
+
+* {
+    -fx-font-family: "Onest";
+}
+
+.button{
     -fx-background-color: #6784AD;
     -fx-text-fill: #c3dcff;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
     -fx-border-width: 1;
 }
-.btn_bootstrap:hover {
+.button:hover {
     -fx-background-color: #4f77ab;
     -fx-cursor : hand;
 }
-.btn_bootstrap:pressed {
+.button:pressed {
     -fx-background-color: #214673;
 }
 .comb_bootstrap{
