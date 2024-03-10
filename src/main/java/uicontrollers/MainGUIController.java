@@ -12,7 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import ui.MainGUI;
 
-public class MainGUIController implements Controller{
+public class MainGUIController implements Controller {
 
     @FXML
     private Label selectOptionLbl;
@@ -27,6 +27,8 @@ public class MainGUIController implements Controller{
     @FXML
     private Button createRideBtn;
 
+    @FXML
+    private Button loginBtn;
 
     @FXML
     private ResourceBundle resources;
@@ -56,6 +58,10 @@ public class MainGUIController implements Controller{
         mainPane.setCenter(mainGUI.getCreateRideLag().getUi());
     }
 
+    @FXML
+    void identification(ActionEvent event) {
+        mainPane.setCenter(mainGUI.getLoginLag().getUi());
+    }
 
     @FXML
     void initialize() {

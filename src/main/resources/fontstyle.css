@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'Onest';
+    src: url('font/Onest-VariableFont_wght.ttf');
+}
+
+.label {
+    -fx-font-family: 'Onest';
+
+}
+
+.button .text {
+    -fx-font-family: 'Onest';
+
+}

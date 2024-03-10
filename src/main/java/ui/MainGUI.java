@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 
 public class MainGUI {
 
-    private Window mainLag, createRideLag, queryRidesLag;
+    private Window mainLag, createRideLag, queryRidesLag, identificationLag;
 
     private BlFacade businessLogic;
     private Stage stage;
@@ -86,6 +86,9 @@ public class MainGUI {
     public Window getCreateRideLag() {
         return createRideLag;
     }
+    public Window getLoginLag() {
+        return identificationLag;
+    }
 
     public void showMain() {
         setupScene(mainLag.ui, "MainTitle", 1050, 450);
@@ -96,7 +99,8 @@ public class MainGUI {
 
         if (scene == null) {
             scene = new Scene(ui, width, height);
-            scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
+            scene.getStylesheets().add(getClass().getResource("/fontstyle.css").toExternalForm());
+
             stage.setScene(scene);
         }
         stage.setMinWidth(width);

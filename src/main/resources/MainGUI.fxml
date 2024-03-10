@@ -8,15 +8,18 @@
 
 <BorderPane fx:id="mainPane" prefHeight="561.0" prefWidth="779.0" style="-fx-background-color: #F8F8FF;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.MainGUIController">
    <left>
-      <VBox id="mainBorderpane" alignment="CENTER" styleClass="borderpane" stylesheets="@main.css" BorderPane.alignment="CENTER">
+      <VBox id="mainBorderpane" alignment="TOP_CENTER" styleClass="borderpane" stylesheets="@main.css" BorderPane.alignment="TOP_CENTER">
          <children>
-            <Label fx:id="selectOptionLbl" text="%SelectUseCase" />
-            <Button fx:id="queryRidesBtn" mnemonicParsing="false" onAction="#queryRides" prefHeight="26.0" prefWidth="156.0" styleClass="btn_bootstrap" stylesheets="@main.css" text="%QueryRides">
+            <Label fx:id="selectOptionLbl" text="%SelectUseCase">
+               <padding>
+                  <Insets top="20.0" />
+               </padding></Label>
+            <Button fx:id="queryRidesBtn" mnemonicParsing="false" onAction="#queryRides" prefHeight="26.0" prefWidth="156.0"  stylesheets="@main.css" text="%QueryRides">
                <VBox.margin>
-                  <Insets bottom="50.0" />
+                  <Insets bottom="20.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="createRidesBtn" mnemonicParsing="false" onAction="#createRide" prefHeight="26.0" prefWidth="155.0" styleClass="btn_bootstrap" text="%CreateRide">
+            <Button fx:id="createRidesBtn" mnemonicParsing="false" onAction="#createRide" prefHeight="26.0" prefWidth="155.0"  text="%CreateRide">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
