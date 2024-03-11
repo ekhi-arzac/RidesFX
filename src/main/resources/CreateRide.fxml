@@ -6,21 +6,20 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.CreateRideController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="anchorpane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.CreateRideController">
    <children>
-      <DatePicker fx:id="datePicker" layoutX="156.0" layoutY="56.0" />
+      <DatePicker fx:id="datePicker" layoutX="156.0" layoutY="56.0" styleClass="textfield" />
       <Label layoutX="53.0" layoutY="60.0" text="%RideDate" />
       <Label layoutX="54.0" layoutY="100.0" text="%DepartCity" />
       <Label layoutX="24.0" layoutY="185.0" text="%NumberOfSeats" />
-      <TextField fx:id="txtDepartCity" layoutX="155.0" layoutY="96.0" prefHeight="26.0" prefWidth="359.0" />
-      <TextField fx:id="txtNumberOfSeats" layoutX="155.0" layoutY="181.0" prefHeight="26.0" prefWidth="106.0" />
+      <TextField fx:id="txtDepartCity" layoutX="155.0" layoutY="96.0" prefHeight="26.0" prefWidth="359.0" styleClass="textfield" />
+      <TextField fx:id="txtNumberOfSeats" layoutX="155.0" layoutY="181.0" prefHeight="26.0" prefWidth="106.0" styleClass="textfield" />
       <Button fx:id="btnCreateRide" layoutX="120.0" layoutY="320.0" mnemonicParsing="false" onAction="#createRideClick" prefHeight="26.0" prefWidth="130.0" text="%CreateRide" />
       <Label fx:id="lblErrorMinBet" layoutX="250.0" layoutY="265.0" />
       <Label layoutX="56.0" layoutY="142.0" text="%ArrivalCity" />
-      <TextField fx:id="txtArrivalCity" layoutX="155.0" layoutY="138.0" prefHeight="26.0" prefWidth="359.0" />
+      <TextField fx:id="txtArrivalCity" layoutX="155.0" layoutY="138.0" prefHeight="26.0" prefWidth="359.0" styleClass="textfield" />
       <Label layoutX="71.0" layoutY="221.0" text="%Price" />
-      <TextField fx:id="txtPrice" layoutX="155.0" layoutY="217.0" prefHeight="26.0" prefWidth="106.0" />
-      <Label id="lblErrorMessage" layoutX="169.0" layoutY="292.0" />
-      <Label id="lblErrorMessage" layoutX="284.0" layoutY="324.0" text="Label" />
+      <TextField fx:id="txtPrice" layoutX="155.0" layoutY="217.0" prefHeight="26.0" prefWidth="106.0" styleClass="textfield" />
+      <Label id="lblErrorMessage" fx:id="lblErrorMessage" layoutX="400.0" layoutY="325.0" />
    </children>
 </AnchorPane>

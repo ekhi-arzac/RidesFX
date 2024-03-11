@@ -7,9 +7,9 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="405.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.QueryRidesController">
+<AnchorPane prefHeight="405.0" prefWidth="902.0" styleClass="anchorpane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.QueryRidesController">
     <children>
-        <DatePicker fx:id="datepicker" layoutX="39.0" layoutY="190.0" />
+        <DatePicker fx:id="datepicker" layoutX="39.0" layoutY="190.0" style="-fx-cursor: hand;" styleClass="datepicker" />
         <Label layoutX="39.0" layoutY="161.0" text="%EventDate" />
         <TableView fx:id="tblRides" layoutX="382.0" layoutY="70.0" prefHeight="200.0" prefWidth="469.0" styleClass="tableview_bootstrap" stylesheets="@main.css">
             <columns>

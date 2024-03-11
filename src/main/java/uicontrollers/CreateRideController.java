@@ -38,7 +38,6 @@ public class CreateRideController implements Controller {
 
     private MainGUI mainGUI;
 
-
     @FXML
     private Label lblErrorMessage;
 
