@@ -111,7 +111,7 @@ public class CreateRideController implements Controller {
 
     void displayMessage(String message, String label){
         lblErrorMessage.getStyleClass().clear();
-        lblErrorMessage.getStyleClass().setAll("lbl", "lbl-"+label);
+        lblErrorMessage.getStyleClass().setAll("error_msg");
         lblErrorMessage.setText(message);
     }
 

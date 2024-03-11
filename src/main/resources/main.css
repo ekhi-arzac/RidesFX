@@ -34,3 +34,12 @@
     -fx-text-fill: #6784AD;
     -fx-background-radius: 5;
 }
+.error_msg{
+    -fx-background-color: #ec9e97;
+    -fx-border-color: #cb564d;
+    -fx-text-fill: #cb564d;
+    -fx-font-weight: 900;
+    -fx-background-radius:8;
+    -fx-border-radius: 8;
+    -fx-label-padding: 8;
+}
