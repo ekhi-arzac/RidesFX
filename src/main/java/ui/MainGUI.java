@@ -11,6 +11,7 @@ import uicontrollers.Controller;
 
 import java.io.IOException;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class MainGUI {
@@ -99,7 +100,7 @@ public class MainGUI {
 
         if (scene == null) {
             scene = new Scene(ui, width, height);
-            scene.getStylesheets().add(getClass().getResource("/fontstyle.css").toExternalForm());
+            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/fontstyle.css")).toExternalForm());
 
             stage.setScene(scene);
         }

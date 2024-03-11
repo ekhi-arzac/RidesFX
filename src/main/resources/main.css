@@ -3,18 +3,14 @@
 
 }
 
-@font-face {
-    font-family: 'Onest';
-    src: url('font/Onest-VariableFont_wght.ttf');
-}
 
 * {
     -fx-font-family: "Onest";
 }
-
 .button{
     -fx-background-color: #6784AD;
     -fx-text-fill: #c3dcff;
+    -fx-font-weight: 900;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
     -fx-border-width: 1;

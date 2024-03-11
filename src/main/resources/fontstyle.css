@@ -1,14 +1,36 @@
 @font-face {
-    font-family: 'Onest';
-    src: url('font/Onest-VariableFont_wght.ttf');
+    font-family: 'Onest 100';
+    src: url('font/onest-latin-100-normal.ttf');
 }
 
-.label {
-    -fx-font-family: 'Onest';
-
+@font-face {
+    font-family: 'Onest 200';
+    src: url('font/onest-latin-200-normal.ttf');
 }
 
-.button .text {
-    -fx-font-family: 'Onest';
-
+@font-face {
+    font-family: 'Onest 300';
+    src: url('font/onest-latin-300-normal.ttf');
 }
+@font-face {
+    font-family: 'Onest 400';
+    src: url('font/onest-latin-400-normal.ttf');
+}
+@font-face {
+    font-family: 'Onest 500';
+    src: url('font/onest-latin-500-normal.ttf');
+}@font-face {
+    font-family: 'Onest 600';
+    src: url('font/onest-latin-600-normal.ttf');
+}@font-face {
+    font-family: 'Onest 700';
+    src: url('font/onest-latin-700-normal.ttf');
+}@font-face {
+    font-family: 'Onest 800';
+    src: url('font/onest-latin-800-normal.ttf');
+}
+@font-face {
+    font-family: 'Onest 900';
+    src: url('font/onest-latin-900-normal.ttf');
+}
+
