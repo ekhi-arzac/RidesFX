@@ -22,7 +22,6 @@ public class ApplicationLauncher {
     BlFacade businessLogic;
 
     try {
-
       if (config.isBusinessLogicLocal())
         businessLogic = new BlFacadeImplementation();
 
