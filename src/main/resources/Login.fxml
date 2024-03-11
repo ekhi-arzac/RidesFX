@@ -10,12 +10,12 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F8F8FF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button layoutX="277.0" layoutY="268.0" mnemonicParsing="false" text="Login" />
-      <TextField layoutX="225.0" layoutY="160.0" />
+      <Button fx:id="loginbtn" layoutX="277.0" layoutY="268.0" mnemonicParsing="false" text="Login" />
+      <TextField fx:id="loginUsername" layoutX="225.0" layoutY="160.0" />
       <Label layoutX="283.0" layoutY="109.0" text="Login" />
       <Label layoutX="225.0" layoutY="142.0" text="Username:" />
       <Label layoutX="225.0" layoutY="200.0" text="Password:" />
-      <Hyperlink layoutX="180.0" layoutY="309.0" text="Not registered yet? Create an account here!" />
-      <PasswordField layoutX="225.0" layoutY="218.0" />
+      <Hyperlink fx:id="enterRegInLog" layoutX="180.0" layoutY="309.0" text="Not registered yet? Create an account here!" />
+      <PasswordField fx:id="loginpassword" layoutX="225.0" layoutY="218.0" />
    </children>
 </AnchorPane>
