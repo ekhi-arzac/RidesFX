@@ -20,7 +20,8 @@ public class Driver implements Serializable {
 	@XmlID
 	@Id 
 	private String email;
-	private String name; 
+	private String name;
+
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private List<Ride> rides=new Vector<Ride>();
 
@@ -114,5 +115,6 @@ public class Driver implements Serializable {
 			return r;
 		} else return null;
 	}
-	
+
+
 }

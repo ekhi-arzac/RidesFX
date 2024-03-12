@@ -28,7 +28,7 @@ public class MainGUIController implements Controller {
     private Button createRideBtn;
 
     @FXML
-    private Button loginBtn;
+    private Button logregbtn;
 
     @FXML
     private ResourceBundle resources;
@@ -73,5 +73,13 @@ public class MainGUIController implements Controller {
     public void setMainApp(MainGUI mainGUI) {
         this.mainGUI = mainGUI;
         mainGUI.setMainPane(mainPane);
+    }
+
+    public void removeLogRegButton() {
+        logregbtn.setVisible(false);
+    }
+
+    public void setDriverName(String name) {
+        lblDriver.setText(name);
     }
 }

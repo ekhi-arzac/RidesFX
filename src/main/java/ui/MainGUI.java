@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import uicontrollers.Controller;
+import uicontrollers.MainGUIController;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -117,6 +118,14 @@ public class MainGUI {
 
         scene.setRoot(ui);
         stage.show();
+    }
+
+    public void removeLogRegButton() {
+        ((MainGUIController) mainLag.c) .removeLogRegButton();
+    }
+
+    public void setDriverName(String name) {
+        ((MainGUIController) mainLag.c) .setDriverName(name);
     }
 
 }
