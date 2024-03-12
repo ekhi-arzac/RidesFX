@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="mainPane" prefHeight="561.0" prefWidth="779.0" style="-fx-background-color: #F8F8FF;" styleClass="anchorpane" stylesheets="@main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.MainGUIController">
+<BorderPane fx:id="mainPane" prefHeight="561.0" prefWidth="779.0" styleClass="anchorpane" stylesheets="@main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.MainGUIController">
    <left>
       <VBox id="mainBorderpane" alignment="TOP_CENTER" styleClass="borderpane" stylesheets="@main.css" BorderPane.alignment="TOP_CENTER">
          <children>

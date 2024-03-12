@@ -62,11 +62,36 @@
 .textfield{
     -fx-font-weight: 900;
     -fx-text-fill: #6784AD;
-    -fx-background-color: #e0ebff; ;
+    -fx-background-color: #e0ebff;
     -fx-effect: dropshadow(three-pass-box, #c7d6ff, 2, 0, 0, 0);
     -fx-background-radius: 10;
 }
 .anchorpane{
     -fx-background-color: #eef4ff;
     -fx-border-radius: 5;
+}
+
+.calendar-grid {
+    -fx-background-color: #8ea9d2;
+    -fx-background-radius:10;
+}
+
+.calendar-header {
+    -fx-background-color: #c3dcff;
+    -fx-base: #c3dcff;
+    -fx-text-fill: white;
+}
+
+
+.date-picker-popup {
+    -fx-text-fill: #c3dcff;
+    -fx-background-color: #c3dcff;
+    -fx-background-radius: 10;
+}
+.date-picker-popup > .month-year-pane {
+    -fx-background-color: #c3dcff;
+    -fx-text-fill: #c3dcff;
+}
+.date-picker .spinner-label {
+    -fx-text-fill: #6784AD;
 }
