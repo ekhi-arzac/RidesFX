@@ -49,18 +49,18 @@ public class MainGUIController implements Controller {
     }
 
     @FXML
-    void queryRides(ActionEvent event) {
-        mainPane.setCenter(mainGUI.getQueryRidesLag().getUi());
+    void showQueryRides(ActionEvent event) {
+        mainGUI.showSceneInCenter("queryRides");
     }
 
     @FXML
-    void createRide(ActionEvent event) {
-        mainPane.setCenter(mainGUI.getCreateRideLag().getUi());
+    void showCreateRide(ActionEvent event) {
+        mainGUI.showSceneInCenter("createRide");
     }
 
     @FXML
-    void identification(ActionEvent event) {
-        mainPane.setCenter(mainGUI.getLoginLag().getUi());
+    void showLogin(ActionEvent event) {
+        mainGUI.showSceneInCenter("login");
     }
 
     @FXML
@@ -72,5 +72,6 @@ public class MainGUIController implements Controller {
     @Override
     public void setMainApp(MainGUI mainGUI) {
         this.mainGUI = mainGUI;
+        mainGUI.setMainPane(mainPane);
     }
 }

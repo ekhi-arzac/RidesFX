@@ -2,11 +2,12 @@ package ui;
 
 import businessLogic.BlFacade;
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import org.kordamp.bootstrapfx.BootstrapFX;
 import uicontrollers.Controller;
 
 import java.io.IOException;
@@ -16,11 +17,13 @@ import java.util.ResourceBundle;
 
 public class MainGUI {
 
-    private Window mainLag, createRideLag, queryRidesLag, identificationLag;
+    private Window mainLag, createRideLag, queryRidesLag, loginLag, registerLag;
 
     private BlFacade businessLogic;
     private Stage stage;
     private Scene scene;
+    @FXML
+    private BorderPane mainPane;
 
     public BlFacade getBusinessLogic() {
         return businessLogic;
@@ -42,7 +45,7 @@ public class MainGUI {
     }
 
 
-    public class Window {
+     class Window {
         Controller c;
         Parent ui;
 
@@ -72,30 +75,31 @@ public class MainGUI {
     public void init(Stage stage) throws IOException {
 
         this.stage = stage;
-
-        mainLag = load("/MainGUI.fxml");
-        queryRidesLag = load("/QueryRides.fxml");
-        createRideLag = load("/CreateRide.fxml");
-
+        mainLag = load("/views/MainGUI.fxml");
+        queryRidesLag = load("/views/QueryRides.fxml");
+        createRideLag = load("/views/CreateRide.fxml");
+        loginLag = load("/views/Login.fxml");
+        registerLag = load("/views/Register.fxml");
         showMain();
 
     }
 
-    public Window getQueryRidesLag() {
-        return queryRidesLag;
-    }
-    public Window getCreateRideLag() {
-        return createRideLag;
-    }
-    public Window getLoginLag() {
-        return identificationLag;
-    }
 
     public void showMain() {
-        setupScene(mainLag.ui, "MainTitle", 1050, 450);
+        setupScene(mainLag.ui, "MainTitle", 1050, 500);
     }
 
-
+    public void setMainPane(BorderPane mainPane) {
+        this.mainPane = mainPane;
+    }
+    public void showSceneInCenter(String window) {
+        switch (window) {
+            case "queryRides" -> mainPane.setCenter(queryRidesLag.ui);
+            case "createRide" -> mainPane.setCenter(createRideLag.ui);
+            case "login" -> mainPane.setCenter(loginLag.ui);
+            case "register" -> mainPane.setCenter(registerLag.ui);
+        }
+    }
     private void setupScene(Parent ui, String title, int width, int height) {
 
         if (scene == null) {
