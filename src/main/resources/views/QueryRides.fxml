@@ -11,7 +11,7 @@
     <children>
         <DatePicker fx:id="datepicker" layoutX="39.0" layoutY="190.0" />
         <Label layoutX="39.0" layoutY="161.0" text="%EventDate" />
-        <TableView fx:id="tblRides" layoutX="382.0" layoutY="70.0" prefHeight="200.0" prefWidth="469.0" styleClass="tableview_bootstrap" stylesheets="@main.css">
+        <TableView fx:id="tblRides" layoutX="382.0" layoutY="70.0" prefHeight="200.0" prefWidth="469.0" styleClass="tableview_bootstrap" stylesheets="@../main.css">
             <columns>
                 <TableColumn fx:id="qc1" prefWidth="223.5" styleClass="tableview_column_bootstrap" text="%FindRidesGUI.Driver" />
                 <TableColumn fx:id="qc2" prefWidth="97.5" styleClass="tableview_column_bootstrap" text="%FindRidesGUI.NPlaces" />
