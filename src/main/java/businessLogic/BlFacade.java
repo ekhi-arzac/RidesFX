@@ -71,4 +71,6 @@ public interface BlFacade  {
 
 
 	List<Date> getDatesWithRides(String value, String value1);
+
+	public Driver login(String email, String name);
 }

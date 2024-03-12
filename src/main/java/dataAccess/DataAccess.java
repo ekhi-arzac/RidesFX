@@ -255,4 +255,13 @@ public class DataAccess {
         }
         return res;
     }
+
+    public Driver login(String email, String name) {
+        System.out.println(">> DataAccess: login");
+        Driver driver = db.createQuery("SELECT d FROM Driver d WHERE d.email = :email and d.name = :name", Driver.class)
+                .setParameter("email", email).setParameter("name", name).getSingleResult();
+
+        return driver;
+    }
+
 }
