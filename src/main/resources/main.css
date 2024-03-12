@@ -47,6 +47,17 @@
     -fx-label-padding: 8;
     -fx-effect: dropshadow(three-pass-box, #ff8f8f, 5, 0, 0, 0);
 }
+.success_msg{
+    -fx-background-color: #a3d9c9;
+    -fx-border-color: #5e9e99;
+    -fx-text-fill: #5e979e;
+    -fx-font-weight: 900;
+    -fx-background-radius:8;
+    -fx-border-radius: 8;
+    -fx-label-padding: 8;
+    -fx-effect: dropshadow(three-pass-box, #8fbac9, 5, 0, 0, 0);
+
+}
 .tableview_bootstrap{
     -fx-background-color: #e0ebff;
     -fx-text-fill: #6784AD;
@@ -71,18 +82,17 @@
     -fx-border-radius: 5;
 }
 
+
+/* style for the calendar*/
 .calendar-grid {
     -fx-background-color: #8ea9d2;
     -fx-background-radius:10;
 }
-
 .calendar-header {
     -fx-background-color: #c3dcff;
     -fx-base: #c3dcff;
     -fx-text-fill: white;
 }
-
-
 .date-picker-popup {
     -fx-text-fill: #c3dcff;
     -fx-background-color: #c3dcff;
@@ -94,4 +104,15 @@
 }
 .date-picker .spinner-label {
     -fx-text-fill: #6784AD;
+    -fx-background-color: #c3dcff
+}
+date-picker .arrow-button {
+    -fx-background-color: #c3dcff;
+    -fx-background-radius: 10;
+}
+.date-picker .arrow-button:hover {
+    -fx-background-color: #c3dcff;
+}
+.date-picker .arrow-button .arrow {
+    -fx-background-color:#6784AD ;
 }
