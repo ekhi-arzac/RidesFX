@@ -146,9 +146,9 @@ public class BlFacadeImplementation implements BlFacade {
 		return dates;
 	}
 
-	public Driver login(String username, String password) {
+	public Driver login(String email, String name) {
 		dbManager.open(false);
-		Driver driver = dbManager.login(username, password);
+		Driver driver = dbManager.login(email, name);
 		dbManager.close();
 		return driver;
 	}
