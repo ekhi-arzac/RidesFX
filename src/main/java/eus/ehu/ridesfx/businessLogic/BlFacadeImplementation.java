@@ -147,4 +147,11 @@ public class BlFacadeImplementation implements BlFacade {
 		return driver;
 	}
 
+	public boolean register(String email, String name, String password) {
+		dbManager.open(false);
+		boolean registered = dbManager.register(email, name, password);
+		dbManager.close();
+		return registered;
+	}
+
 }

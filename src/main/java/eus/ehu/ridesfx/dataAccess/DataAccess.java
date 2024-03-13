@@ -289,6 +289,20 @@ public class DataAccess {
 
         return driver;
     }
+
+    public boolean register(String email, String name, String password) {
+        System.out.println(">> DataAccess: register");
+        db.getTransaction().begin();
+        Driver driver = new Driver(email, name);
+        if (db.find(Driver.class, email) != null) {
+            db.getTransaction().commit();
+            return false;
+        }
+        db.persist(driver);
+        db.getTransaction().commit();
+        return true;
+
+    }
 }
 
 
