@@ -1,13 +1,13 @@
 .borderpane{
     -fx-background-color: #9DB2D0;
-
+    -fx-border-radius: 5;
+    -fx-effect: dropshadow(three-pass-box, #6784AD, 10, 0, 0, 0);
 }
-
-
 * {
     -fx-font-family: "Onest";
 }
 .button{
+    -fx-effect: dropshadow(three-pass-box, #8494be, 10, 0, 0, 0);
     -fx-background-color: #6784AD;
     -fx-text-fill: #c3dcff;
     -fx-font-weight: 900;
@@ -18,21 +18,24 @@
 .button:hover {
     -fx-background-color: #4f77ab;
     -fx-cursor : hand;
+    -fx-effect: dropshadow(three-pass-box, #6784AD, 10, 0, 0, 0);
 }
 .button:pressed {
     -fx-background-color: #214673;
+    -fx-effect: dropshadow(three-pass-box, #6784AD, 10, 0, 0, 0);
 }
 .comb_bootstrap{
     -fx-background-color:  #cedefd;
     -fx-text-fill: #6784AD ;
     -fx-border-radius: 5;
-    -fx-background-radius: 5;
     -fx-border-width: 1;
+    -fx-effect: dropshadow(three-pass-box, #c7d6ff, 5, 0, 0, 0);
+    -fx-background-radius: 10;
 }
 .tableview_column_bootstrap{
     -fx-background-color: #cedefd;
     -fx-text-fill: #6784AD;
-    -fx-background-radius: 5;
+    -fx-effect: dropshadow(three-pass-box, #c7d6ff, 10, 0, 0, 0);
 }
 .error_msg{
     -fx-background-color: #ec9e97;
@@ -42,4 +45,74 @@
     -fx-background-radius:8;
     -fx-border-radius: 8;
     -fx-label-padding: 8;
+    -fx-effect: dropshadow(three-pass-box, #ff8f8f, 5, 0, 0, 0);
+}
+.success_msg{
+    -fx-background-color: #a3d9c9;
+    -fx-border-color: #5e9e99;
+    -fx-text-fill: #5e979e;
+    -fx-font-weight: 900;
+    -fx-background-radius:8;
+    -fx-border-radius: 8;
+    -fx-label-padding: 8;
+    -fx-effect: dropshadow(three-pass-box, #8fbac9, 5, 0, 0, 0);
+
+}
+.tableview_bootstrap{
+    -fx-background-color: #e0ebff;
+    -fx-text-fill: #6784AD;
+    -fx-effect: dropshadow(three-pass-box, #c7d6ff, 5, 0, 0, 0);
+    -fx-border-radius: 5;
+}
+.datepicker{
+    -fx-background-color: #cedefd;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-border-width: 1;
+}
+.textfield{
+    -fx-font-weight: 900;
+    -fx-text-fill: #6784AD;
+    -fx-background-color: #e0ebff;
+    -fx-effect: dropshadow(three-pass-box, #c7d6ff, 2, 0, 0, 0);
+    -fx-background-radius: 10;
+}
+.anchorpane{
+    -fx-background-color: #eef4ff;
+    -fx-border-radius: 5;
+}
+
+
+/* style for the calendar*/
+.calendar-grid {
+    -fx-background-color: #8ea9d2;
+    -fx-background-radius:10;
+}
+.calendar-header {
+    -fx-background-color: #c3dcff;
+    -fx-base: #c3dcff;
+    -fx-text-fill: white;
+}
+.date-picker-popup {
+    -fx-text-fill: #c3dcff;
+    -fx-background-color: #c3dcff;
+    -fx-background-radius: 10;
+}
+.date-picker-popup > .month-year-pane {
+    -fx-background-color: #c3dcff;
+    -fx-text-fill: #c3dcff;
+}
+.date-picker .spinner-label {
+    -fx-text-fill: #6784AD;
+    -fx-background-color: #c3dcff
+}
+date-picker .arrow-button {
+    -fx-background-color: #c3dcff;
+    -fx-background-radius: 10;
+}
+.date-picker .arrow-button:hover {
+    -fx-background-color: #c3dcff;
+}
+.date-picker .arrow-button .arrow {
+    -fx-background-color:#6784AD ;
 }
