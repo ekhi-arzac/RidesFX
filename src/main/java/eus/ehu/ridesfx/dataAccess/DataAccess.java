@@ -292,6 +292,16 @@ public class DataAccess {
 
     public boolean register(String email, String name, String password) {
         System.out.println(">> DataAccess: register");
+
+        if (email.isEmpty() || name.isEmpty() || password.isEmpty()) {
+            return false;
+        }
+
+        //regular expression check for email
+        if (!email.matches("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
+            return false;
+        }
+
         db.getTransaction().begin();
         Driver driver = new Driver(email, name);
         if (db.find(Driver.class, email) != null) {
