@@ -111,7 +111,7 @@ public class CreateRideController implements Controller {
 
     void displayMessage(String message, String label){
         lblErrorMessage.getStyleClass().clear();
-        lblErrorMessage.getStyleClass().setAll("lbl", "lbl-"+label);
+        lblErrorMessage.getStyleClass().setAll(label);
         lblErrorMessage.setText(message);
     }
 
@@ -125,7 +125,7 @@ public class CreateRideController implements Controller {
 
         if (errors != null) {
             // eus.ehu.ridesfx.businessLogic.createQuestion(event, inputQuestion, inputPrice);
-            displayMessage(errors, "danger");
+            displayMessage(errors, "error_msg");
 
         } else {
             try {
@@ -134,22 +134,22 @@ public class CreateRideController implements Controller {
                 float price = Float.parseFloat(txtPrice.getText());
                 Driver driver = businessLogic.getCurrentDriver();
                 Ride r = businessLogic.createRide(txtDepartCity.getText(), txtArrivalCity.getText(), Dates.convertToDate(datePicker.getValue()), inputSeats, price, driver.getEmail());
-                displayMessage(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.RideCreated"), "success");
+                displayMessage(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.RideCreated"), "success_msg");
 
 
             } catch (RideMustBeLaterThanTodayException e1) {
-                displayMessage(e1.getMessage(), "danger");
+                displayMessage(e1.getMessage(), "error_msg");
             } catch (RideAlreadyExistException e1) {
-                displayMessage(e1.getMessage(), "danger");
+                displayMessage(e1.getMessage(), "error_msg");
             }
         }
 
 /*
     if (lblErrorMinBet.getText().length() > 0 && showErrors) {
-      lblErrorMinBet.getStyleClass().setAll("lbl", "lbl-danger");
+      lblErrorMinBet.getStyleClass().setAll("lbl", "lbl-error_msg");
     }
     if (lblErrorQuestion.getText().length() > 0 && showErrors) {
-      lblErrorQuestion.getStyleClass().setAll("lbl", "lbl-danger");
+      lblErrorQuestion.getStyleClass().setAll("lbl", "lbl-error_msg");
     }
  */
     }

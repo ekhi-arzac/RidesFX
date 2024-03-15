@@ -12,6 +12,7 @@ import jakarta.persistence.TypedQuery;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import at.favre.lib.crypto.bcrypt.*;
 
 import java.util.*;
 
@@ -23,6 +24,8 @@ public class DataAccess {
 
     protected EntityManager db;
     protected EntityManagerFactory emf;
+
+    private BCrypt passwordGen;
 
     public DataAccess() {
 
@@ -301,9 +304,13 @@ public class DataAccess {
         if (!email.matches("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
             return false;
         }
+        //when registering the introduced password must be hashed and salted
+
+
 
         db.getTransaction().begin();
         Driver driver = new Driver(email, name);
+        driver.setPassword(password);
         if (db.find(Driver.class, email) != null) {
             db.getTransaction().commit();
             return false;

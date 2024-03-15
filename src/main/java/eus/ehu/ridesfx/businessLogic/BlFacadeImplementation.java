@@ -98,7 +98,10 @@ public class BlFacadeImplementation implements BlFacade {
 		return dbManager.login(email, name);
 	}
 
-	public boolean register(String email, String name, String password) {
-		return dbManager.register(email, name, password);
+	@Override
+	public boolean register(String email, String username, String password) {
+		return false;
 	}
+
 }
+
