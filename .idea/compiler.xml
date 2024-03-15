@@ -7,10 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ridesfx" />
+        <module name="RidesFX" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="RidesFX" target="17" />
-    </bytecodeTargetLevel>
   </component>
 </project>

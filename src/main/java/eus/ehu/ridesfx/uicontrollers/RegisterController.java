@@ -26,17 +26,34 @@ public class RegisterController implements Controller {
         String email = emailField.getText();
         String password = passwordField.getText();
         String username = usernameField.getText();
-        if (businessLogic.register(email, username, password)) {
-            //this.displayMessage("Register successful", "success_msg");
-            System.out.println("Register successful");
-            businessLogic.setCurrentDriver(new Driver(email, username));
-            mainGUI.removeLogRegButton();
-            mainGUI.setDriverName(username);
-            mainGUI.showSceneInCenter("queryRides");
-            //mainGUI.showSceneInCenter("login");
-        } else {
-            this.displayMessage("Register failed", "error_msg");
-            System.out.println("Register failed");
+        switch (businessLogic.register(email, username, password)) {
+            case "success":
+                System.out.println("Register successful");
+                businessLogic.setCurrentDriver(new Driver(email, username));
+                mainGUI.removeLogRegButton();
+                mainGUI.setDriverName(username);
+                mainGUI.showSceneInCenter("queryRides");
+                break;
+            case "emailExists":
+                this.displayMessage("Email already in use", "error_msg");
+                System.out.println("Email already in use");
+                break;
+            case "invalidEmail":
+                this.displayMessage("Invalid email", "error_msg");
+                System.out.println("Invalid email");
+                break;
+            case "invalidName":
+                this.displayMessage("Username must have less than 10 characters", "error_msg");
+                System.out.println("Invalid username");
+                break;
+            case "invalidPassword":
+                this.displayMessage("Password must have at least 6 characters", "error_msg");
+                System.out.println("Invalid password");
+                break;
+            case "emptyFields":
+                this.displayMessage("All fields are compulsory", "error_msg");
+                System.out.println("Empty fields");
+                break;
         }
     }
 

@@ -290,27 +290,34 @@ public class DataAccess {
         return driver;
     }
 
-    public boolean register(String email, String name, String password) {
+    public String register(String email, String name, String password) {
         System.out.println(">> DataAccess: register");
 
         if (email.isEmpty() || name.isEmpty() || password.isEmpty()) {
-            return false;
+            return "emptyFields";
         }
 
         //regular expression check for email
         if (!email.matches("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
-            return false;
+            return "invalidEmail";
+        }
+
+        if(password.length() < 6 || password.length() > 20){
+            return "invalidPassword";
+        }
+        if(name.length() > 10){
+            return "invalidName";
         }
 
         db.getTransaction().begin();
         Driver driver = new Driver(email, name);
         if (db.find(Driver.class, email) != null) {
             db.getTransaction().commit();
-            return false;
+            return "emailExists";
         }
         db.persist(driver);
         db.getTransaction().commit();
-        return true;
+        return "success";
 
     }
 }
