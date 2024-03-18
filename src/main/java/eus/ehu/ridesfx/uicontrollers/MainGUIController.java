@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import eus.ehu.ridesfx.ui.MainGUI;
+import javafx.scene.image.ImageView;
 
 public class MainGUIController implements Controller {
 
@@ -38,6 +39,10 @@ public class MainGUIController implements Controller {
 
     @FXML
     private BorderPane mainPane;
+
+    @FXML
+    private ImageView user_icon;
+
     private MainGUI mainGUI;
 
     private BlFacade businessLogic;
@@ -77,6 +82,7 @@ public class MainGUIController implements Controller {
     void initialize() {
             // set current driver name
             lblDriver.setText(businessLogic.getCurrentDriver().getName());
+            user_icon.setVisible(false);
     }
 
     @Override
@@ -96,5 +102,9 @@ public class MainGUIController implements Controller {
      */
     public void setDriverName(String name) {
         lblDriver.setText(name);
+    }
+
+    public void showUserIcon() {
+        user_icon.setVisible(true);
     }
 }

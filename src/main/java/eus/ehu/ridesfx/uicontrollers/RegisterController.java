@@ -41,6 +41,7 @@ public class RegisterController implements Controller {
                 businessLogic.setCurrentDriver(new Driver(email, username));
                 mainGUI.removeLogRegButton();
                 mainGUI.setDriverName(username);
+                mainGUI.showUserIcon();
                 mainGUI.showSceneInCenter("queryRides");
             }
             case "emailExists" -> {

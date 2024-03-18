@@ -50,6 +50,7 @@ public class LoginController implements Controller {
             mainGUI.removeLogRegButton();
             mainGUI.setDriverName(driver.getName());
             mainGUI.showSceneInCenter("queryRides");
+            mainGUI.showUserIcon();
             //this.displayMessage("Login successful", "success_msg");
 
         } else {

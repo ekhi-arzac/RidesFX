@@ -128,6 +128,10 @@ public class MainGUI {
         ((MainGUIController) mainLag.c) .removeLogRegButton();
     }
 
+    public void showUserIcon() {
+        ((MainGUIController) mainLag.c) .showUserIcon();
+    }
+
     public void setDriverName(String name) {
         ((MainGUIController) mainLag.c) .setDriverName(name);
     }
