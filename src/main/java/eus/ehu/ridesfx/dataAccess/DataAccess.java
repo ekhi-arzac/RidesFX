@@ -281,7 +281,12 @@ public class DataAccess {
         db.close();
         System.out.println("DataBase is closed");
     }
-
+    /**
+     * This method logs in a driver
+     * @param email the email of the driver
+     * @param name the name of the driver
+     * @return the driver that has logged in
+     */
     public Driver login(String email, String name) {
         System.out.println(">> DataAccess: login");
         Driver driver = db.createQuery("SELECT d FROM Driver d WHERE d.email = :email and d.name = :name", Driver.class)
@@ -290,6 +295,13 @@ public class DataAccess {
         return driver;
     }
 
+    /**
+     * This method registers a new driver in the database
+     * @param email the email of the driver
+     * @param name the name of the driver
+     * @param password the password of the driver
+     * @return a string with the result of the registration
+     */
     public String register(String email, String name, String password) {
         System.out.println(">> DataAccess: register");
 
