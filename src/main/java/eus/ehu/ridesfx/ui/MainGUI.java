@@ -93,6 +93,10 @@ public class MainGUI {
     public void setMainPane(BorderPane mainPane) {
         this.mainPane = mainPane;
     }
+    /**
+     * This method sets the scene to the center of the mainPane: queryRides or createRide
+     * @param window the window to be shown
+     */
     public void showSceneInCenter(String window) {
         switch (window) {
             case "queryRides" -> mainPane.setCenter(queryRidesLag.ui);

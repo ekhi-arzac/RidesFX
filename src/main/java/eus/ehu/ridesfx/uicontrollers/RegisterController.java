@@ -21,6 +21,15 @@ public class RegisterController implements Controller {
     @FXML
     private TextField usernameField;
 
+    /**
+     * This method sets verifies the registration once the button is clicked. It will display an error message if the registration fails. There are several failure cases:
+     * - The email is already in use
+     * - The email is invalid
+     * - The username is invalid
+     * - The password is invalid
+     * - The fields are empty
+     * If the registration is successful, the user will be redirected to the queryRides scene.
+     */
     @FXML
     void onRegister() {
         String email = emailField.getText();
@@ -72,6 +81,11 @@ public class RegisterController implements Controller {
         businessLogic = bl;
     }
 
+    /**
+     * This method displays a message in the label lblErrorMessage
+     * @param message the message to be displayed
+     * @param label the style of the message
+     */
     public void displayMessage(String message,  String label) {
         lblErrorMessage.getStyleClass().clear();
         lblErrorMessage.getStyleClass().setAll(label);

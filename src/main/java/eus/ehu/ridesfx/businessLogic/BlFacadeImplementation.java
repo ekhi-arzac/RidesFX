@@ -93,11 +93,12 @@ public class BlFacadeImplementation implements BlFacade {
 		List<Date> dates = dbManager.getDatesWithRides(value, value1);
 		return dates;
 	}
-
+    @Override
 	public Driver login(String email, String name) {
 		return dbManager.login(email, name);
 	}
 
+	@Override
 	public String register(String email, String name, String password) {
 		return dbManager.register(email, name, password);
 	}
