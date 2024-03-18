@@ -94,13 +94,13 @@ public class BlFacadeImplementation implements BlFacade {
 		return dates;
 	}
 
-	public Driver login(String email, String name) {
-		return dbManager.login(email, name);
+	public Driver login(String email, String password) {
+		return dbManager.login(email,password);
 	}
 
 	@Override
 	public boolean register(String email, String username, String password) {
-		return false;
+		return dbManager.register(email, username, password);
 	}
 
 }

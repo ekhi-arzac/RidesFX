@@ -31,6 +31,7 @@
     -fx-border-width: 1;
     -fx-effect: dropshadow(three-pass-box, #c7d6ff, 5, 0, 0, 0);
     -fx-background-radius: 10;
+    
 }
 .tableview_column_bootstrap{
     -fx-background-color: #cedefd;

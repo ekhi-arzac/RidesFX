@@ -21,9 +21,9 @@
 			<version>21.0.2</version>
 		</dependency>
 		<dependency>
-			<groupId>at.favre.lib</groupId>
-			<artifactId>bcrypt</artifactId>
-			<version>0.10.2</version>
+			<groupId>org.mindrot</groupId>
+			<artifactId>jbcrypt</artifactId>
+			<version>0.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openjfx</groupId>

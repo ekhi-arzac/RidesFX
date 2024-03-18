@@ -8,11 +8,12 @@ import eus.ehu.ridesfx.exceptions.RideAlreadyExistException;
 import eus.ehu.ridesfx.exceptions.RideMustBeLaterThanTodayException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import at.favre.lib.crypto.bcrypt.*;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.*;
 
@@ -287,10 +288,11 @@ public class DataAccess {
 
     public Driver login(String email, String name) {
         System.out.println(">> DataAccess: login");
-        Driver driver = db.createQuery("SELECT d FROM Driver d WHERE d.email = :email and d.name = :name", Driver.class)
-                .setParameter("email", email).setParameter("name", name).getSingleResult();
 
+        Driver driver = db.createQuery("SELECT d FROM Driver d WHERE d.email = :email and d.name = :name", Driver.class)
+             .setParameter("email", email).setParameter("name", name).getSingleResult();
         return driver;
+
     }
 
     public boolean register(String email, String name, String password) {
@@ -305,12 +307,13 @@ public class DataAccess {
             return false;
         }
         //when registering the introduced password must be hashed and salted
+        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
 
 
 
         db.getTransaction().begin();
         Driver driver = new Driver(email, name);
-        driver.setPassword(password);
+        driver.setPassword(hashedPassword);
         if (db.find(Driver.class, email) != null) {
             db.getTransaction().commit();
             return false;
