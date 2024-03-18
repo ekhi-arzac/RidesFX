@@ -11,7 +11,7 @@
       <TextField fx:id="emailField" layoutX="225.0" layoutY="160.0" styleClass="textfield" />
       <Label layoutX="283.0" layoutY="109.0" text="Login" />
       <Label layoutX="225.0" layoutY="142.0" text="%Email:" />
-      <Label layoutX="225.0" layoutY="200.0" text="%Password:" />
+      <Label layoutX="225.0" layoutY="200.0" text="Password:" />
       <Hyperlink layoutX="180.0" layoutY="329.0" onAction="#showRegister" text="Not registered yet? Create an account here!" />
       <TextField fx:id="nameField" layoutX="225.0" layoutY="218.0" styleClass="textfield" />
    <Label fx:id="lblErrorMessage" layoutX="284.0" layoutY="311.0" />

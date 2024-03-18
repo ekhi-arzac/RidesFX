@@ -118,4 +118,7 @@ public class Driver implements Serializable {
 		} else return null;
 	}
 
+    public String getPassword() {
+		return this.password;
+    }
 }

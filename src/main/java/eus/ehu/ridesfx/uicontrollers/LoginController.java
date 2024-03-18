@@ -53,7 +53,7 @@ public class LoginController implements Controller {
         }
     }
 
-    private void displayMessage(String label, String message) {
+    private void displayMessage(String message, String label) {
         lblErrorMessage.getStyleClass().clear();
         lblErrorMessage.getStyleClass().setAll(label);
         lblErrorMessage.setText(message);

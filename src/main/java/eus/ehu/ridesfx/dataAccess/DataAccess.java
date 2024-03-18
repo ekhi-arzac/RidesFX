@@ -286,12 +286,22 @@ public class DataAccess {
         System.out.println("DataBase is closed");
     }
 
-    public Driver login(String email, String name) {
+    public Driver login(String email, String password) {
         System.out.println(">> DataAccess: login");
+        //without using find
 
-        Driver driver = db.createQuery("SELECT d FROM Driver d WHERE d.email = :email and d.name = :name", Driver.class)
-             .setParameter("email", email).setParameter("name", name).getSingleResult();
-        return driver;
+
+
+        TypedQuery<Driver> query = db.createQuery("SELECT d FROM Driver d WHERE d.email = :email", Driver.class);
+        Driver driver = query.getSingleResult();
+
+        if (driver != null && BCrypt.checkpw(password, driver.getPassword())) {
+            System.out.println("Login successful");
+            return driver;
+        }
+        else{
+            return null;
+        }
 
     }
 
