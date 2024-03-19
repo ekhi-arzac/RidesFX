@@ -8,10 +8,12 @@ import eus.ehu.ridesfx.exceptions.RideAlreadyExistException;
 import eus.ehu.ridesfx.exceptions.RideMustBeLaterThanTodayException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.*;
 
@@ -23,6 +25,8 @@ public class DataAccess {
 
     protected EntityManager db;
     protected EntityManagerFactory emf;
+
+    private BCrypt passwordGen;
 
     public DataAccess() {
 
@@ -281,18 +285,29 @@ public class DataAccess {
         db.close();
         System.out.println("DataBase is closed");
     }
+
     /**
      * This method logs in a driver
      * @param email the email of the driver
      * @param name the name of the driver
      * @return the driver that has logged in
      */
-    public Driver login(String email, String name) {
+    public Driver login(String email, String password) {
         System.out.println(">> DataAccess: login");
-        Driver driver = db.createQuery("SELECT d FROM Driver d WHERE d.email = :email and d.name = :name", Driver.class)
-                .setParameter("email", email).setParameter("name", name).getSingleResult();
+        //without using find
 
-        return driver;
+
+
+        TypedQuery<Driver> query = db.createQuery("SELECT d FROM Driver d WHERE d.email = :email", Driver.class)
+                .setParameter("email", email);
+        Driver driver = query.getSingleResult();
+        if (driver != null && BCrypt.checkpw(password, driver.getPassword())) {
+            return driver;
+        }
+        else{
+            return null;
+        }
+
     }
 
     /**
@@ -320,9 +335,14 @@ public class DataAccess {
         if(name.length() > 10){
             return "invalidName";
         }
+        //when registering the introduced password must be hashed and salted
+        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
+
+
 
         db.getTransaction().begin();
         Driver driver = new Driver(email, name);
+        driver.setPassword(hashedPassword);
         if (db.find(Driver.class, email) != null) {
             db.getTransaction().commit();
             return "emailExists";
