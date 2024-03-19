@@ -93,6 +93,10 @@ public class MainGUI {
     public void setMainPane(BorderPane mainPane) {
         this.mainPane = mainPane;
     }
+    /**
+     * This method sets the scene to the center of the mainPane: queryRides or createRide
+     * @param window the window to be shown
+     */
     public void showSceneInCenter(String window) {
         switch (window) {
             case "queryRides" -> mainPane.setCenter(queryRidesLag.ui);
@@ -122,6 +126,10 @@ public class MainGUI {
 
     public void removeLogRegButton() {
         ((MainGUIController) mainLag.c) .removeLogRegButton();
+    }
+
+    public void showUserIcon() {
+        ((MainGUIController) mainLag.c) .showUserIcon();
     }
 
     public void setDriverName(String name) {

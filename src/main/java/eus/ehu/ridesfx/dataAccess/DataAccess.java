@@ -286,6 +286,12 @@ public class DataAccess {
         System.out.println("DataBase is closed");
     }
 
+    /**
+     * This method logs in a driver
+     * @param email the email of the driver
+     * @param name the name of the driver
+     * @return the driver that has logged in
+     */
     public Driver login(String email, String password) {
         System.out.println(">> DataAccess: login");
         //without using find
@@ -304,16 +310,30 @@ public class DataAccess {
 
     }
 
-    public boolean register(String email, String name, String password) {
+    /**
+     * This method registers a new driver in the database
+     * @param email the email of the driver
+     * @param name the name of the driver
+     * @param password the password of the driver
+     * @return a string with the result of the registration
+     */
+    public String register(String email, String name, String password) {
         System.out.println(">> DataAccess: register");
 
         if (email.isEmpty() || name.isEmpty() || password.isEmpty()) {
-            return false;
+            return "emptyFields";
         }
 
         //regular expression check for email
         if (!email.matches("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
-            return false;
+            return "invalidEmail";
+        }
+
+        if(password.length() < 6 || password.length() > 20){
+            return "invalidPassword";
+        }
+        if(name.length() > 10){
+            return "invalidName";
         }
         //when registering the introduced password must be hashed and salted
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
@@ -325,11 +345,11 @@ public class DataAccess {
         driver.setPassword(hashedPassword);
         if (db.find(Driver.class, email) != null) {
             db.getTransaction().commit();
-            return false;
+            return "emailExists";
         }
         db.persist(driver);
         db.getTransaction().commit();
-        return true;
+        return "success";
 
     }
 }

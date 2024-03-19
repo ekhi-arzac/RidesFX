@@ -33,6 +33,12 @@ public class LoginController implements Controller {
         mainGUI.showSceneInCenter("register");
     }
 
+    /**
+     * This method sets verifies the login once the button is clicked.
+     * It will display an error message if the login fails. The error case is:
+     * - The email is not registered yet
+     * If the login is successful, the user will be redirected to the queryRides scene.
+     */
     @FXML
     void onLogin() {
         String email = emailField.getText();
@@ -44,15 +50,21 @@ public class LoginController implements Controller {
             mainGUI.removeLogRegButton();
             mainGUI.setDriverName(driver.getName());
             mainGUI.showSceneInCenter("queryRides");
+            mainGUI.showUserIcon();
             //this.displayMessage("Login successful", "success_msg");
 
         } else {
-            this.displayMessage("Login failed", "error_msg");
+            this.displayMessage("This email is not registered", "error_msg");
             System.out.println("Login failed");
 
         }
     }
-
+  
+    /**
+     * This method displays a message in the label lblErrorMessage
+     * @param message the message to be displayed
+     * @param label the style of the message
+     */
     private void displayMessage(String message, String label) {
         lblErrorMessage.getStyleClass().clear();
         lblErrorMessage.getStyleClass().setAll(label);
