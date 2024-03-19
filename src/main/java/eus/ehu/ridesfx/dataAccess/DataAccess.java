@@ -292,11 +292,10 @@ public class DataAccess {
 
 
 
-        TypedQuery<Driver> query = db.createQuery("SELECT d FROM Driver d WHERE d.email = :email", Driver.class);
+        TypedQuery<Driver> query = db.createQuery("SELECT d FROM Driver d WHERE d.email = :email", Driver.class)
+                .setParameter("email", email);
         Driver driver = query.getSingleResult();
-
         if (driver != null && BCrypt.checkpw(password, driver.getPassword())) {
-            System.out.println("Login successful");
             return driver;
         }
         else{
