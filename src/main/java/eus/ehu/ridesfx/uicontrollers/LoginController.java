@@ -4,6 +4,7 @@ import eus.ehu.ridesfx.businessLogic.BlFacade;
 import eus.ehu.ridesfx.domain.Driver;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import eus.ehu.ridesfx.ui.MainGUI;
 
@@ -17,7 +18,7 @@ public class LoginController implements Controller {
     @FXML
     private TextField emailField;
     @FXML
-    private TextField nameField;
+    private PasswordField passwordField;
 
     @Override
     public void setMainApp(MainGUI mainGUI) {
@@ -42,7 +43,7 @@ public class LoginController implements Controller {
     @FXML
     void onLogin() {
         String email = emailField.getText();
-        String name = nameField.getText();
+        String name = passwordField.getText();
         Driver driver = businessLogic.login(email, name);
         if (driver != null) {
             System.out.println("Login successful");
