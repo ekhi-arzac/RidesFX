@@ -6,10 +6,7 @@ import eus.ehu.ridesfx.domain.Ride;
 import eus.ehu.ridesfx.domain.Driver;
 import eus.ehu.ridesfx.exceptions.RideAlreadyExistException;
 import eus.ehu.ridesfx.exceptions.RideMustBeLaterThanTodayException;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Query;
-import jakarta.persistence.TypedQuery;
+import jakarta.persistence.*;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -289,23 +286,28 @@ public class DataAccess {
     /**
      * This method logs in a driver
      * @param email the email of the driver
-     * @param name the name of the driver
+     * @param password the name of the driver
      * @return the driver that has logged in
      */
     public Driver login(String email, String password) {
         System.out.println(">> DataAccess: login");
-        //without using find
+        //without using findç
+        Driver driver;
 
-
-
-        TypedQuery<Driver> query = db.createQuery("SELECT d FROM Driver d WHERE d.email = :email", Driver.class)
-                .setParameter("email", email);
-        Driver driver = query.getSingleResult();
+        try{
+            TypedQuery<Driver> query = db.createQuery("SELECT d FROM Driver d WHERE d.email = :email", Driver.class)
+                    .setParameter("email", email);
+            driver = query.getSingleResult();
+        }
+        catch(NoResultException e){
+            driver = null;
+        }
         if (driver != null && BCrypt.checkpw(password, driver.getPassword())) {
             return driver;
         }
         else{
-            return null;
+            driver = null;
+            return driver;
         }
 
     }
