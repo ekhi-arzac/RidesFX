@@ -275,9 +275,7 @@ public class DataAccess {
     private void generateTestingData() {
         // create domain entities and persist them
     }
-
-
-
+    
     public void close() {
         db.close();
         System.out.println("DataBase is closed");
@@ -339,6 +337,7 @@ public class DataAccess {
         }
         //when registering the introduced password must be hashed and salted
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
+
 
 
 
