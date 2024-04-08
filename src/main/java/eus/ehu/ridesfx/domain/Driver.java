@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Vector;
 
 @Entity
-public class Driver implements Serializable {
+public class Driver implements User, Serializable {
 
 	/**
 	 *

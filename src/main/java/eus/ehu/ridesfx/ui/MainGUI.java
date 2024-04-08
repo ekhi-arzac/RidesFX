@@ -1,6 +1,7 @@
 package eus.ehu.ridesfx.ui;
 
 import eus.ehu.ridesfx.businessLogic.BlFacade;
+import eus.ehu.ridesfx.uicontrollers.DriverRidePanelController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +19,7 @@ import java.util.ResourceBundle;
 
 public class MainGUI {
 
-    private Window mainLag, createRideLag, queryRidesLag, loginLag, registerLag;
+    private Window mainLag, createRideLag, queryRidesLag, loginLag, registerLag, dRidePanelLag;
 
     private BlFacade businessLogic;
     private Stage stage;
@@ -81,6 +82,7 @@ public class MainGUI {
         createRideLag = load("/views/CreateRide.fxml");
         loginLag = load("/views/Login.fxml");
         registerLag = load("/views/Register.fxml");
+        dRidePanelLag = load("/views/DriverRidePanel.fxml");
         showMain();
 
     }
@@ -103,7 +105,12 @@ public class MainGUI {
             case "createRide" -> mainPane.setCenter(createRideLag.ui);
             case "login" -> mainPane.setCenter(loginLag.ui);
             case "register" -> mainPane.setCenter(registerLag.ui);
+            case "dRidePanel" -> {
+                mainPane.setCenter(dRidePanelLag.ui);
+                ((DriverRidePanelController) dRidePanelLag.c).updateRides();
+            }
         }
+
     }
     private void setupScene(Parent ui, String title, int width, int height) {
 

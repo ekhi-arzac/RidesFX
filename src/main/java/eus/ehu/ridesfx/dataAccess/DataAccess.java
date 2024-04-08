@@ -195,7 +195,6 @@ public class DataAccess {
 
     public List<Ride> getRides(String origin, String destination, Date date) {
         System.out.println(">> DataAccess: getRides origin/dest/date");
-        Vector<Ride> res = new Vector<>();
 
         TypedQuery<Ride> query = db.createQuery("SELECT ride FROM Ride ride "
                 + "WHERE ride.date=?1 ", Ride.class);
@@ -205,6 +204,15 @@ public class DataAccess {
         return query.getResultList();
     }
 
+    public List<Ride> getRidesFromDriver(String email) {
+        System.out.println(">> DataAccess: getRidesFromDriver email");
+
+        TypedQuery<Ride> query = db.createQuery("SELECT ride FROM Ride ride "
+                + "WHERE ride.driver.email=?1 ", Ride.class);
+        query.setParameter(1, email);
+        return query.getResultList();
+
+    }
 
     /**
      * This method returns all the cities where rides depart
@@ -353,6 +361,8 @@ public class DataAccess {
         return "success";
 
     }
+
+
 }
 
 

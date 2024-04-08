@@ -38,7 +38,7 @@ public class RegisterController implements Controller {
         switch (businessLogic.register(email, username, password)) {
             case "success" -> {
                 System.out.println("Register successful");
-                businessLogic.setCurrentDriver(new Driver(email, username));
+                businessLogic.setCurrentUser(new Driver(email, username));
                 mainGUI.removeLogRegButton();
                 mainGUI.setDriverName(username);
                 mainGUI.showUserIcon();
