@@ -34,8 +34,6 @@
     
 }
 .tableview_column_bootstrap{
-    -fx-background-color: #cedefd;
-    -fx-text-fill: #6784AD;
     -fx-effect: dropshadow(three-pass-box, #c7d6ff, 10, 0, 0, 0);
 }
 .error_msg{
