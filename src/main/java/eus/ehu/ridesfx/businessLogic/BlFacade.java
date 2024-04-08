@@ -73,5 +73,5 @@ public interface BlFacade {
 
 	public Driver login(String email, String name);
 
-	String register(String email, String username, String password);
+	String register(String email, String username, String password, String role);
 }

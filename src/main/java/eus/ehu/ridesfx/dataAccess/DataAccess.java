@@ -4,6 +4,8 @@ import eus.ehu.ridesfx.configuration.Config;
 import eus.ehu.ridesfx.configuration.UtilDate;
 import eus.ehu.ridesfx.domain.Ride;
 import eus.ehu.ridesfx.domain.Driver;
+import eus.ehu.ridesfx.domain.Traveler;
+import eus.ehu.ridesfx.domain.User;
 import eus.ehu.ridesfx.exceptions.RideAlreadyExistException;
 import eus.ehu.ridesfx.exceptions.RideMustBeLaterThanTodayException;
 import jakarta.persistence.*;
@@ -79,7 +81,7 @@ public class DataAccess {
         db.getTransaction().begin();
         db.createNativeQuery("DELETE FROM DRIVER_RIDE").executeUpdate();
         db.createQuery("DELETE FROM Ride ").executeUpdate();
-        db.createQuery("DELETE FROM Driver ").executeUpdate();
+        db.createQuery("DELETE FROM User ").executeUpdate();
         db.getTransaction().commit();
     }
 
@@ -105,6 +107,7 @@ public class DataAccess {
             Driver driver1 = new Driver("driver1@gmail.com", "Aitor Fernandez");
             Driver driver2 = new Driver("driver2@gmail.com", "Ane Gaztañaga");
             Driver driver3 = new Driver("driver3@gmail.com", "Test driver");
+            Traveler traveler1 = new Traveler("traveler1@gmail.com", "Andrea Lezo");
 
 
             //Create rides
@@ -126,6 +129,7 @@ public class DataAccess {
             db.persist(driver1);
             db.persist(driver2);
             db.persist(driver3);
+            db.persist(traveler1);
 
 
             db.getTransaction().commit();
@@ -319,7 +323,7 @@ public class DataAccess {
      * @param password the password of the driver
      * @return a string with the result of the registration
      */
-    public String register(String email, String name, String password) {
+    public String register(String email, String name, String password, String role) {
         System.out.println(">> DataAccess: register");
 
         if (email.isEmpty() || name.isEmpty() || password.isEmpty()) {
@@ -343,13 +347,22 @@ public class DataAccess {
 
 
         db.getTransaction().begin();
-        Driver driver = new Driver(email, name);
-        driver.setPassword(hashedPassword);
+        User user = null;
+        switch (role){
+            case ("DRIVER") -> {
+                user = new Driver(email, name);
+            }
+            case ("TRAVELER") -> {
+                user = new Traveler(email, name);
+            }
+        }
+        assert user != null;
+        user.setPassword(hashedPassword);
         if (db.find(Driver.class, email) != null) {
             db.getTransaction().commit();
             return "emailExists";
         }
-        db.persist(driver);
+        db.persist(user);
         db.getTransaction().commit();
         return "success";
 

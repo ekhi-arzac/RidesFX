@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -10,7 +11,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F8F8FF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.ridesfx.uicontrollers.RegisterController">
    <children>
-      <Button layoutX="277.0" layoutY="268.0" mnemonicParsing="false" onAction="#onRegister" text="Register" />
+      <Button layoutX="270.0" layoutY="324.0" mnemonicParsing="false" onAction="#onRegister" text="Register" />
 
       <TextField fx:id="usernameField" layoutX="225.0" layoutY="160.0" styleClass="textfield" />
       <Label layoutX="272.0" layoutY="47.0" text="Register">
@@ -19,10 +20,12 @@
          </font></Label>
       <Label layoutX="225.0" layoutY="142.0" text="Username:" />
       <Label layoutX="225.0" layoutY="200.0" text="Password:" />
-      <Hyperlink layoutX="199.0" layoutY="337.0" onAction="#showLogin" text="Already have an account? Click here!" />
+      <Hyperlink layoutX="199.0" layoutY="350.0" onAction="#showLogin" text="Already have an account? Click here!" />
       <PasswordField fx:id="passwordField" layoutX="225.0" layoutY="218.0" styleClass="textfield" />
       <TextField fx:id="emailField" layoutX="225.0" layoutY="103.0" styleClass="textfield" />
       <Label layoutX="223.0" layoutY="85.0" text="Email:" />
       <Label fx:id="lblErrorMessage" layoutX="286.0" layoutY="319.0" />
+      <ComboBox fx:id="role" layoutX="224.0" layoutY="275.0" prefWidth="150.0" />
+      <Label layoutX="223.0" layoutY="257.0" text="Role:" />
    </children>
 </AnchorPane>

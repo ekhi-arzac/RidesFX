@@ -8,18 +8,13 @@ import java.util.List;
 import java.util.Vector;
 
 @Entity
-public class Driver implements Serializable {
+@DiscriminatorValue("DRIVER")
+public class Driver extends User implements Serializable {
 
 	/**
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	private String email;
-	private String name;
-
-	private String password;
 
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private List<Ride> rides=new Vector<Ride>();
@@ -29,34 +24,33 @@ public class Driver implements Serializable {
 	}
 
 	public Driver(String email, String name) {
-		this.email = email;
-		this.name = name;
+		super(email, name);
 	}
 	public void setPassword(String password){
-		this.password = password;
+		super.setPassword(password);
 	}
 
 
 	public String getEmail() {
-		return email;
+		return super.getEmail();
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		super.setEmail(email);
 	}
 
 	public String getName() {
-		return name;
+		return super.getName();
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		super.setName(name);
 	}
 
 
 
 	public String toString(){
-		return email+";"+name+rides;
+		return super.getEmail()+";"+super.getName()+rides;
 	}
 
 	/**
@@ -97,7 +91,7 @@ public class Driver implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Driver other = (Driver) obj;
-		if (email != other.email)
+		if (super.getEmail() != other.getEmail())
 			return false;
 		return true;
 	}
@@ -119,6 +113,6 @@ public class Driver implements Serializable {
 	}
 
     public String getPassword() {
-		return this.password;
+		return super.getPassword();
     }
 }
