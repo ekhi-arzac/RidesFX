@@ -47,7 +47,7 @@ public class LoginController implements Controller {
         Driver driver = businessLogic.login(email, name);
         if (driver != null) {
             System.out.println("Login successful");
-            businessLogic.setCurrentDriver(driver);
+            businessLogic.setCurrentUser(driver);
             mainGUI.removeLogRegButton();
             mainGUI.setDriverName(driver.getName());
             mainGUI.showSceneInCenter("queryRides");

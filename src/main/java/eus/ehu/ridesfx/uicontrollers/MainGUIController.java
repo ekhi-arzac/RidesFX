@@ -79,9 +79,13 @@ public class MainGUIController implements Controller {
     }
 
     @FXML
+    void showDRidePanel(ActionEvent event) {
+        mainGUI.showSceneInCenter("dRidePanel");
+    }
+    @FXML
     void initialize() {
             // set current driver name
-            lblDriver.setText(businessLogic.getCurrentDriver().getName());
+            lblDriver.setText(businessLogic.getCurrentUser().getName());
             user_icon.setVisible(false);
     }
 
