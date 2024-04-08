@@ -197,9 +197,9 @@ public class DataAccess {
         System.out.println(">> DataAccess: getRides origin/dest/date");
 
         TypedQuery<Ride> query = db.createQuery("SELECT ride FROM Ride ride "
-                + "WHERE ride.date=?1 ", Ride.class);
+                + "WHERE ride.date=?1 AND ride.status=?2 ", Ride.class);
         query.setParameter(1, date);
-
+        query.setParameter(2, Ride.STATUS.ACTIVE);
 
         return query.getResultList();
     }
@@ -219,7 +219,8 @@ public class DataAccess {
      * @return collection of cities
      */
     public List<String> getDepartCities(){
-        TypedQuery<String> query = db.createQuery("SELECT DISTINCT r.fromLocation FROM Ride r ORDER BY r.fromLocation", String.class);
+        TypedQuery<String> query = db.createQuery("SELECT DISTINCT r.fromLocation FROM Ride r WHERE r.status=?1 ORDER BY r.fromLocation", String.class);
+        query.setParameter(1, Ride.STATUS.ACTIVE);
         List<String> cities = query.getResultList();
         return cities;
 
@@ -231,8 +232,9 @@ public class DataAccess {
      * @return all the arrival destinations
      */
     public List<String> getArrivalCities(String from){
-        TypedQuery<String> query = db.createQuery("SELECT DISTINCT r.toLocation FROM Ride r WHERE r.fromLocation=?1 ORDER BY r.toLocation",String.class);
+        TypedQuery<String> query = db.createQuery("SELECT DISTINCT r.toLocation FROM Ride r WHERE r.fromLocation=?1 AND r.status=?2 ORDER BY r.toLocation",String.class);
         query.setParameter(1, from);
+        query.setParameter(2, Ride.STATUS.ACTIVE);
         List<String> arrivingCities = query.getResultList();
         return arrivingCities;
 
@@ -253,12 +255,14 @@ public class DataAccess {
         Date lastDayMonthDate= UtilDate.lastDayMonth(date);
 
 
-        TypedQuery<Date> query = db.createQuery("SELECT DISTINCT r.date FROM Ride r WHERE r.fromLocation=?1 AND r.toLocation=?2 AND r.date BETWEEN ?3 and ?4",Date.class);
+        TypedQuery<Date> query = db.createQuery("SELECT DISTINCT r.date FROM Ride r WHERE r.status=?5 AND r.fromLocation=?1 AND r.toLocation=?2 AND r.date BETWEEN ?3 and ?4 ",Date.class);
 
         query.setParameter(1, from);
         query.setParameter(2, to);
         query.setParameter(3, firstDayMonthDate);
         query.setParameter(4, lastDayMonthDate);
+        query.setParameter(5, Ride.STATUS.ACTIVE);
+
         List<Date> dates = query.getResultList();
         for (Date d:dates){
             res.add(d);
@@ -270,10 +274,11 @@ public class DataAccess {
         System.out.println(">> DataAccess: getEventsFromTo");
         List<Date> res = new ArrayList<>();
 
-        TypedQuery<Date> query = db.createQuery("SELECT DISTINCT r.date FROM Ride r WHERE r.fromLocation=?1 AND r.toLocation=?2",Date.class);
+        TypedQuery<Date> query = db.createQuery("SELECT DISTINCT r.date FROM Ride r WHERE r.fromLocation=?1 AND r.toLocation=?2 AND r.status=?3",Date.class);
 
         query.setParameter(1, from);
         query.setParameter(2, to);
+        query.setParameter(3, Ride.STATUS.ACTIVE);
         List<Date> dates = query.getResultList();
         for (Date d:dates){
             res.add(d);
@@ -363,6 +368,13 @@ public class DataAccess {
     }
 
 
+    public Ride cancelRide(Ride ride) {
+        db.getTransaction().begin();
+        Ride r = db.find(Ride.class, ride.getRideNumber());
+        r.setStatus(Ride.STATUS.CANCELLED);
+        db.getTransaction().commit();
+        return r;
+    }
 }
 
 

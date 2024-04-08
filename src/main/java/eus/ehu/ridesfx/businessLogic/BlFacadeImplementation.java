@@ -47,6 +47,10 @@ public class BlFacadeImplementation implements BlFacade {
 		List<Ride> events = dbManager.getRidesFromDriver(email);
 		return events;
 	}
+	public Ride cancelRide(Ride ride) {
+		Ride r = dbManager.cancelRide(ride);
+		return r;
+	}
 
 	/**
 	 * {@inheritDoc}

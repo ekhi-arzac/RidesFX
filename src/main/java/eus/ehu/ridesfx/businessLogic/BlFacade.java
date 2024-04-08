@@ -25,6 +25,7 @@ public interface BlFacade {
 	 */
 	List<Ride> getRides(String from, String to, Date date);
 	List<Ride> getRidesFromDriver(String email);
+	Ride cancelRide(Ride ride);
 
 	/**
 	 * This method retrieves from the database the dates a month for which there are events
