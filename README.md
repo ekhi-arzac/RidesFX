@@ -1,6 +1,6 @@
 ShareTrip: a JavaFX (modular+hibernate+h2+properties) desktop application project 
 ==============================
-
+[![Java CI with Maven](https://github.com/ekhi-arzac/RidesFX/actions/workflows/maven.yml/badge.svg)](https://github.com/ekhi-arzac/RidesFX/actions/workflows/maven.yml)
 ## Introduction
 This application is a desktop application that allows carpooling between individuals. Any user can offer their own rides to other users or request a ride from other users. 
 

@@ -141,6 +141,7 @@ public class QueryRidesController implements Controller {
         comboDepartCity.setOnAction(e -> {
             arrivalCities.clear();
             arrivalCities.setAll(businessLogic.getDestinationCities(comboDepartCity.getValue()));
+            comboArrivalCity.setItems(arrivalCities);
         });
 
         // a date has been chosen, update the combobox of Rides

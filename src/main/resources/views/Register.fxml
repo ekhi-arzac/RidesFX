@@ -14,6 +14,9 @@
       <Button layoutX="270.0" layoutY="324.0" mnemonicParsing="false" onAction="#onRegister" text="Register" />
 
       <TextField fx:id="usernameField" layoutX="225.0" layoutY="160.0" styleClass="textfield" />
+      <PasswordField fx:id="passwordField" layoutX="225.0" layoutY="218.0" styleClass="textfield" />
+      <Button layoutX="277.0" layoutY="268.0" mnemonicParsing="false" onAction="#onRegister" text="Register" />
+      <Hyperlink layoutX="200.0" layoutY="349.0" onAction="#showLogin" text="Already have an account? Click here!" />
       <Label layoutX="272.0" layoutY="47.0" text="Register">
          <font>
             <Font name="System Bold" size="18.0" />

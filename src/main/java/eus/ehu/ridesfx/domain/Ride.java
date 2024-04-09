@@ -12,6 +12,9 @@ import java.util.Date;
 @SuppressWarnings("serial")
 @Entity
 public class Ride implements Serializable {
+	public enum STATUS {
+		ACTIVE, CANCELLED, FINISHED
+	}
 	@Id
 	@GeneratedValue
 	private Integer rideNumber;
@@ -20,7 +23,7 @@ public class Ride implements Serializable {
 	private int numPlaces;
 	private Date date;
 	private float price;
-
+	private STATUS status;
 	@ManyToOne
 	private Driver driver;
 
@@ -37,6 +40,7 @@ public class Ride implements Serializable {
 		this.date=date;
 		this.price=price;
 		this.driver = driver;
+		this.status = STATUS.ACTIVE;
 	}
 
 
@@ -49,6 +53,7 @@ public class Ride implements Serializable {
 		this.date=date;
 		this.price=price;
 		this.driver = driver;
+		this.status = STATUS.ACTIVE;
 	}
 
 	/**
@@ -186,7 +191,13 @@ public class Ride implements Serializable {
 		return rideNumber+";"+";"+ fromLocation +";"+ toLocation +";"+date;
 	}
 
+	public STATUS getStatus() {
+		return status;
+	}
 
+	public STATUS setStatus(STATUS status) {
+		return this.status = status;
+	}
 
 
 
