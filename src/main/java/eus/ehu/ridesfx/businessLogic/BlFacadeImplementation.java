@@ -4,6 +4,7 @@ import eus.ehu.ridesfx.configuration.Config;
 import eus.ehu.ridesfx.dataAccess.DataAccess;
 import eus.ehu.ridesfx.domain.Driver;
 import eus.ehu.ridesfx.domain.Ride;
+import eus.ehu.ridesfx.domain.User;
 import eus.ehu.ridesfx.exceptions.RideAlreadyExistException;
 import eus.ehu.ridesfx.exceptions.RideMustBeLaterThanTodayException;
 
@@ -19,7 +20,7 @@ public class BlFacadeImplementation implements BlFacade {
 
 	DataAccess dbManager;
 	Config config = Config.getInstance();
-	private Driver currentDriver;
+	private User currentUser;
 
 	public BlFacadeImplementation()  {
 		System.out.println("Creating BlFacadeImplementation instance");
@@ -65,13 +66,13 @@ public class BlFacadeImplementation implements BlFacade {
 	}
 
 	@Override
-	public void setCurrentDriver(Driver driver) {
-		this.currentDriver = driver;
+	public void setCurrentUser(User user) {
+		this.currentUser = user;
 	}
 
 	@Override
-	public Driver getCurrentDriver() {
-		return this.currentDriver;
+	public User getCurrentUser() {
+		return this.currentUser;
 	}
 
 
@@ -94,7 +95,7 @@ public class BlFacadeImplementation implements BlFacade {
 		return dates;
 	}
 	@Override
-	public Driver login(String email, String password) {
+	public User login(String email, String password) {
 		return dbManager.login(email,password);
 	}
 	@Override

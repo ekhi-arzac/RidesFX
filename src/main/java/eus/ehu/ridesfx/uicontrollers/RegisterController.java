@@ -1,6 +1,7 @@
 package eus.ehu.ridesfx.uicontrollers;
 import eus.ehu.ridesfx.businessLogic.BlFacade;
 import eus.ehu.ridesfx.domain.Driver;
+import eus.ehu.ridesfx.domain.Traveler;
 import eus.ehu.ridesfx.ui.MainGUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -45,9 +46,15 @@ public class RegisterController implements Controller {
         switch (businessLogic.register(email, username, password, role)) {
             case "success" -> {
                 System.out.println("Register successful");
-                businessLogic.setCurrentDriver(new Driver(email, username));
+                if (role.equals("TRAVELER")) {
+                    businessLogic.setCurrentUser(new Traveler(email, username));
+                    mainGUI.hideCreateRide();
+                } else {
+                    businessLogic.setCurrentUser(new Driver(email, username));
+                    mainGUI.hideQueryRides();
+                }
                 mainGUI.removeLogRegButton();
-                mainGUI.setDriverName(username);
+                mainGUI.setUserName(username);
                 mainGUI.showUserIcon();
                 mainGUI.showSceneInCenter("queryRides");
             }

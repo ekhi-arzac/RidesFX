@@ -79,7 +79,7 @@ public class DataAccess {
 
     public void reset() {
         db.getTransaction().begin();
-        db.createNativeQuery("DELETE FROM DRIVER_RIDE").executeUpdate();
+        db.createNativeQuery("DELETE FROM USERS_RIDE").executeUpdate();
         db.createQuery("DELETE FROM Ride ").executeUpdate();
         db.createQuery("DELETE FROM User ").executeUpdate();
         db.getTransaction().commit();
@@ -105,9 +105,12 @@ public class DataAccess {
 
             //Create drivers
             Driver driver1 = new Driver("driver1@gmail.com", "Aitor Fernandez");
+            String hashedPassword = BCrypt.hashpw("1234", BCrypt.gensalt(12));
+            driver1.setPassword(hashedPassword);
             Driver driver2 = new Driver("driver2@gmail.com", "Ane Gaztañaga");
             Driver driver3 = new Driver("driver3@gmail.com", "Test driver");
             Traveler traveler1 = new Traveler("traveler1@gmail.com", "Andrea Lezo");
+            traveler1.setPassword(hashedPassword);
 
 
             //Create rides
@@ -293,25 +296,25 @@ public class DataAccess {
      * @param password the name of the driver
      * @return the driver that has logged in
      */
-    public Driver login(String email, String password) {
+    public User login(String email, String password) {
         System.out.println(">> DataAccess: login");
         //without using findç
-        Driver driver;
+        User user;
 
         try{
-            TypedQuery<Driver> query = db.createQuery("SELECT d FROM Driver d WHERE d.email = :email", Driver.class)
+            TypedQuery<User> query = db.createQuery("SELECT d FROM User d WHERE d.email = :email", User.class)
                     .setParameter("email", email);
-            driver = query.getSingleResult();
+            user = query.getSingleResult();
         }
         catch(NoResultException e){
-            driver = null;
+            user = null;
         }
-        if (driver != null && BCrypt.checkpw(password, driver.getPassword())) {
-            return driver;
+        if (user != null && BCrypt.checkpw(password, user.getPassword())) {
+            return user;
         }
         else{
-            driver = null;
-            return driver;
+            user = null;
+            return user;
         }
 
     }
