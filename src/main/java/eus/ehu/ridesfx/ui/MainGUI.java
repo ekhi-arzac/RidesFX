@@ -46,8 +46,16 @@ public class MainGUI {
         });
     }
 
+    public void hideQueryRides() {
+        ((MainGUIController) mainLag.c).hideQueryRides();
+    }
 
-     class Window {
+    public void hideCreateRide() {
+        ((MainGUIController) mainLag.c).hideCreateRide();
+    }
+
+
+    class Window {
         Controller c;
         Parent ui;
 
@@ -139,8 +147,8 @@ public class MainGUI {
         ((MainGUIController) mainLag.c) .showUserIcon();
     }
 
-    public void setDriverName(String name) {
-        ((MainGUIController) mainLag.c) .setDriverName(name);
+    public void setUserName(String name) {
+        ((MainGUIController) mainLag.c) .setUserName(name);
     }
 
 }

@@ -19,7 +19,7 @@ public class MainGUIController implements Controller {
     private Label selectOptionLbl;
 
     @FXML
-    private Label lblDriver;
+    private Label lblUser;
 
 
     @FXML
@@ -85,7 +85,7 @@ public class MainGUIController implements Controller {
     @FXML
     void initialize() {
             // set current driver name
-            lblDriver.setText(businessLogic.getCurrentUser().getName());
+            lblUser.setText(businessLogic.getCurrentUser().getName());
             user_icon.setVisible(false);
     }
 
@@ -104,11 +104,19 @@ public class MainGUIController implements Controller {
      * This method sets the driver name to the label lblDriver to show once the user has logged in
      * @param name the name of the driver
      */
-    public void setDriverName(String name) {
-        lblDriver.setText(name);
+    public void setUserName(String name) {
+        lblUser.setText(name);
     }
 
     public void showUserIcon() {
         user_icon.setVisible(true);
+    }
+
+    public void hideQueryRides() {
+        queryRidesBtn.setVisible(false);
+    }
+
+    public void hideCreateRide() {
+        createRideBtn.setVisible(false);
     }
 }

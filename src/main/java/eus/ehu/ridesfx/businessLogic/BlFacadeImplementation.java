@@ -104,12 +104,12 @@ public class BlFacadeImplementation implements BlFacade {
 		return dates;
 	}
 	@Override
-	public Driver login(String email, String password) {
+	public User login(String email, String password) {
 		return dbManager.login(email,password);
 	}
 	@Override
-	public String register(String email, String name, String password) {
-		return dbManager.register(email, name, password);
+	public String register(String email, String name, String password, String role) {
+		return dbManager.register(email, name, password, role);
 
 	}
 

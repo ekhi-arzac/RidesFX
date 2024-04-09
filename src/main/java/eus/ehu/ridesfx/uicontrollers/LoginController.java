@@ -2,6 +2,8 @@ package eus.ehu.ridesfx.uicontrollers;
 
 import eus.ehu.ridesfx.businessLogic.BlFacade;
 import eus.ehu.ridesfx.domain.Driver;
+import eus.ehu.ridesfx.domain.Traveler;
+import eus.ehu.ridesfx.domain.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -44,15 +46,20 @@ public class LoginController implements Controller {
     void onLogin() {
         String email = emailField.getText();
         String name = passwordField.getText();
-        Driver driver = businessLogic.login(email, name);
-        if (driver != null) {
+        User user = businessLogic.login(email, name);
+        if (user != null) {
             System.out.println("Login successful");
-            businessLogic.setCurrentUser(driver);
+            businessLogic.setCurrentUser(user);
             mainGUI.removeLogRegButton();
-            mainGUI.setDriverName(driver.getName());
+            mainGUI.setUserName(user.getName());
             mainGUI.showSceneInCenter("queryRides");
             mainGUI.showUserIcon();
             //this.displayMessage("Login successful", "success_msg");
+            if (businessLogic.getCurrentUser() instanceof Driver) {
+                mainGUI.hideQueryRides();
+            } else if (businessLogic.getCurrentUser() instanceof Traveler) {
+                mainGUI.hideCreateRide();
+            }
 
         } else {
             this.displayMessage("This email is not registered", "error_msg");
