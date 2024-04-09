@@ -16,5 +16,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
         </columnResizePolicy>
     </TableView>
-   <Button layoutX="382.0" fx:id="cancelBtn" layoutY="295.0" mnemonicParsing="false" style="-fx-background-color: red; -fx-text-fill: white;" text="Cancel Ride" disable="true" onAction="#cancelRide"/>
+   <Button layoutX="382.0" fx:id="cancelBtn" layoutY="295.0" mnemonicParsing="false" style="-fx-background-color: red; -fx-text-fill: white;" text="Cancel Ride" onAction="#cancelRide" visible="false"/>
+    <Button layoutX="382.0" fx:id="reenableBtn" layoutY="295.0" mnemonicParsing="false" style="-fx-background-color: green; -fx-text-fill: white;" text="Reenable Ride" onAction="#reenableRide" visible="false"/>
+
 </AnchorPane>

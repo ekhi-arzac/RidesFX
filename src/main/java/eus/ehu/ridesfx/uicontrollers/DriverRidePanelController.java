@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 public class DriverRidePanelController implements Controller {
+
     private MainGUI mainGUI;
     private BlFacade businessLogic;
     public DriverRidePanelController(BlFacade bussinessLogic) {
@@ -25,6 +26,8 @@ public class DriverRidePanelController implements Controller {
     @FXML
     private Button cancelBtn;
 
+    @FXML
+    private Button reenableBtn;
 
     @FXML
     private TableColumn<Ride, Date> qc1;
@@ -50,11 +53,15 @@ public class DriverRidePanelController implements Controller {
         qc1.setCellValueFactory(new PropertyValueFactory<>("date"));
         qc2.setCellValueFactory(new PropertyValueFactory<>("fromLocation"));
         qc3.setCellValueFactory(new PropertyValueFactory<>("toLocation"));
+        tblRides.getSortOrder().add(qc1);
+
     }
 
     @FXML
     void initialize() {
         assert tblRides != null : "fx:id=\"tblRides\" was not injected: check your FXML file 'DriverRidePanel.fxml'.";
+        // Order by qc1 descending date order
+
         tblRides.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 cancelBtn.setDisable(false);
@@ -62,30 +69,54 @@ public class DriverRidePanelController implements Controller {
                 cancelBtn.setDisable(true);
             }
         });
-
+        // disable arrow key navigation
         tblRides.setRowFactory(tv -> new TableRow<Ride>() {
             protected void updateItem(Ride ride, boolean empty) {
                 super.updateItem(ride, empty);
                 if (ride == null)
                     setStyle("");
+                else if (ride.getDate().before(new Date())) {
+                    setStyle("-fx-background-color: lightgrey;");
+                    cancelBtn.setVisible(false);
+                    reenableBtn.setVisible(false);
+                }
                 else if (ride.getStatus() == Ride.STATUS.CANCELLED) {
                     setStyle("-fx-background-color: red;");
-                    setDisable(true);
+
+                    cancelBtn.setVisible(false);
+                    reenableBtn.setVisible(true);
+
                 }
-                else if (ride.getDate().before(new Date())) {
-                    setDisable(true);
-                    setStyle("-fx-background-color: lightgrey;");
+                else if (ride.getStatus() == Ride.STATUS.ACTIVE) {
+                    setStyle("-fx-background-color: lightgreen;");
+                    cancelBtn.setVisible(true);
+                    reenableBtn.setVisible(false);
                 }
+                else {
+                    setStyle("");
+                    cancelBtn.setVisible(false);
+                    reenableBtn.setVisible(false);
+                }
+
             }
         });
+        qc1.setSortType(TableColumn.SortType.DESCENDING);
     }
 
 
     @FXML
     void cancelRide() {
         Ride ride = tblRides.getSelectionModel().getSelectedItem();
-        if (ride != null) {
+        if (ride != null && ride.getStatus() == Ride.STATUS.ACTIVE) {
             businessLogic.cancelRide(ride);
+            updateRides();
+        }
+    }
+    @FXML
+    void reenableRide() {
+        Ride ride = tblRides.getSelectionModel().getSelectedItem();
+        if (ride != null && ride.getStatus() == Ride.STATUS.CANCELLED) {
+            businessLogic.reenableRide(ride);
             updateRides();
         }
     }

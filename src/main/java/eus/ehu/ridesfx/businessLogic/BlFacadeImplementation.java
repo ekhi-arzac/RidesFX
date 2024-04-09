@@ -113,5 +113,10 @@ public class BlFacadeImplementation implements BlFacade {
 
 	}
 
+	public void reenableRide(Ride ride) {
+		dbManager.reenableRide(ride);
+	}
+
+
 }
 

@@ -391,6 +391,13 @@ public class DataAccess {
         db.getTransaction().commit();
         return r;
     }
+
+    public void reenableRide(Ride ride) {
+        db.getTransaction().begin();
+        Ride r = db.find(Ride.class, ride.getRideNumber());
+        r.setStatus(Ride.STATUS.ACTIVE);
+        db.getTransaction().commit();
+    }
 }
 
 

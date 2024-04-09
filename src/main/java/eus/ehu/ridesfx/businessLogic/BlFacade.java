@@ -77,4 +77,6 @@ public interface BlFacade {
 	public User login(String email, String name);
 
 	String register(String email, String username, String password, String role);
+
+	void reenableRide(Ride ride);
 }
