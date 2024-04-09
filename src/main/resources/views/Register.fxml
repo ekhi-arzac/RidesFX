@@ -15,7 +15,6 @@
 
       <TextField fx:id="usernameField" layoutX="225.0" layoutY="160.0" styleClass="textfield" />
       <PasswordField fx:id="passwordField" layoutX="225.0" layoutY="218.0" styleClass="textfield" />
-      <Button layoutX="277.0" layoutY="268.0" mnemonicParsing="false" onAction="#onRegister" text="Register" />
       <Hyperlink layoutX="200.0" layoutY="349.0" onAction="#showLogin" text="Already have an account? Click here!" />
       <Label layoutX="272.0" layoutY="47.0" text="Register">
          <font>
@@ -23,7 +22,6 @@
          </font></Label>
       <Label layoutX="225.0" layoutY="142.0" text="Username:" />
       <Label layoutX="225.0" layoutY="200.0" text="Password:" />
-      <Hyperlink layoutX="199.0" layoutY="350.0" onAction="#showLogin" text="Already have an account? Click here!" />
       <PasswordField fx:id="passwordField" layoutX="225.0" layoutY="218.0" styleClass="textfield" />
       <TextField fx:id="emailField" layoutX="225.0" layoutY="103.0" styleClass="textfield" />
       <Label layoutX="223.0" layoutY="85.0" text="Email:" />
