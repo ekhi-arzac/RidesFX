@@ -7,6 +7,7 @@ import java.util.*;
 import eus.ehu.ridesfx.businessLogic.BlFacade;
 import eus.ehu.ridesfx.domain.Driver;
 import eus.ehu.ridesfx.domain.Ride;
+import eus.ehu.ridesfx.domain.User;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -24,7 +25,7 @@ import eus.ehu.ridesfx.utils.Dates;
 public class QueryRidesController implements Controller {
 
     @FXML
-    private Button BookRideButton;
+    private Button bookRideButton;
 
     @FXML
     private ResourceBundle resources;
@@ -147,6 +148,7 @@ public class QueryRidesController implements Controller {
             comboArrivalCity.setItems(arrivalCities);
         });
 
+
         // a date has been chosen, update the combobox of Rides
         datepicker.setOnAction(actionEvent -> {
 
@@ -156,6 +158,17 @@ public class QueryRidesController implements Controller {
             // List<Ride> rides = Arrays.asList(new Ride("Bilbao", "Donostia", Dates.convertToDate(datepicker.getValue()), 3, 3.5f, new Driver("pepe@pepe.com", "pepe")));
             for (eus.ehu.ridesfx.domain.Ride ride : rides) {
                 tblRides.getItems().add(ride);
+            }
+        });
+
+        // if the user is a traveler, he has the option to book an available ride, the ride will be set as pending
+        bookRideButton.setOnAction(actionEvent -> {
+            User user = businessLogic.getCurrentUser();
+            if (user.getClass().getSimpleName().equals("Traveler")) {
+                Ride ride = tblRides.getSelectionModel().getSelectedItem();
+                if (ride != null) {
+                    businessLogic.createBook(ride, Dates.convertToDate(datepicker.getValue()),user.getEmail());
+                }
             }
         });
 
