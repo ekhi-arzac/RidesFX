@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="eus.ehu.ridesfx.uicontrollers.CarPoolChatController"
+            prefHeight="400.0" prefWidth="600.0">
+<children>
+<BorderPane prefHeight="400.0" prefWidth="600.0">
+<top>
+<HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+<children>
+<Label text="Chat" />
+<Label fx:id="chatName" text="Chat Name" />
+</children>
+</HBox>
+</top>
+<center>
+<ScrollPane prefHeight="200.0" prefWidth="200.0">
+<content>
+<VBox fx:id="chatMessages" prefHeight="200.0" prefWidth="200.0" spacing="10.0" />
+</content>
+</ScrollPane>
+</center>
+<bottom>
+<HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+<children>
+<TextField fx:id="message" prefHeight="25.0" prefWidth="400.0" />
+<Button fx:id="send" mnemonicParsing="false" text="Send" onAction="#sendMessage"/>
+</children>
+</HBox>
+</bottom>
+</BorderPane>
+</children>
+</AnchorPane>

@@ -7,7 +7,10 @@ import eus.ehu.ridesfx.domain.Ride;
 import eus.ehu.ridesfx.domain.User;
 import eus.ehu.ridesfx.exceptions.RideAlreadyExistException;
 import eus.ehu.ridesfx.exceptions.RideMustBeLaterThanTodayException;
+import eus.ehu.ridesfx.msgClient.MsgClient;
+import eus.ehu.ridesfx.uicontrollers.CarPoolChatController;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
@@ -19,6 +22,8 @@ import java.util.Vector;
 public class BlFacadeImplementation implements BlFacade {
 
 	DataAccess dbManager;
+
+	MsgClient msgClient;
 	Config config = Config.getInstance();
 	private User currentUser;
 
@@ -105,10 +110,24 @@ public class BlFacadeImplementation implements BlFacade {
 	}
 	@Override
 	public User login(String email, String password) {
-		return dbManager.login(email,password);
+		User user = dbManager.login(email,password);
+		if (user != null) {
+			try {
+				msgClient = new MsgClient(email);
+				return user;
+			} catch (Exception e) {
+				return null;
+			}
+		}
+		return null;
 	}
 	@Override
 	public String register(String email, String name, String password, String role) {
+		try {
+			msgClient = new MsgClient(email);
+		} catch (IOException e) {
+			return null;
+		}
 		return dbManager.register(email, name, password, role);
 
 	}
@@ -116,6 +135,24 @@ public class BlFacadeImplementation implements BlFacade {
 	public void reenableRide(Ride ride) {
 		dbManager.reenableRide(ride);
 	}
+
+	public void sendMessage(int channel, String message) {
+		msgClient.sendMessage(channel, message);
+	}
+
+	@Override
+	public void setChatController(CarPoolChatController chatController) {
+		msgClient.setChatController(chatController);
+	}
+
+	@Override
+	public void closeMsgClient() {
+        try {
+            msgClient.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
 }

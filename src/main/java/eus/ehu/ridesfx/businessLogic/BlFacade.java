@@ -5,6 +5,7 @@ import eus.ehu.ridesfx.domain.Ride;
 import eus.ehu.ridesfx.domain.User;
 import eus.ehu.ridesfx.exceptions.RideAlreadyExistException;
 import eus.ehu.ridesfx.exceptions.RideMustBeLaterThanTodayException;
+import eus.ehu.ridesfx.uicontrollers.CarPoolChatController;
 
 import java.util.Date;
 import java.util.List;
@@ -79,4 +80,9 @@ public interface BlFacade {
 	String register(String email, String username, String password, String role);
 
 	void reenableRide(Ride ride);
+
+	void sendMessage(int channel, String message);
+	void setChatController(CarPoolChatController chatController);
+
+	void closeMsgClient();
 }

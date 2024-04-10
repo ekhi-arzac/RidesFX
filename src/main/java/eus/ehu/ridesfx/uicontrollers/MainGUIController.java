@@ -82,6 +82,7 @@ public class MainGUIController implements Controller {
     void showDRidePanel(ActionEvent event) {
         mainGUI.showSceneInCenter("dRidePanel");
     }
+
     @FXML
     void initialize() {
             // set current driver name

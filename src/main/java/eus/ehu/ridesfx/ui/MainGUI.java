@@ -1,8 +1,11 @@
 package eus.ehu.ridesfx.ui;
 
 import eus.ehu.ridesfx.businessLogic.BlFacade;
+import eus.ehu.ridesfx.domain.Ride;
+import eus.ehu.ridesfx.uicontrollers.CarPoolChatController;
 import eus.ehu.ridesfx.uicontrollers.DriverRidePanelController;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,7 +22,7 @@ import java.util.ResourceBundle;
 
 public class MainGUI {
 
-    private Window mainLag, createRideLag, queryRidesLag, loginLag, registerLag, dRidePanelLag;
+    private Window mainLag, createRideLag, queryRidesLag, loginLag, registerLag, dRidePanelLag, carPoolChatLag;
 
     private BlFacade businessLogic;
     private Stage stage;
@@ -44,6 +47,7 @@ public class MainGUI {
                 e.printStackTrace();
             }
         });
+
     }
 
     public void hideQueryRides() {
@@ -52,6 +56,17 @@ public class MainGUI {
 
     public void hideCreateRide() {
         ((MainGUIController) mainLag.c).hideCreateRide();
+    }
+
+    public void showChat(Ride ride) {
+        try {
+            ((CarPoolChatController) carPoolChatLag.c).setRide(ride);
+            businessLogic.setChatController(((CarPoolChatController) carPoolChatLag.c));
+
+            mainPane.setCenter(carPoolChatLag.ui);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -91,6 +106,7 @@ public class MainGUI {
         loginLag = load("/views/Login.fxml");
         registerLag = load("/views/Register.fxml");
         dRidePanelLag = load("/views/DriverRidePanel.fxml");
+        carPoolChatLag = load("/views/CarPoolChat.fxml");
         showMain();
 
     }
@@ -149,6 +165,12 @@ public class MainGUI {
 
     public void setUserName(String name) {
         ((MainGUIController) mainLag.c) .setUserName(name);
+    }
+
+    @FXML
+    public void exitApplication(ActionEvent event) {
+        businessLogic.closeMsgClient();
+        Platform.exit();
     }
 
 }
