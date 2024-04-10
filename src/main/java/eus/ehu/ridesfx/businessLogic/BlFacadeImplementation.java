@@ -108,8 +108,8 @@ public class BlFacadeImplementation implements BlFacade {
 		return dbManager.login(email,password);
 	}
 	@Override
-	public String register(String email, String name, String password, String role) {
-		return dbManager.register(email, name, password, role);
+	public String register(String email, String name, String password, String repeatPassword, String role) {
+		return dbManager.register(email, name, password, repeatPassword, role);
 
 	}
 
