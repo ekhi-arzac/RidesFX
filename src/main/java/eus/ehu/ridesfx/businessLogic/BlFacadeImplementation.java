@@ -113,7 +113,7 @@ public class BlFacadeImplementation implements BlFacade {
 		User user = dbManager.login(email,password);
 		if (user != null) {
 			try {
-				msgClient = new MsgClient(email);
+				msgClient = new MsgClient(user.getName());
 				return user;
 			} catch (Exception e) {
 				return null;
@@ -124,9 +124,9 @@ public class BlFacadeImplementation implements BlFacade {
 	@Override
 	public String register(String email, String name, String password, String role) {
 		try {
-			msgClient = new MsgClient(email);
+			msgClient = new MsgClient(name);
 		} catch (IOException e) {
-			return null;
+			return "msgClientError";
 		}
 		return dbManager.register(email, name, password, role);
 

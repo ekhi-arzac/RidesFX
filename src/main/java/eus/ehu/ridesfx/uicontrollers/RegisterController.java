@@ -43,6 +43,7 @@ public class RegisterController implements Controller {
         String password = passwordField.getText();
         String username = usernameField.getText();
         String role = this.role.getValue();
+        System.out.println("Registering user: " + email + " " + username + " " + password + " " + role);
         switch (businessLogic.register(email, username, password, role)) {
             case "success" -> {
                 System.out.println("Register successful");
@@ -77,6 +78,10 @@ public class RegisterController implements Controller {
             case "emptyFields" -> {
                 this.displayMessage("All fields are compulsory", "error_msg");
                 System.out.println("Empty fields");
+            }
+            case "msgClientError" -> {
+                this.displayMessage("Client error", "error_msg");
+                System.out.println("Client error");
             }
         }
     }
