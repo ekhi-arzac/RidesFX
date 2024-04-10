@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -27,5 +28,6 @@
       <Label layoutX="39.0" layoutY="106.0" text="%ArrivalCity" />
       <ComboBox fx:id="comboDepartCity" layoutX="149.0" layoutY="54.0" prefWidth="150.0" styleClass="comb_bootstrap" />
       <ComboBox fx:id="comboArrivalCity" layoutX="149.0" layoutY="102.0" prefWidth="150.0" styleClass="comb_bootstrap" />
+      <Button fx:id="BookRideButton" layoutX="119.0" layoutY="257.0" mnemonicParsing="false" text="Button" />
     </children>
 </AnchorPane>

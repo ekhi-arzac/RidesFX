@@ -357,10 +357,6 @@ public class DataAccess {
         }
         //when registering the introduced password must be hashed and salted
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
-
-
-
-
         db.getTransaction().begin();
         User user = null;
         switch (role){

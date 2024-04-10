@@ -1,15 +1,16 @@
 package eus.ehu.ridesfx.domain;
 
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 @Entity
 @DiscriminatorValue("TRAVELER")
 public class Traveler extends User implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    private ArrayList<RideRequest> rideRequest;
 
     public Traveler(String email, String name) {
         super(email, name);
@@ -22,7 +23,6 @@ public class Traveler extends User implements Serializable {
     public void setPassword(String password){
         super.setPassword(password);
     }
-
 
     public String getEmail() {
         return super.getEmail();
@@ -43,6 +43,4 @@ public class Traveler extends User implements Serializable {
     public String getPassword() {
         return super.getPassword();
     }
-
-
 }

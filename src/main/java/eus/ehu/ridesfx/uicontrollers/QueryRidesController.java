@@ -24,6 +24,9 @@ import eus.ehu.ridesfx.utils.Dates;
 public class QueryRidesController implements Controller {
 
     @FXML
+    private Button BookRideButton;
+
+    @FXML
     private ResourceBundle resources;
 
     @FXML

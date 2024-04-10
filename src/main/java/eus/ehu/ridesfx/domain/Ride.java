@@ -1,12 +1,10 @@
 package eus.ehu.ridesfx.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 
 @SuppressWarnings("serial")
@@ -21,6 +19,7 @@ public class Ride implements Serializable {
 	private String fromLocation;
 	private String toLocation;
 	private int numPlaces;
+	List<RideRequest> rideRequests;
 	private Date date;
 	private float price;
 	private STATUS status;
