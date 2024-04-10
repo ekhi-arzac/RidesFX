@@ -21,6 +21,8 @@ public class RegisterController implements Controller {
 
     @FXML
     private PasswordField passwordField;
+    @FXML
+    private TextField repeatPasswordField;
 
     @FXML
     private TextField usernameField;
@@ -41,14 +43,16 @@ public class RegisterController implements Controller {
     void onRegister() {
         String email = emailField.getText();
         String password = passwordField.getText();
+        String repeatPassword = repeatPasswordField.getText();
         String username = usernameField.getText();
         String role = this.role.getValue();
-        switch (businessLogic.register(email, username, password, role)) {
+        switch (businessLogic.register(email, username, password, repeatPassword, role)) {
             case "success" -> {
                 System.out.println("Register successful");
                 if (role.equals("TRAVELER")) {
                     businessLogic.setCurrentUser(new Traveler(email, username));
                     mainGUI.hideCreateRide();
+                    mainGUI.hideDriverRidePanel();
                 } else {
                     businessLogic.setCurrentUser(new Driver(email, username));
                     mainGUI.hideQueryRides();
@@ -58,25 +62,29 @@ public class RegisterController implements Controller {
                 mainGUI.showUserIcon();
                 mainGUI.showSceneInCenter("queryRides");
             }
-            case "emailExists" -> {
-                this.displayMessage("Email already in use", "error_msg");
-                System.out.println("Email already in use");
+            case "emptyFields" -> {
+                this.displayMessage("All fields are compulsory", "error_msg");
+                System.out.println("Empty fields");
             }
             case "invalidEmail" -> {
                 this.displayMessage("Invalid email", "error_msg");
                 System.out.println("Invalid email");
             }
+            case "emailExists" -> {
+                this.displayMessage("Email already in use", "error_msg");
+                System.out.println("Email already in use");
+            }
             case "invalidName" -> {
-                this.displayMessage("Username must have less than 10 characters", "error_msg");
+                this.displayMessage("Username must have less than 20 characters", "error_msg");
                 System.out.println("Invalid username");
             }
             case "invalidPassword" -> {
                 this.displayMessage("Password must have at least 6 characters", "error_msg");
                 System.out.println("Invalid password");
             }
-            case "emptyFields" -> {
-                this.displayMessage("All fields are compulsory", "error_msg");
-                System.out.println("Empty fields");
+            case "passwordMismatch" -> {
+                this.displayMessage("Passwords do not match", "error_msg");
+                System.out.println("Passwords do not match");
             }
         }
     }
@@ -105,6 +113,15 @@ public class RegisterController implements Controller {
         lblErrorMessage.getStyleClass().clear();
         lblErrorMessage.getStyleClass().setAll(label);
         lblErrorMessage.setText(message);
+        Thread thread = new Thread(() -> {
+            try {
+                Thread.sleep(3000);
+                lblErrorMessage.setVisible(false);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        thread.start();
     }
 
     @FXML

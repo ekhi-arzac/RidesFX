@@ -43,6 +43,9 @@ public class MainGUIController implements Controller {
     @FXML
     private ImageView user_icon;
 
+    @FXML
+    private Button dRidePanelBtn;
+
     private MainGUI mainGUI;
 
     private BlFacade businessLogic;
@@ -118,5 +121,9 @@ public class MainGUIController implements Controller {
 
     public void hideCreateRide() {
         createRideBtn.setVisible(false);
+    }
+
+    public void hideDriverRidePanel() {
+        dRidePanelBtn.setVisible(false);
     }
 }
