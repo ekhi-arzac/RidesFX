@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 public class CarPoolChatController implements Controller {
 
@@ -33,7 +35,7 @@ public class CarPoolChatController implements Controller {
     private record Msg(int rideNumber, String sender, String message) {}
 
 
-    private Map<Integer, List<Msg>> cache = new HashMap<>();
+    private ConcurrentMap<Integer, List<Msg>> cache = new ConcurrentHashMap<>();
     public CarPoolChatController(BlFacade businessLogic) {
         this.businessLogic = businessLogic;
         for (var ride : businessLogic.getRidesFromDriver(businessLogic.getCurrentUser().getEmail())) {

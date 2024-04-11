@@ -47,17 +47,18 @@ public class MsgClient {
                 while ((message = reader.readLine()) != null) {
                     String[] parts = message.split(":");
                     if (parts[0].equals(chatController.getRide().getRideNumber() + "") &&
-                            !parts[1].equals(this.senderUsername)
-                            || parts[0].equals("0"))
+                            !parts[1].trim().equals(this.senderUsername)
+                            || parts[0].equals("0")) {
                         System.out.println(message);
-                    String finalMessage = parts[2];
-                    String sender = parts[1];
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            chatController.addMessage(sender, finalMessage, false);
-                        }
-                    });
+                        String finalMessage = parts[2];
+                        String sender = parts[1];
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                chatController.addMessage(sender, finalMessage, false);
+                            }
+                        });
+                    }
                 }
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
