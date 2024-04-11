@@ -2,10 +2,7 @@ package eus.ehu.ridesfx.dataAccess;
 
 import eus.ehu.ridesfx.configuration.Config;
 import eus.ehu.ridesfx.configuration.UtilDate;
-import eus.ehu.ridesfx.domain.Ride;
-import eus.ehu.ridesfx.domain.Driver;
-import eus.ehu.ridesfx.domain.Traveler;
-import eus.ehu.ridesfx.domain.User;
+import eus.ehu.ridesfx.domain.*;
 import eus.ehu.ridesfx.exceptions.RideAlreadyExistException;
 import eus.ehu.ridesfx.exceptions.RideMustBeLaterThanTodayException;
 import jakarta.persistence.*;
@@ -378,7 +375,10 @@ public class DataAccess {
         return "success";
 
     }
+    public RideBook bookRide(Ride ride, Date date, String email, int passengers){
 
+        return null;
+    }
 
     public Ride cancelRide(Ride ride) {
         db.getTransaction().begin();

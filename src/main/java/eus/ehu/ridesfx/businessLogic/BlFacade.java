@@ -79,4 +79,6 @@ public interface BlFacade {
 	String register(String email, String username, String password, String role);
 
 	void reenableRide(Ride ride);
+
+	public void RideBook(Ride ride, Date date, String email, int passengers);
 }

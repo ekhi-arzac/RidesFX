@@ -16,6 +16,6 @@
         <mapping class="eus.ehu.ridesfx.domain.Driver" />
         <mapping class="eus.ehu.ridesfx.domain.Traveler" />
         <mapping class="eus.ehu.ridesfx.domain.Ride" />
-        <mapping class="eus.ehu.ridesfx.domain.RideRequest" />
+        <mapping class="eus.ehu.ridesfx.domain.RideBook" />
     </session-factory>
 </hibernate-configuration>

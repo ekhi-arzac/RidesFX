@@ -7,6 +7,7 @@ import eus.ehu.ridesfx.domain.Ride;
 import eus.ehu.ridesfx.domain.User;
 import eus.ehu.ridesfx.exceptions.RideAlreadyExistException;
 import eus.ehu.ridesfx.exceptions.RideMustBeLaterThanTodayException;
+import eus.ehu.ridesfx.utils.Dates;
 
 import java.util.Date;
 import java.util.List;
@@ -115,6 +116,10 @@ public class BlFacadeImplementation implements BlFacade {
 
 	public void reenableRide(Ride ride) {
 		dbManager.reenableRide(ride);
+	}
+
+	public void RideBook(Ride ride, Date date, String email, int passengers){
+
 	}
 
 

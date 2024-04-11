@@ -19,7 +19,7 @@ public class Ride implements Serializable {
 	private String fromLocation;
 	private String toLocation;
 	private int numPlaces;
-	List<RideRequest> rideRequests;
+	List<RideBook> rideBooks;
 	private Date date;
 	private float price;
 	private STATUS status;

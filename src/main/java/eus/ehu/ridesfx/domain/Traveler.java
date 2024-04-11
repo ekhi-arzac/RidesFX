@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Traveler extends User implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private ArrayList<RideRequest> rideRequest;
+    private ArrayList<RideBook> rideBook;
 
     public Traveler(String email, String name) {
         super(email, name);

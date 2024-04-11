@@ -167,7 +167,7 @@ public class QueryRidesController implements Controller {
             if (user.getClass().getSimpleName().equals("Traveler")) {
                 Ride ride = tblRides.getSelectionModel().getSelectedItem();
                 if (ride != null) {
-                    businessLogic.createBook(ride, Dates.convertToDate(datepicker.getValue()),user.getEmail());
+                    businessLogic.RideBook(ride, Dates.convertToDate(datepicker.getValue()),user.getEmail(), 0); //passengers set to cero, need to add a spinner to select number
                 }
             }
         });
