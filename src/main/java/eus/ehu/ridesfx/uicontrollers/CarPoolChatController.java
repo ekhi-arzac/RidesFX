@@ -12,11 +12,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ConcurrentMap;
 
 public class CarPoolChatController implements Controller {
@@ -57,10 +55,12 @@ public class CarPoolChatController implements Controller {
         if (isSelf) {
             chatMessages.setAlignment(Pos.CENTER_RIGHT);
             txt.setStyle("-fx-background-color: lightblue; -fx-border-color: #f4f4f4; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-padding: 5px; -fx-text-fill: #000000;");
+            lbl.setText("You: ");
         } else {
             chatMessages.setAlignment(Pos.CENTER_LEFT);
             txt.setStyle("-fx-background-color: white; -fx-border-color: #f4f4f4; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-padding: 5px; -fx-text-fill: #000000;");
         }
+        txt.setMaxWidth(7 * message.length() +30);
 
 
 
@@ -73,18 +73,19 @@ public class CarPoolChatController implements Controller {
         }
         chatMessages.getChildren().clear();
         if (!cache.containsKey(ride.getRideNumber())) {
-            cache.put(ride.getRideNumber(), new ArrayList<>());
+            cache.put(ride.getRideNumber(), Collections.synchronizedList(new ArrayList<>()));
         } else {
             loadCache();
         }
         this.ride = ride;
     }
     public void loadCache() {
-        Platform.runLater(() ->
-            cache.get(ride.getRideNumber()).forEach(msg -> {
-                addMessage(msg.sender(), msg.message(), msg.sender().equals(businessLogic.getCurrentUser().getName()));
-            }
-        ));
+        Platform.runLater(() -> {
+                    List<Msg> tempMsgList = new ArrayList<>(cache.get(ride.getRideNumber()));
+                    tempMsgList.forEach(msg -> {
+                        addMessage(msg.sender(), msg.message(), msg.sender().equals(businessLogic.getCurrentUser().getName()));
+                    });
+        });
     }
     @FXML
     public void sendMessage(ActionEvent actionEvent) {
