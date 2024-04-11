@@ -332,8 +332,9 @@ public class DataAccess {
 
     /**
      * This method registers a new driver in the database
-     * @param email the email of the driver
-     * @param name the name of the driver
+     *
+     * @param email    the email of the driver
+     * @param name     the name of the driver
      * @param password the password of the driver
      * @return a string with the result of the registration
      */

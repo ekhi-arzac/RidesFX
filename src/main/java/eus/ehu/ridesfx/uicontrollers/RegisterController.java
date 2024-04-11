@@ -86,6 +86,10 @@ public class RegisterController implements Controller {
                 this.displayMessage("Passwords do not match", "error_msg");
                 System.out.println("Passwords do not match");
             }
+            case "msgClientError" -> {
+                this.displayMessage("Client error", "error_msg");
+                System.out.println("Client error");
+            }
         }
     }
 

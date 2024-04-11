@@ -3,6 +3,7 @@ package eus.ehu.ridesfx.uicontrollers;
 import eus.ehu.ridesfx.businessLogic.BlFacade;
 import eus.ehu.ridesfx.domain.Ride;
 import eus.ehu.ridesfx.ui.MainGUI;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -77,26 +78,15 @@ public class DriverRidePanelController implements Controller {
                     setStyle("");
                 else if (ride.getDate().before(new Date())) {
                     setStyle("-fx-background-color: lightgrey;");
-                    cancelBtn.setVisible(false);
-                    reenableBtn.setVisible(false);
                 }
                 else if (ride.getStatus() == Ride.STATUS.CANCELLED) {
                     setStyle("-fx-background-color: red;");
 
-                    cancelBtn.setVisible(false);
-                    reenableBtn.setVisible(true);
-
                 }
                 else if (ride.getStatus() == Ride.STATUS.ACTIVE) {
                     setStyle("-fx-background-color: lightgreen;");
-                    cancelBtn.setVisible(true);
-                    reenableBtn.setVisible(false);
                 }
-                else {
-                    setStyle("");
-                    cancelBtn.setVisible(false);
-                    reenableBtn.setVisible(false);
-                }
+
 
             }
         });
@@ -118,6 +108,13 @@ public class DriverRidePanelController implements Controller {
         if (ride != null && ride.getStatus() == Ride.STATUS.CANCELLED) {
             businessLogic.reenableRide(ride);
             updateRides();
+        }
+    }
+
+    public void openChat(ActionEvent actionEvent) {
+        Ride ride = tblRides.getSelectionModel().getSelectedItem();
+        if (ride != null) {
+            mainGUI.showChat(ride);
         }
     }
 }
