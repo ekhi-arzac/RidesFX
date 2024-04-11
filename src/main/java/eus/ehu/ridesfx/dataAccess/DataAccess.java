@@ -337,10 +337,10 @@ public class DataAccess {
      * @param password the password of the driver
      * @return a string with the result of the registration
      */
-    public String register(String email, String name, String password, String role) {
+    public String register(String email, String name, String password, String repeatPassword, String role) {
         System.out.println(">> DataAccess: register");
 
-        if (email.isEmpty() || name.isEmpty() || password.isEmpty()) {
+        if (email.isEmpty() || name.isEmpty() || password.isEmpty() || repeatPassword.isEmpty() || role == null) {
             return "emptyFields";
         }
 
@@ -352,7 +352,12 @@ public class DataAccess {
         if(password.length() < 6 || password.length() > 20){
             return "invalidPassword";
         }
-        if(name.length() > 10){
+
+        if(!password.equals(repeatPassword)){
+            return "passwordMismatch";
+        }
+
+        if(name.length() > 20){
             return "invalidName";
         }
         //when registering the introduced password must be hashed and salted

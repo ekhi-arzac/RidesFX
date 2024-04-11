@@ -69,6 +69,10 @@ public class MainGUI {
         }
     }
 
+    public void hideDriverRidePanel() {
+        ((MainGUIController) mainLag.c).hideDriverRidePanel();
+    }
+
 
     class Window {
         Controller c;
