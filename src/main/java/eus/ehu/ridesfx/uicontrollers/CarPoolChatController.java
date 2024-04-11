@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -52,21 +53,22 @@ public class CarPoolChatController implements Controller {
         lbl.setStyle("-fx-padding: 0 0 5 0; -fx-font-weight: bold;");
         TextField txt = new TextField(message);
         txt.setEditable(false);
+        HBox hBox = new HBox();
+
 
         if (isSelf) {
-            chatMessages.setAlignment(Pos.CENTER_RIGHT);
+            hBox.setAlignment(Pos.CENTER_RIGHT);
             txt.setStyle("-fx-background-color: lightblue; -fx-border-color: #f4f4f4; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-padding: 5px; -fx-text-fill: #000000;");
             lbl.setText("You: ");
         } else {
-            chatMessages.setAlignment(Pos.CENTER_LEFT);
+            hBox.setAlignment(Pos.CENTER_LEFT);
             txt.setStyle("-fx-background-color: white; -fx-border-color: #f4f4f4; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-padding: 5px; -fx-text-fill: #000000;");
         }
         txt.setMaxWidth(7 * message.length() +30);
 
 
-
-        cache.get(ride.getRideNumber()).add(new Msg(ride.getRideNumber(), sender, message));
-        chatMessages.getChildren().addAll(lbl,txt);
+        hBox.getChildren().addAll(lbl, txt);
+        chatMessages.getChildren().add(hBox);
     }
     public void setRide(Ride ride) {
         if (this.ride != null && this.ride.getRideNumber() == ride.getRideNumber()){
@@ -78,7 +80,7 @@ public class CarPoolChatController implements Controller {
         } else {
             loadCache();
         }
-        chatName.setText( "[#"+ ride.getRideNumber() + "]" + ride.getFromLocation() + " - " + ride.getToLocation() + " (" + ride.getDate()+ ")");
+        chatName.setText( "[#"+ ride.getRideNumber() + "] " + ride.getFromLocation() + " - " + ride.getToLocation() + " (" + ride.getDate()+ ")");
         this.ride = ride;
     }
     public void loadCache() {
@@ -92,12 +94,19 @@ public class CarPoolChatController implements Controller {
     @FXML
     public void sendMessage(ActionEvent actionEvent) {
         businessLogic.sendMessage(ride.getRideNumber(), message.getText());
+        message.clear();
     }
 
     @FXML
     void initialize() {
         assert message != null : "fx:id=\"message\" was not injected: check your FXML file 'CarPoolChat.fxml'.";
         assert chatMessages != null : "fx:id=\"chatMessages\" was not injected: check your FXML file 'CarPoolChat.fxml'.";
+        message.setPromptText("Send a message");
+        message.setOnKeyPressed( event -> {
+            if( event.getCode() == KeyCode.ENTER ) {
+                sendMessage(null);
+            }
+        } );
     }
 
 
