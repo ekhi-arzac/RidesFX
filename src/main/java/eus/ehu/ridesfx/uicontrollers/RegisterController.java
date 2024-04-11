@@ -49,8 +49,10 @@ public class RegisterController implements Controller {
                 if (role.equals("TRAVELER")) {
                     businessLogic.setCurrentUser(new Traveler(email, username));
                     mainGUI.hideCreateRide();
+                    mainGUI.hideBookRide(false);
                 } else {
                     businessLogic.setCurrentUser(new Driver(email, username));
+                    mainGUI.hideBookRide(false);
                     mainGUI.hideQueryRides();
                 }
                 mainGUI.removeLogRegButton();

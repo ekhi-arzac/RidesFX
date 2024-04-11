@@ -19,6 +19,7 @@ public class Ride implements Serializable {
 	private String fromLocation;
 	private String toLocation;
 	private int numPlaces;
+	@OneToMany
 	List<RideBook> rideBooks;
 	private Date date;
 	private float price;
@@ -140,7 +141,7 @@ public class Ride implements Serializable {
 	}
 
 
-	public float getNumPlaces() {
+	public int getNumPlaces() {
 		return numPlaces;
 	}
 

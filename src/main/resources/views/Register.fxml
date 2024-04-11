@@ -25,7 +25,7 @@
       <TextField fx:id="emailField" layoutX="225.0" layoutY="103.0" styleClass="textfield" />
       <Label layoutX="223.0" layoutY="85.0" text="Email:" />
       <Label fx:id="lblErrorMessage" layoutX="286.0" layoutY="319.0" />
-      <ComboBox fx:id="role" layoutX="224.0" layoutY="275.0" prefWidth="150.0" />
+      <ComboBox fx:id="role" layoutX="224.0" layoutY="275.0" prefWidth="150.0" styleClass="comb_bootstrap" />
       <Label layoutX="223.0" layoutY="257.0" text="Role:" />
    </children>
 </AnchorPane>

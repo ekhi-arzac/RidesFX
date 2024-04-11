@@ -64,7 +64,7 @@ public class DataAccess {
                 // The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
                 // so destroy it manually.
                 System.out.println("Error in DataAccess: " + e.getMessage());
-                StandardServiceRegistryBuilder.destroy(registry);
+                //StandardServiceRegistryBuilder.destroy(registry);
             }
 
             db = emf.createEntityManager();
@@ -375,9 +375,13 @@ public class DataAccess {
         return "success";
 
     }
-    public RideBook bookRide(Ride ride, Date date, String email, int passengers){
-
-        return null;
+    public RideBook bookRide (Ride ride, Date date, String email, int passengers){
+        db.getTransaction().begin();
+        RideBook book = new RideBook(ride, date, email, passengers);
+        db.persist(book);
+        db.getTransaction().commit();
+        System.out.println(">> DataAccess: bookRide");
+        return book;
     }
 
     public Ride cancelRide(Ride ride) {

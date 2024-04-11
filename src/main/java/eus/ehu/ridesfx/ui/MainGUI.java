@@ -2,6 +2,7 @@ package eus.ehu.ridesfx.ui;
 
 import eus.ehu.ridesfx.businessLogic.BlFacade;
 import eus.ehu.ridesfx.uicontrollers.DriverRidePanelController;
+import eus.ehu.ridesfx.uicontrollers.QueryRidesController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,6 +53,10 @@ public class MainGUI {
 
     public void hideCreateRide() {
         ((MainGUIController) mainLag.c).hideCreateRide();
+    }
+
+    public void hideBookRide(boolean hide){
+        ((QueryRidesController)queryRidesLag.c).hideBookRide(hide);
     }
 
 

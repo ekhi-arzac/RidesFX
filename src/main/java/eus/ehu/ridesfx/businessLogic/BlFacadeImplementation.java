@@ -118,8 +118,8 @@ public class BlFacadeImplementation implements BlFacade {
 		dbManager.reenableRide(ride);
 	}
 
-	public void RideBook(Ride ride, Date date, String email, int passengers){
-
+	public void bookRide(Ride ride, Date date, String email, int passengers){
+		dbManager.bookRide(ride, date, email, passengers);
 	}
 
 

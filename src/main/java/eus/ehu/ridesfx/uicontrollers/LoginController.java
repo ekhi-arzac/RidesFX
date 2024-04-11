@@ -57,8 +57,10 @@ public class LoginController implements Controller {
             //this.displayMessage("Login successful", "success_msg");
             if (businessLogic.getCurrentUser() instanceof Driver) {
                 mainGUI.hideQueryRides();
+                mainGUI.hideBookRide(true);
             } else if (businessLogic.getCurrentUser() instanceof Traveler) {
                 mainGUI.hideCreateRide();
+                mainGUI.hideBookRide(false);
             }
 
         } else {

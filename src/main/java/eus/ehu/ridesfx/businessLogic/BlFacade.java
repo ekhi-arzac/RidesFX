@@ -80,5 +80,5 @@ public interface BlFacade {
 
 	void reenableRide(Ride ride);
 
-	public void RideBook(Ride ride, Date date, String email, int passengers);
+	public void bookRide(Ride ride, Date date, String email, int passengers);
 }
