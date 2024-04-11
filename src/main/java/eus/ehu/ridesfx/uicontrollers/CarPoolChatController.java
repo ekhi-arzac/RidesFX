@@ -19,7 +19,8 @@ import java.util.concurrent.ConcurrentMap;
 
 public class CarPoolChatController implements Controller {
 
-
+    @FXML
+    private Label chatName;
     private MainGUI mainGui;
     private BlFacade businessLogic;
     private Ride ride;
@@ -77,6 +78,7 @@ public class CarPoolChatController implements Controller {
         } else {
             loadCache();
         }
+        chatName.setText( "[#"+ ride.getRideNumber() + "]" + ride.getFromLocation() + " - " + ride.getToLocation() + " (" + ride.getDate()+ ")");
         this.ride = ride;
     }
     public void loadCache() {
