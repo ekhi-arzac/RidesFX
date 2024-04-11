@@ -2,7 +2,6 @@ package eus.ehu.ridesfx.businessLogic;
 
 import eus.ehu.ridesfx.configuration.Config;
 import eus.ehu.ridesfx.dataAccess.DataAccess;
-import eus.ehu.ridesfx.domain.Driver;
 import eus.ehu.ridesfx.domain.Ride;
 import eus.ehu.ridesfx.domain.User;
 import eus.ehu.ridesfx.exceptions.RideAlreadyExistException;
@@ -121,14 +120,16 @@ public class BlFacadeImplementation implements BlFacade {
 		}
 		return null;
 	}
+
+
 	@Override
-	public String register(String email, String name, String password, String role) {
+	public String register(String email, String name, String password, String repeaatPassword,String role) {
 		try {
 			msgClient = new MsgClient(name);
 		} catch (IOException e) {
 			return "msgClientError";
 		}
-		return dbManager.register(email, name, password, role);
+		return dbManager.register(email, name, password, repeaatPassword, role);
 
 	}
 
