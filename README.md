@@ -40,6 +40,20 @@ The requirement analysis has been done using Star UML and can be found [in the U
   ```
 Using this method we are able to change the center pane of the application to the desired one.
 
+* ### Sprint 2
+
+For this second sprint, we needed to implement at least two use cases.
+* #### User database:
+First of all, big changes were made in the database. Now, It is a user database, where users can access as a driver or as a traveler. If the user is a driver, he can offer rides, and if the user is a traveler, he can request rides.
+* #### Book a ride:
+The main use case we implemented was to book a ride. Now, when a traveler queries a ride, the book button exists, so that they can book it. This creates a ride request that will be stored into the database.
+* #### Messenger functionality:
+The second use case is the messaging option. It is still in a very early stage, but now the driver can send messages with another driver logged in at the same time, with the same ride identification.
+* #### Guest user:
+Also, when initializing the application, instead of a test driver, we will use a guest. This guest will be able to see all the rides, but not to book them.
+* #### Event flows and sequence diagram:
+On the other hand, we have implemented new event flows, for the: Check availability of rides, create alert, and remove alert in the use case diagram. 
+
 _Authors: Amets Martiarena, Ekhi Arzac, Jon Reboiro._
 
 

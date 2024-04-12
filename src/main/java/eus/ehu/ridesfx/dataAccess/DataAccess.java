@@ -2,10 +2,7 @@ package eus.ehu.ridesfx.dataAccess;
 
 import eus.ehu.ridesfx.configuration.Config;
 import eus.ehu.ridesfx.configuration.UtilDate;
-import eus.ehu.ridesfx.domain.Ride;
-import eus.ehu.ridesfx.domain.Driver;
-import eus.ehu.ridesfx.domain.Traveler;
-import eus.ehu.ridesfx.domain.User;
+import eus.ehu.ridesfx.domain.*;
 import eus.ehu.ridesfx.exceptions.RideAlreadyExistException;
 import eus.ehu.ridesfx.exceptions.RideMustBeLaterThanTodayException;
 import jakarta.persistence.*;
@@ -392,6 +389,7 @@ public class DataAccess {
 
     public Ride cancelRide(Ride ride) {
         db.getTransaction().begin();
+
         Ride r = db.find(Ride.class, ride.getRideNumber());
         r.setStatus(Ride.STATUS.CANCELLED);
         db.getTransaction().commit();
@@ -405,5 +403,6 @@ public class DataAccess {
         db.getTransaction().commit();
     }
 }
+
 
 
