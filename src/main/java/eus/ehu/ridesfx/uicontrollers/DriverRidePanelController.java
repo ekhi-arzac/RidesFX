@@ -5,10 +5,7 @@ import eus.ehu.ridesfx.domain.Ride;
 import eus.ehu.ridesfx.ui.MainGUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.Date;
@@ -38,6 +35,8 @@ public class DriverRidePanelController implements Controller {
 
     @FXML
     private TableColumn<Ride, String> qc3;
+    @FXML
+    private Label lblErrorMessage;
     @Override
     public void setMainApp(MainGUI mainGUI) {
         this.mainGUI = mainGUI;
@@ -61,15 +60,7 @@ public class DriverRidePanelController implements Controller {
     @FXML
     void initialize() {
         assert tblRides != null : "fx:id=\"tblRides\" was not injected: check your FXML file 'DriverRidePanel.fxml'.";
-        // Order by qc1 descending date order
 
-        tblRides.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
-                cancelBtn.setDisable(false);
-            } else {
-                cancelBtn.setDisable(true);
-            }
-        });
         // disable arrow key navigation
         tblRides.setRowFactory(tv -> new TableRow<Ride>() {
             protected void updateItem(Ride ride, boolean empty) {
@@ -97,24 +88,69 @@ public class DriverRidePanelController implements Controller {
     @FXML
     void cancelRide() {
         Ride ride = tblRides.getSelectionModel().getSelectedItem();
+        if (ride == null) {
+            displayMessage("Select a ride to cancel", "error_msg");
+            return;
+        }
+
+        if (ride.getDate().before(new Date())) {
+            displayMessage("Cannot cancel a ride that has already happened", "error_msg");
+            return;
+        }
         if (ride != null && ride.getStatus() == Ride.STATUS.ACTIVE) {
             businessLogic.cancelRide(ride);
+            displayMessage("Ride cancelled", "success_msg");
             updateRides();
         }
     }
     @FXML
     void reenableRide() {
         Ride ride = tblRides.getSelectionModel().getSelectedItem();
-        if (ride != null && ride.getStatus() == Ride.STATUS.CANCELLED) {
+        if (ride == null) {
+            displayMessage("Select a ride to reenable", "error_msg");
+            return;
+        }
+        if (ride.getDate().before(new Date())) {
+            displayMessage("Cannot reenable a ride that has already happened", "error_msg");
+            return;
+        }
+        if (ride.getStatus() == Ride.STATUS.CANCELLED) {
             businessLogic.reenableRide(ride);
+            displayMessage("Ride reenabled", "success_msg");
             updateRides();
         }
     }
 
     public void openChat(ActionEvent actionEvent) {
         Ride ride = tblRides.getSelectionModel().getSelectedItem();
+        if (ride == null) {
+            displayMessage("Select a ride to open chat", "error_msg");
+            return;
+        }
+        if (ride.getDate().before(new Date())) {
+            displayMessage("Cannot open a chat for a completed ride", "error_msg");
+            return;
+        }
         if (ride != null) {
             mainGUI.showChat(ride);
         }
     }
+
+
+    public void displayMessage(String message,  String label) {
+        lblErrorMessage.getStyleClass().clear();
+        lblErrorMessage.getStyleClass().setAll(label);
+        lblErrorMessage.setText(message);
+        lblErrorMessage.setVisible(true);
+        Thread thread = new Thread(() -> {
+            try {
+                Thread.sleep(3000);
+                lblErrorMessage.setVisible(false);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        thread.start();
+    }
+
 }

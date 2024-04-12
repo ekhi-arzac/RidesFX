@@ -15,6 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import eus.ehu.ridesfx.uicontrollers.Controller;
 import eus.ehu.ridesfx.uicontrollers.MainGUIController;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -48,6 +49,13 @@ public class MainGUI {
                 e.printStackTrace();
             }
         });
+        // i want to call closeWindowEvent when the window is closed
+    }
+
+    private void closeWindowEvent(WindowEvent windowEvent) {
+        if (businessLogic != null && businessLogic.getMsgClient() != null)
+            businessLogic.closeMsgClient();
+
     }
 
     public void hideQueryRides() {
@@ -169,6 +177,9 @@ public class MainGUI {
         stage.setTitle(ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString(title));
 
         scene.setRoot(ui);
+        stage.setOnCloseRequest(event -> {
+            closeWindowEvent(event);
+        });
         stage.show();
     }
 
@@ -184,10 +195,5 @@ public class MainGUI {
         ((MainGUIController) mainLag.c) .setUserName(name);
     }
 
-    @FXML
-    public void exitApplication(ActionEvent event) {
-        businessLogic.closeMsgClient();
-        Platform.exit();
-    }
 
 }

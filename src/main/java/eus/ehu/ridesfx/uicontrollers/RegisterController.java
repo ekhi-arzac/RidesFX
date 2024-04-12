@@ -116,18 +116,9 @@ public class RegisterController implements Controller {
      * @param label the style of the message
      */
     public void displayMessage(String message,  String label) {
-        lblErrorMessage.getStyleClass().clear();
-        lblErrorMessage.getStyleClass().setAll(label);
         lblErrorMessage.setText(message);
-        Thread thread = new Thread(() -> {
-            try {
-                Thread.sleep(3000);
-                lblErrorMessage.setVisible(false);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-        thread.start();
+        lblErrorMessage.getStyleClass().clear();
+        lblErrorMessage.getStyleClass().add(label);
     }
 
     @FXML
