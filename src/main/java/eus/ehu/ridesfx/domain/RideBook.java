@@ -9,6 +9,10 @@ public class RideBook {
     public RideBook(Ride ride, Date date, String email, int passengers) {
     }
 
+    public RideBook() {
+
+    }
+
     public enum STATUS {
         ACCEPTED, CANCELLED, PENDING
     }
@@ -19,19 +23,21 @@ public class RideBook {
 
     @ManyToOne
     private Ride ride;
+    @ManyToOne
+    private Traveler traveler;
     private STATUS status;
     private Date date;
     private int passengers;
 
     //constructor
-    public RideBook(String userEmail, Ride ride, Date date, int passengers) {
+    public RideBook(Ride ride,Date date, int passengers, Traveler traveler) {
         //assign a randomID
         this.bookId =  (int) (Math.random() * 1000);
-        this.userEmail = userEmail;
         this.ride = ride;
         this.status = STATUS.PENDING;
         this.date = date;
         this.passengers = passengers;
+        this.traveler = traveler;
     }
 
 

@@ -4,6 +4,7 @@ import eus.ehu.ridesfx.configuration.Config;
 import eus.ehu.ridesfx.dataAccess.DataAccess;
 import eus.ehu.ridesfx.domain.Driver;
 import eus.ehu.ridesfx.domain.Ride;
+import eus.ehu.ridesfx.domain.Traveler;
 import eus.ehu.ridesfx.domain.User;
 import eus.ehu.ridesfx.exceptions.RideAlreadyExistException;
 import eus.ehu.ridesfx.exceptions.RideMustBeLaterThanTodayException;
@@ -118,8 +119,8 @@ public class BlFacadeImplementation implements BlFacade {
 		dbManager.reenableRide(ride);
 	}
 
-	public void bookRide(Ride ride, Date date, String email, int passengers){
-		dbManager.bookRide(ride, date, email, passengers);
+	public void bookRide(Ride ride, Date date, int passengers, Traveler traveler){
+		dbManager.bookRide(ride, date, passengers, traveler);
 	}
 
 

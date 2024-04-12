@@ -2,6 +2,7 @@ package eus.ehu.ridesfx.businessLogic;
 
 import eus.ehu.ridesfx.domain.Driver;
 import eus.ehu.ridesfx.domain.Ride;
+import eus.ehu.ridesfx.domain.Traveler;
 import eus.ehu.ridesfx.domain.User;
 import eus.ehu.ridesfx.exceptions.RideAlreadyExistException;
 import eus.ehu.ridesfx.exceptions.RideMustBeLaterThanTodayException;
@@ -80,5 +81,5 @@ public interface BlFacade {
 
 	void reenableRide(Ride ride);
 
-	public void bookRide(Ride ride, Date date, String email, int passengers);
+	public void bookRide(Ride ride, Date date, int passengers, Traveler traveler);
 }

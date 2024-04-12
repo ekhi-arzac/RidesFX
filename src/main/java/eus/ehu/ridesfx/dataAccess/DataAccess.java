@@ -375,9 +375,9 @@ public class DataAccess {
         return "success";
 
     }
-    public RideBook bookRide (Ride ride, Date date, String email, int passengers){
+    public RideBook bookRide (Ride ride, Date date, int passengers, Traveler traveler){
         db.getTransaction().begin();
-        RideBook book = new RideBook(ride, date, email, passengers);
+        RideBook book = new RideBook(ride, date,passengers, traveler);
         db.persist(book);
         db.getTransaction().commit();
         System.out.println(">> DataAccess: bookRide");

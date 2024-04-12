@@ -205,18 +205,15 @@ public class QueryRidesController implements Controller {
 
         // if the user is a traveler, he has the option to book an available ride, the ride will be set as pending
         bookRideButton.setOnAction(actionEvent -> {
-
-            System.out.println("trying to book...");
             if (businessLogic.getCurrentUser() instanceof Traveler) {
                 Ride ride = tblRides.getSelectionModel().getSelectedItem();
                 int passengers = numOfPassenger.getValue();
-                if (ride != null ) {
+                if (ride != null) {
                     //correct  number of passengers
                     if (passengers > 0 && passengers <= ride.getNumPlaces()) {
-                        businessLogic.bookRide(ride, Dates.convertToDate(datepicker.getValue()), businessLogic.getCurrentUser().getEmail(), passengers);
+                        businessLogic.bookRide(ride, Dates.convertToDate(datepicker.getValue()), passengers, (Traveler)businessLogic.getCurrentUser());
                     }
                     else{
-                        //display messagge
                         displayMessage("Please select a valid number of passengers", "error_msg");
                         System.out.println("Please select a valid date");
                     }
