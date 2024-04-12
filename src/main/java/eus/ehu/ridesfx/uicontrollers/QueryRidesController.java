@@ -229,6 +229,7 @@ public class QueryRidesController implements Controller {
         });
 
         datepicker.setOnMouseClicked(e -> {
+            //.
             // get a reference to datepicker inner content
             // attach a listener to the  << and >> buttons
             // mark events for the (prev, current, next) month and year shown
