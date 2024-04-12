@@ -56,7 +56,6 @@ public class RegisterController implements Controller {
                     mainGUI.hideBookRide(false);
                 } else {
                     businessLogic.setCurrentUser(new Driver(email, username));
-                    mainGUI.hideQueryRides();
                     mainGUI.showCreateRide();
                     mainGUI.showDriverRidePanel();
                 }

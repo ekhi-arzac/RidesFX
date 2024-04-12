@@ -58,7 +58,6 @@ public class LoginController implements Controller {
             if (businessLogic.getCurrentUser() instanceof Driver) {
                 mainGUI.showCreateRide();
                 mainGUI.showDriverRidePanel();
-                mainGUI.hideQueryRides();
                 mainGUI.hideBookRide(true);
             } else if (businessLogic.getCurrentUser() instanceof Traveler) {
                 mainGUI.hideCreateRide();

@@ -78,6 +78,14 @@ public class MainGUI {
         ((QueryRidesController)queryRidesLag.c).hideBookRide(hide);
     }
 
+    public void hideCreateRide() {
+        ((MainGUIController) mainLag.c).hideCreateRideBtn();
+    }
+
+    public void hideDriverRidePanel() {
+        ((MainGUIController) mainLag.c).hideDriverRidePanel();
+    }
+
 
     class Window {
         Controller c;
