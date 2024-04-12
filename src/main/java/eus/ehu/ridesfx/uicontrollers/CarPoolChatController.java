@@ -93,6 +93,9 @@ public class CarPoolChatController implements Controller {
     }
     @FXML
     public void sendMessage(ActionEvent actionEvent) {
+        if (ride == null || message.getText().isEmpty()) {
+            return;
+        }
         businessLogic.sendMessage(ride.getRideNumber(), message.getText());
         message.clear();
     }
