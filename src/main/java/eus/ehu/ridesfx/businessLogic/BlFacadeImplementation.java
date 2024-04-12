@@ -120,13 +120,13 @@ public class BlFacadeImplementation implements BlFacade {
 		return null;
 	}
 	@Override
-	public String register(String email, String name, String password, String repeaatPassword, String role) {
+	public String register(String email, String name, String password, String repeatPassword, String role) {
 		try {
 			msgClient = new MsgClient(name);
 		} catch (IOException e) {
 			return "msgClientError";
 		}
-		return dbManager.register(email, name, password, repeaatPassword, role);
+		return dbManager.register(email, name, password, repeatPassword, role);
 
 	}
 

@@ -3,8 +3,10 @@ package eus.ehu.ridesfx.businessLogic;
 import eus.ehu.ridesfx.domain.Driver;
 import eus.ehu.ridesfx.domain.Ride;
 import eus.ehu.ridesfx.domain.User;
+import eus.ehu.ridesfx.domain.Traveler;
 import eus.ehu.ridesfx.exceptions.RideAlreadyExistException;
 import eus.ehu.ridesfx.exceptions.RideMustBeLaterThanTodayException;
+import eus.ehu.ridesfx.uicontrollers.CarPoolChatController;
 
 import java.util.Date;
 import java.util.List;
@@ -76,14 +78,14 @@ public interface BlFacade {
 
 	public User login(String email, String name);
 
-	String register(String email, String username, String password, String role);
+    String register(String email, String name, String password, String repeaatPassword, String role);
 
-	void reenableRide(Ride ride);
+    void reenableRide(Ride ride);
 
 	public void bookRide(Ride ride, Date date, int passengers, Traveler traveler);
 
 	void sendMessage(int channel, String message);
 	void setChatController(CarPoolChatController chatController);
 
-	void closeMsgClient();
+    void closeMsgClient();
 }

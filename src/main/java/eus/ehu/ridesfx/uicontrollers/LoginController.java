@@ -76,7 +76,7 @@ public class LoginController implements Controller {
      * @param message the message to be displayed
      * @param label the style of the message
      */
-    private void displayMessage() {
+    private void displayMessage(String message, String label) {
         lblErrorMessage.setVisible(true);
         lblErrorMessage.getStyleClass().clear();
         lblErrorMessage.getStyleClass().setAll("error_msg");
