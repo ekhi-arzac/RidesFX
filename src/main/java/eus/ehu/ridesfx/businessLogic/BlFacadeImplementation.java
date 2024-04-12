@@ -3,6 +3,7 @@ package eus.ehu.ridesfx.businessLogic;
 import eus.ehu.ridesfx.configuration.Config;
 import eus.ehu.ridesfx.dataAccess.DataAccess;
 import eus.ehu.ridesfx.domain.Ride;
+import eus.ehu.ridesfx.domain.Traveler;
 import eus.ehu.ridesfx.domain.User;
 import eus.ehu.ridesfx.exceptions.RideAlreadyExistException;
 import eus.ehu.ridesfx.exceptions.RideMustBeLaterThanTodayException;
@@ -19,10 +20,8 @@ import java.util.Vector;
  * Implements the business logic as a web service.
  */
 public class BlFacadeImplementation implements BlFacade {
-
+    MsgClient msgClient;
 	DataAccess dbManager;
-
-	MsgClient msgClient;
 	Config config = Config.getInstance();
 	private User currentUser;
 
@@ -120,10 +119,8 @@ public class BlFacadeImplementation implements BlFacade {
 		}
 		return null;
 	}
-
-
 	@Override
-	public String register(String email, String name, String password, String repeaatPassword,String role) {
+	public String register(String email, String name, String password, String repeaatPassword, String role) {
 		try {
 			msgClient = new MsgClient(name);
 		} catch (IOException e) {
@@ -135,6 +132,10 @@ public class BlFacadeImplementation implements BlFacade {
 
 	public void reenableRide(Ride ride) {
 		dbManager.reenableRide(ride);
+	}
+
+	public void bookRide(Ride ride, Date date, int passengers, Traveler traveler){
+		dbManager.bookRide(ride, date, passengers, traveler);
 	}
 
 	public void sendMessage(int channel, String message) {

@@ -20,11 +20,11 @@
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Label>
-      <Label layoutX="223.0" layoutY="112.0" text="Username:" />
-      <Label layoutX="225.0" layoutY="164.0" text="Password:" />
-      <PasswordField fx:id="passwordField" layoutX="225.0" layoutY="182.0" styleClass="textfield" />
-      <TextField fx:id="emailField" layoutX="226.0" layoutY="77.0" styleClass="textfield" />
-      <Label layoutX="226.0" layoutY="59.0" text="Email:" />
+      <Label layoutX="225.0" layoutY="142.0" text="Username:" />
+      <Label layoutX="225.0" layoutY="200.0" text="Password:" />
+      <PasswordField fx:id="passwordField" layoutX="225.0" layoutY="218.0" styleClass="textfield" />
+      <TextField fx:id="emailField" layoutX="225.0" layoutY="103.0" styleClass="textfield" />
+      <Label layoutX="223.0" layoutY="85.0" text="Email:" />
       <Label fx:id="lblErrorMessage" layoutX="286.0" layoutY="319.0" />
       <ComboBox fx:id="role" layoutX="224.0" layoutY="285.0" prefWidth="150.0" />
       <Label layoutX="223.0" layoutY="267.0" text="Role:" />

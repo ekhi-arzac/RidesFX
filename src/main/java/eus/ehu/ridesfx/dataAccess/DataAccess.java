@@ -2,10 +2,7 @@ package eus.ehu.ridesfx.dataAccess;
 
 import eus.ehu.ridesfx.configuration.Config;
 import eus.ehu.ridesfx.configuration.UtilDate;
-import eus.ehu.ridesfx.domain.Ride;
-import eus.ehu.ridesfx.domain.Driver;
-import eus.ehu.ridesfx.domain.Traveler;
-import eus.ehu.ridesfx.domain.User;
+import eus.ehu.ridesfx.domain.*;
 import eus.ehu.ridesfx.exceptions.RideAlreadyExistException;
 import eus.ehu.ridesfx.exceptions.RideMustBeLaterThanTodayException;
 import jakarta.persistence.*;
@@ -67,7 +64,7 @@ public class DataAccess {
                 // The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
                 // so destroy it manually.
                 System.out.println("Error in DataAccess: " + e.getMessage());
-                StandardServiceRegistryBuilder.destroy(registry);
+                //StandardServiceRegistryBuilder.destroy(registry);
             }
 
             db = emf.createEntityManager();
@@ -363,10 +360,6 @@ public class DataAccess {
         }
         //when registering the introduced password must be hashed and salted
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
-
-
-
-
         db.getTransaction().begin();
         User user = null;
         switch (role){
@@ -388,7 +381,14 @@ public class DataAccess {
         return "success";
 
     }
-
+    public RideBook bookRide (Ride ride, Date date, int passengers, Traveler traveler){
+        db.getTransaction().begin();
+        RideBook book = new RideBook(ride, date,passengers, traveler);
+        db.persist(book);
+        db.getTransaction().commit();
+        System.out.println(">> DataAccess: bookRide");
+        return book;
+    }
 
     public Ride cancelRide(Ride ride) {
         db.getTransaction().begin();

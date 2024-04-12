@@ -53,8 +53,10 @@ public class RegisterController implements Controller {
                     businessLogic.setCurrentUser(new Traveler(email, username));
                     mainGUI.hideCreateRide();
                     mainGUI.hideDriverRidePanel();
+                    mainGUI.hideBookRide(false);
                 } else {
                     businessLogic.setCurrentUser(new Driver(email, username));
+                    mainGUI.hideBookRide(false);
                     mainGUI.hideQueryRides();
                 }
                 mainGUI.removeLogRegButton();
@@ -62,17 +64,13 @@ public class RegisterController implements Controller {
                 mainGUI.showUserIcon();
                 mainGUI.showSceneInCenter("queryRides");
             }
-            case "emptyFields" -> {
-                this.displayMessage("All fields are compulsory", "error_msg");
-                System.out.println("Empty fields");
+            case "emailExists" -> {
+                this.displayMessage("Email already in use", "error_msg");
+                System.out.println("Email already in use");
             }
             case "invalidEmail" -> {
                 this.displayMessage("Invalid email", "error_msg");
                 System.out.println("Invalid email");
-            }
-            case "emailExists" -> {
-                this.displayMessage("Email already in use", "error_msg");
-                System.out.println("Email already in use");
             }
             case "invalidName" -> {
                 this.displayMessage("Username must have less than 20 characters", "error_msg");
