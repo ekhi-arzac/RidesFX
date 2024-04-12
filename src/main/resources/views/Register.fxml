@@ -11,23 +11,22 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F8F8FF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.ridesfx.uicontrollers.RegisterController">
    <children>
-      <Button layoutX="270.0" layoutY="328.0" mnemonicParsing="false" onAction="#onRegister" text="Register" />
-
-      <TextField fx:id="usernameField" layoutX="227.0" layoutY="137.0" styleClass="textfield" />
-      <PasswordField fx:id="repeatPasswordField" layoutX="227.0" layoutY="225.0" styleClass="textfield" />
-      <Hyperlink layoutX="200.0" layoutY="362.0" onAction="#showLogin" text="Already have an account? Click here!" />
-      <Label layoutX="270.0" layoutY="24.0" text="Register">
+       <Button layoutX="270.0" layoutY="328.0" mnemonicParsing="false" onAction="#onRegister" text="Register" />
+       <TextField fx:id="emailField" layoutX="226.0" layoutY="77.0" styleClass="textfield" />
+       <TextField fx:id="usernameField" layoutX="225.0" layoutY="130.0" styleClass="textfield" />
+       <PasswordField fx:id="repeatPasswordField" layoutX="225.0" layoutY="231.0" styleClass="textfield" />
+       <Hyperlink layoutX="200.0" layoutY="362.0" onAction="#showLogin" text="Already have an account? Click here!" />
+       <Label layoutX="270.0" layoutY="24.0" text="Register">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Label>
-      <Label layoutX="227.0" layoutY="119.0" text="Username:" />
-      <Label layoutX="229.0" layoutY="163.0" text="Password:" />
-      <PasswordField fx:id="passwordField" layoutX="227.0" layoutY="181.0" styleClass="textfield" />
-      <TextField fx:id="emailField" layoutX="229.0" layoutY="93.0" styleClass="textfield" />
-      <Label layoutX="230.0" layoutY="75.0" text="Email:" />
+      <Label layoutX="223.0" layoutY="112.0" text="Username:" />
+      <Label layoutX="225.0" layoutY="164.0" text="Password:" />
+      <PasswordField fx:id="passwordField" layoutX="225.0" layoutY="182.0" styleClass="textfield" />
+      <Label layoutX="226.0" layoutY="59.0" text="Email:" />
       <Label fx:id="lblErrorMessage" layoutX="286.0" layoutY="319.0" />
-      <ComboBox fx:id="role" layoutX="229.0" layoutY="275.0" prefWidth="150.0" styleClass="comb_bootstrap" stylesheets="@../main.css" />
-      <Label layoutX="228.0" layoutY="257.0" text="Role:" />
-      <Label layoutX="227.0" layoutY="207.0" text="Repeat password:" />
+      <ComboBox fx:id="role" layoutX="224.0" layoutY="285.0" prefWidth="150.0" />
+      <Label layoutX="223.0" layoutY="267.0" text="Role:" />
+      <Label layoutX="223.0" layoutY="213.0" text="Repeat password:" />
    </children>
 </AnchorPane>

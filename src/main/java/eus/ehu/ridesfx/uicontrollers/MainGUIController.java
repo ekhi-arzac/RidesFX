@@ -91,6 +91,10 @@ public class MainGUIController implements Controller {
             // set current driver name
             lblUser.setText(businessLogic.getCurrentUser().getName());
             user_icon.setVisible(false);
+            if (businessLogic.getCurrentUser() instanceof eus.ehu.ridesfx.domain.Guest) {
+                createRideBtn.setVisible(false);
+                dRidePanelBtn.setVisible(false);
+            }
     }
 
     @Override
@@ -120,11 +124,11 @@ public class MainGUIController implements Controller {
         queryRidesBtn.setVisible(false);
     }
 
-    public void hideCreateRide() {
-        createRideBtn.setVisible(false);
+    public void showCreateRideBtn() {
+        createRideBtn.setVisible(true);
     }
 
-    public void hideDriverRidePanel() {
-        dRidePanelBtn.setVisible(false);
+    public void showDriverRidePanel() {
+        dRidePanelBtn.setVisible(true);
     }
 }

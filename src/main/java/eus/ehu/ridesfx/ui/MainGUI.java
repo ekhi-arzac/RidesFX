@@ -54,8 +54,8 @@ public class MainGUI {
         ((MainGUIController) mainLag.c).hideQueryRides();
     }
 
-    public void hideCreateRide() {
-        ((MainGUIController) mainLag.c).hideCreateRide();
+    public void showCreateRide() {
+        ((MainGUIController) mainLag.c).showCreateRideBtn();
     }
 
     public void showChat(Ride ride) {
@@ -69,8 +69,9 @@ public class MainGUI {
         }
     }
 
-    public void hideDriverRidePanel() {
-        ((MainGUIController) mainLag.c).hideDriverRidePanel();
+
+    public void showDriverRidePanel() {
+        ((MainGUIController) mainLag.c).showDriverRidePanel();
     }
 
     public void hideBookRide(boolean hide){

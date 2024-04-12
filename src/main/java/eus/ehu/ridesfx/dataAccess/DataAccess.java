@@ -392,6 +392,7 @@ public class DataAccess {
 
     public Ride cancelRide(Ride ride) {
         db.getTransaction().begin();
+
         Ride r = db.find(Ride.class, ride.getRideNumber());
         r.setStatus(Ride.STATUS.CANCELLED);
         db.getTransaction().commit();
@@ -405,5 +406,6 @@ public class DataAccess {
         db.getTransaction().commit();
     }
 }
+
 
 

@@ -56,21 +56,26 @@ public class RegisterController implements Controller {
                     mainGUI.hideBookRide(false);
                 } else {
                     businessLogic.setCurrentUser(new Driver(email, username));
-                    mainGUI.hideBookRide(false);
                     mainGUI.hideQueryRides();
+                    mainGUI.showCreateRide();
+                    mainGUI.showDriverRidePanel();
                 }
                 mainGUI.removeLogRegButton();
                 mainGUI.setUserName(username);
                 mainGUI.showUserIcon();
                 mainGUI.showSceneInCenter("queryRides");
             }
-            case "emailExists" -> {
-                this.displayMessage("Email already in use", "error_msg");
-                System.out.println("Email already in use");
+            case "emptyFields" -> {
+                this.displayMessage("All fields are compulsory", "error_msg");
+                System.out.println("Empty fields");
             }
             case "invalidEmail" -> {
                 this.displayMessage("Invalid email", "error_msg");
                 System.out.println("Invalid email");
+            }
+            case "emailExists" -> {
+                this.displayMessage("Email already in use", "error_msg");
+                System.out.println("Email already in use");
             }
             case "invalidName" -> {
                 this.displayMessage("Username must have less than 20 characters", "error_msg");
