@@ -132,4 +132,10 @@ public class MainGUIController implements Controller {
         dRidePanelBtn.setVisible(true);
     }
 
+    public void hideCreateRideBtn() {
+        createRideBtn.setVisible(false);
+    }
+    public void hideDriverRidePanel() {
+        dRidePanelBtn.setVisible(false);
+    }
 }

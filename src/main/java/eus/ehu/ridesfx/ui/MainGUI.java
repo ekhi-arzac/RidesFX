@@ -4,6 +4,7 @@ import eus.ehu.ridesfx.businessLogic.BlFacade;
 import eus.ehu.ridesfx.domain.Ride;
 import eus.ehu.ridesfx.uicontrollers.CarPoolChatController;
 import eus.ehu.ridesfx.uicontrollers.DriverRidePanelController;
+import eus.ehu.ridesfx.uicontrollers.QueryRidesController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -79,6 +80,18 @@ public class MainGUI {
 
     public void showDriverRidePanel() {
         ((MainGUIController) mainLag.c).showDriverRidePanel();
+    }
+
+    public void hideBookRide(boolean hide){
+        ((QueryRidesController)queryRidesLag.c).hideBookRide(hide);
+    }
+
+    public void hideCreateRide() {
+        ((MainGUIController) mainLag.c).hideCreateRideBtn();
+    }
+
+    public void hideDriverRidePanel() {
+        ((MainGUIController) mainLag.c).hideDriverRidePanel();
     }
 
 

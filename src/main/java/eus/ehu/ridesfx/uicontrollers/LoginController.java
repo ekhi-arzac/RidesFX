@@ -58,10 +58,15 @@ public class LoginController implements Controller {
             if (businessLogic.getCurrentUser() instanceof Driver) {
                 mainGUI.showCreateRide();
                 mainGUI.showDriverRidePanel();
-                mainGUI.hideQueryRides();
+                mainGUI.hideBookRide(true);
+            } else if (businessLogic.getCurrentUser() instanceof Traveler) {
+                mainGUI.hideCreateRide();
+                mainGUI.hideDriverRidePanel();
+                mainGUI.hideBookRide(false);
             }
+
         } else {
-            this.displayMessage();
+            this.displayMessage("This email is not registered", "error_msg");
             System.out.println("Login failed");
 
         }
@@ -69,8 +74,10 @@ public class LoginController implements Controller {
   
     /**
      * This method displays a message in the label lblErrorMessage
+     * @param message the message to be displayed
+     * @param label the style of the message
      */
-    private void displayMessage() {
+    private void displayMessage(String message, String label) {
         lblErrorMessage.setVisible(true);
         lblErrorMessage.getStyleClass().clear();
         lblErrorMessage.getStyleClass().setAll("error_msg");

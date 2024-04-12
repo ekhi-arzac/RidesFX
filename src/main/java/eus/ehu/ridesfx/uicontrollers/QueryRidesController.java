@@ -7,6 +7,8 @@ import java.util.*;
 import eus.ehu.ridesfx.businessLogic.BlFacade;
 import eus.ehu.ridesfx.domain.Driver;
 import eus.ehu.ridesfx.domain.Ride;
+import eus.ehu.ridesfx.domain.Traveler;
+import eus.ehu.ridesfx.domain.User;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -22,6 +24,15 @@ import eus.ehu.ridesfx.ui.MainGUI;
 import eus.ehu.ridesfx.utils.Dates;
 
 public class QueryRidesController implements Controller {
+
+    @FXML
+    private Button bookRideButton;
+
+    @FXML
+    private ComboBox<Integer> numOfPassenger;
+
+    @FXML
+    private Label lblErrorMsg;
 
     @FXML
     private ResourceBundle resources;
@@ -42,6 +53,9 @@ public class QueryRidesController implements Controller {
     private TableColumn<Ride, Integer> qc2;
 
     @FXML
+    private Label passengersLbl;
+
+    @FXML
     private TableColumn<Ride, Float> qc3;
 
     @FXML
@@ -50,8 +64,8 @@ public class QueryRidesController implements Controller {
     @FXML
     private ComboBox<String> comboDepartCity;
 
-//  @FXML
-//  private TableView<Event> tblEvents;
+    //@FXML
+    //private TableView<Event> tblEvents;
 
     @FXML
     private TableView<Ride> tblRides;
@@ -125,6 +139,18 @@ public class QueryRidesController implements Controller {
     @FXML
     void initialize() {
 
+        //change the elements depending of the user when initializing the page
+        User user = businessLogic.getCurrentUser();
+        if (user instanceof Traveler) {
+            bookRideButton.setVisible(true);
+            numOfPassenger.setVisible(true);
+            passengersLbl.setVisible(true);
+        } else {
+            bookRideButton.setVisible(false);
+            numOfPassenger.setVisible(false);
+            passengersLbl.setVisible(false);
+        }
+
         // Update DatePicker cells when ComboBox value changes
         comboArrivalCity.valueProperty().addListener(
                 (obs, oldVal, newVal) -> updateDatePickerCellFactory(datepicker));
@@ -144,6 +170,27 @@ public class QueryRidesController implements Controller {
             comboArrivalCity.setItems(arrivalCities);
         });
 
+        tblRides.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) ->
+
+        {
+            numOfPassenger.getItems().clear();
+            // get the number of passengers from selected ride of the table
+            Ride selectedRide = tblRides.getSelectionModel().getSelectedItem();
+
+            if (selectedRide != null) {
+                numOfPassenger.setDisable(false);
+                int numSeats = selectedRide.getNumPlaces();
+                for (int i= 0; i < numSeats; i++) {
+                    numOfPassenger.getItems().add(i+1);
+                }
+            }
+            else{
+                numOfPassenger.setDisable(true);
+            }
+
+        });
+
+
         // a date has been chosen, update the combobox of Rides
         datepicker.setOnAction(actionEvent -> {
 
@@ -151,12 +198,38 @@ public class QueryRidesController implements Controller {
             // Vector<eus.ehu.ridesfx.domain.Ride> events = eus.ehu.ridesfx.businessLogic.getEvents(Dates.convertToDate(datepicker.getValue()));
             List<Ride> rides = businessLogic.getRides(comboDepartCity.getValue(), comboArrivalCity.getValue(), Dates.convertToDate(datepicker.getValue()));
             // List<Ride> rides = Arrays.asList(new Ride("Bilbao", "Donostia", Dates.convertToDate(datepicker.getValue()), 3, 3.5f, new Driver("pepe@pepe.com", "pepe")));
-            for (eus.ehu.ridesfx.domain.Ride ride : rides) {
+            for (Ride ride : rides) {
                 tblRides.getItems().add(ride);
             }
         });
 
+        // if the user is a traveler, he has the option to book an available ride, the ride will be set as pending
+        bookRideButton.setOnAction(actionEvent -> {
+            if (businessLogic.getCurrentUser() instanceof Traveler) {
+                Ride ride = tblRides.getSelectionModel().getSelectedItem();
+                int passengers = numOfPassenger.getValue();
+                if (ride != null) {
+                    //correct  number of passengers
+                    if (passengers > 0 && passengers <= ride.getNumPlaces()) {
+                        businessLogic.bookRide(ride, Dates.convertToDate(datepicker.getValue()), passengers, (Traveler)businessLogic.getCurrentUser());
+                    }
+                    else{
+                        displayMessage("Please select a valid number of passengers", "error_msg");
+                        System.out.println("Please select a valid date");
+                    }
+                }
+                else{
+                    System.out.println("Please select a ride");
+                }
+            }
+            else{
+                System.out.println("user is not a traveler");
+            }
+
+        });
+
         datepicker.setOnMouseClicked(e -> {
+            //.
             // get a reference to datepicker inner content
             // attach a listener to the  << and >> buttons
             // mark events for the (prev, current, next) month and year shown
@@ -211,5 +284,22 @@ public class QueryRidesController implements Controller {
     @Override
     public void setMainApp(MainGUI mainGUI) {
         this.mainGUI = mainGUI;
+    }
+    //hides the book ride options or not
+    public void hideBookRide(boolean hide) {
+        if (hide) {
+            bookRideButton.setVisible(false);
+            passengersLbl.setVisible(false);
+            numOfPassenger.setVisible(false);
+        } else {
+            bookRideButton.setVisible(true);
+            passengersLbl.setVisible(true);
+            numOfPassenger.setVisible(true);
+        }
+    }
+    private void displayMessage(String message, String label) {
+        lblErrorMsg.getStyleClass().clear();
+        lblErrorMsg.getStyleClass().setAll(label);
+        lblErrorMsg.setText(message);
     }
 }

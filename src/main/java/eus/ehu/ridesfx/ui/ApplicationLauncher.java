@@ -1,7 +1,6 @@
 package eus.ehu.ridesfx.ui;
 
 import eus.ehu.ridesfx.configuration.Config;
-import eus.ehu.ridesfx.domain.Driver;
 import eus.ehu.ridesfx.businessLogic.BlFacade;
 import eus.ehu.ridesfx.businessLogic.BlFacadeImplementation;
 import eus.ehu.ridesfx.domain.Guest;
@@ -25,7 +24,6 @@ public class ApplicationLauncher {
         businessLogic = new BlFacadeImplementation();
 
 
-        //Driver driver=new Driver("driver3@gmail.com","Test Driver");
         Guest guest1 = new Guest("guest@gmail.com", "Guest");
         businessLogic.setCurrentUser(guest1);
 
