@@ -155,6 +155,9 @@ public class BlFacadeImplementation implements BlFacade {
         }
     }
 
+	public MsgClient getMsgClient() {
+		return msgClient;
+	}
 
 }
 

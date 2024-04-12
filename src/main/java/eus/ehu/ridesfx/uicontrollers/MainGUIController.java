@@ -131,4 +131,5 @@ public class MainGUIController implements Controller {
     public void showDriverRidePanel() {
         dRidePanelBtn.setVisible(true);
     }
+
 }

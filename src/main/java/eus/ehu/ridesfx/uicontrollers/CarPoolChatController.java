@@ -8,6 +8,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
@@ -31,6 +33,9 @@ public class CarPoolChatController implements Controller {
 
     @FXML
     private VBox chatMessages;
+    @FXML
+    private ScrollPane scrollPane;
+
     private List<Integer> rideNumbers = new ArrayList<>();
     private record Msg(int rideNumber, String sender, String message) {}
 
@@ -51,8 +56,7 @@ public class CarPoolChatController implements Controller {
     public void addMessage(String sender, String message, boolean isSelf) {
         Label lbl = new Label(sender + ":");
         lbl.setStyle("-fx-padding: 0 0 5 0; -fx-font-weight: bold;");
-        TextField txt = new TextField(message);
-        txt.setEditable(false);
+        Label txt = new Label(message);
         HBox hBox = new HBox();
 
 
@@ -64,9 +68,9 @@ public class CarPoolChatController implements Controller {
             hBox.setAlignment(Pos.CENTER_LEFT);
             txt.setStyle("-fx-background-color: white; -fx-border-color: #f4f4f4; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-padding: 5px; -fx-text-fill: #000000;");
         }
-        txt.setMaxWidth(7 * message.length() +30);
-
-
+        int messageLength = message.split(" ").length;
+        txt.setWrapText(true);
+        txt.setMaxWidth(300);
         hBox.getChildren().addAll(lbl, txt);
         chatMessages.getChildren().add(hBox);
     }
@@ -110,6 +114,9 @@ public class CarPoolChatController implements Controller {
                 sendMessage(null);
             }
         } );
+
+        scrollPane.vvalueProperty().bind(chatMessages.heightProperty());
+
     }
 
 

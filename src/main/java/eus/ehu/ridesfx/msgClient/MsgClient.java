@@ -61,7 +61,7 @@ public class MsgClient {
                     }
                 }
             } catch (IOException ex) {
-                throw new RuntimeException(ex);
+                System.out.println("Socket closed!");
             }
         }
     }
@@ -75,9 +75,9 @@ public class MsgClient {
 
 
     public void close() throws IOException {
+        clientSocket.close();
         in.close();
         out.close();
-        clientSocket.close();
     }
 
     public void setChatController(CarPoolChatController chatController) {
