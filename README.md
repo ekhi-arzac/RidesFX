@@ -31,11 +31,11 @@ The requirement analysis has been done using Star UML and can be found [in the U
   In the `MainGUI` class, we have created the `showSceneInCenter` which allows us to change the center pane of the application.
 ```Java
   public void showSceneInCenter(String window) {
-  switch (window) {
-  case "queryRides" -> mainPane.setCenter(queryRidesLag.ui);
-  case "createRide" -> mainPane.setCenter(createRideLag.ui);
-  case "login" -> mainPane.setCenter(loginLag.ui);
-  case "register" -> mainPane.setCenter(registerLag.ui);
+    switch (window) {
+      case "queryRides" -> mainPane.setCenter(queryRidesLag.ui);
+      case "createRide" -> mainPane.setCenter(createRideLag.ui);
+      case "login" -> mainPane.setCenter(loginLag.ui);
+      case "register" -> mainPane.setCenter(registerLag.ui);
   }
   ```
 Using this method we are able to change the center pane of the application to the desired one.
@@ -52,7 +52,7 @@ The second use case is the messaging option. It is still in a very early stage, 
 * #### Guest user:
 Also, when initializing the application, instead of a test driver, we will use a guest. This guest will be able to see all the rides, but not to book them.
 * #### Event flows and sequence diagram:
-On the other hand, we have implemented new event flows, for the: Check availability of rides, create alert, and remove alert in the use case diagram. 
+On the other hand, we have implemented new event flows, for the: Check availability of rides, create alert, and remove alert in the use case diagram, therefore we have done the sequence diagram for the Query rides use case.
 
 _Authors: Amets Martiarena, Ekhi Arzac, Jon Reboiro._
 
