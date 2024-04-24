@@ -27,6 +27,7 @@ public class ApplicationLauncher {
         Guest guest1 = new Guest("guest@gmail.com", "Guest");
         businessLogic.setCurrentUser(guest1);
 
+
         new MainGUI(businessLogic);
       }
     }

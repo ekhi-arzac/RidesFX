@@ -63,6 +63,7 @@ public class RegisterController implements Controller {
                 mainGUI.setUserName(username);
                 mainGUI.showUserIcon();
                 mainGUI.showSceneInCenter("queryRides");
+                mainGUI.showLogoutButton();
             }
             case "emptyFields" -> {
                 this.displayMessage("All fields are compulsory", "error_msg");
