@@ -8,6 +8,8 @@ The application is developed using JavaFX, Hibernate, H2, and Properties.
 
 ## Sprints
 
+
+
 * ### Sprint 1
   ---
 
@@ -41,6 +43,8 @@ The requirement analysis has been done using Star UML and can be found [in the U
   ```
 Using this method we are able to change the center pane of the application to the desired one.
 
+
+
 * ### Sprint 2
   ---
 
@@ -55,6 +59,8 @@ The second use case is the messaging option. It is still in a very early stage, 
 Also, when initializing the application, instead of a test driver, we will use a guest. This guest will be able to see all the rides, but not to book them.
 * #### Event flows and sequence diagram:
 On the other hand, we have implemented new event flows, for the: Check availability of rides, create alert, and remove alert in the use case diagram. 
+
+
 
 * ### Sprint 3
   ---
