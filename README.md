@@ -54,6 +54,21 @@ Also, when initializing the application, instead of a test driver, we will use a
 * #### Event flows and sequence diagram:
 On the other hand, we have implemented new event flows, for the: Check availability of rides, create alert, and remove alert in the use case diagram. 
 
+* ### Sprint 3
+
+* For the third sprint we are going to fix fill the deficiencies that the project had in the last sprint:
+  - Add the hours that we work in each issue in the second sprint
+  - Do the planification of the third sprint 
+  - Fix the sequence diagram
+  - Implement a correct keyboard navigation through the text fields 
+  - Update the documentation to do the understanding opf the structure easier
+ 
+* Therefore we will implement new functions for the program
+#### Logout feature:
+The users should have the option to Logout from the program whenever they want 
+  
+  
+
 _Authors: Amets Martiarena, Ekhi Arzac, Jon Reboiro._
 
 
