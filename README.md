@@ -9,6 +9,7 @@ The application is developed using JavaFX, Hibernate, H2, and Properties.
 ## Sprints
 
 * ### Sprint 1
+  ---
 
 For this first sprint, we needed to do the requirements analysis and start designing some features for the application.
 
@@ -41,6 +42,7 @@ The requirement analysis has been done using Star UML and can be found [in the U
 Using this method we are able to change the center pane of the application to the desired one.
 
 * ### Sprint 2
+  ---
 
 For this second sprint, we needed to implement at least two use cases.
 * #### User database:
@@ -55,6 +57,7 @@ Also, when initializing the application, instead of a test driver, we will use a
 On the other hand, we have implemented new event flows, for the: Check availability of rides, create alert, and remove alert in the use case diagram. 
 
 * ### Sprint 3
+  ---
 
 * For the third sprint we are going to fix fill the deficiencies that the project had in the last sprint:
   - Add the hours that we work in each issue in the second sprint
