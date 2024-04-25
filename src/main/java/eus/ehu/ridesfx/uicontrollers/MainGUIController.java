@@ -111,6 +111,7 @@ public class MainGUIController implements Controller {
         mainGUI.clearFields();
         user_icon.setVisible(false);
         lblUser.setText("Guest");
+        this.businessLogic.closeMsgClient();
         hideLogoutBtn();
     }
 
