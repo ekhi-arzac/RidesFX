@@ -29,6 +29,7 @@ public class LoginController implements Controller {
 
     public LoginController(BlFacade bl) {
         businessLogic = bl;
+
     }
 
     @FXML
@@ -54,6 +55,7 @@ public class LoginController implements Controller {
             mainGUI.setUserName(user.getName());
             mainGUI.showSceneInCenter("queryRides");
             mainGUI.showUserIcon();
+            mainGUI.showLogoutButton();
             //this.displayMessage("Login successful", "success_msg");
             if (businessLogic.getCurrentUser() instanceof Driver) {
                 mainGUI.showCreateRide();
@@ -93,4 +95,10 @@ public class LoginController implements Controller {
         thread.start();
 
     }
+
+    public void clearFields() {
+        emailField.clear();
+        passwordField.clear();
+    }
+
 }
