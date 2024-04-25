@@ -1,6 +1,7 @@
 package eus.ehu.ridesfx.uicontrollers;
 
 import eus.ehu.ridesfx.businessLogic.BlFacade;
+import eus.ehu.ridesfx.configuration.Config;
 import eus.ehu.ridesfx.domain.Driver;
 import eus.ehu.ridesfx.domain.Traveler;
 import eus.ehu.ridesfx.domain.User;
@@ -100,5 +101,10 @@ public class LoginController implements Controller {
         emailField.clear();
         passwordField.clear();
     }
-
+    @FXML
+    void initialize() {
+        Config config = Config.getInstance();
+        emailField.setText(config.getMail());
+        passwordField.setText(config.getPassword());
+    }
 }
