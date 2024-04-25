@@ -187,6 +187,7 @@ public class MainGUI {
         ((MainGUIController) mainLag.c) .removeLogRegButton();
     }
 
+
     public void showUserIcon() {
         ((MainGUIController) mainLag.c) .showUserIcon();
     }

@@ -109,7 +109,12 @@ public class MainGUIController implements Controller {
         mainGUI.showSceneInCenter("login");
         businessLogic.setCurrentUser(new Guest("guest@gmail.com", "Guest"));
         mainGUI.clearFields();
+        mainGUI.hideCreateRide();
+        mainGUI.hideDriverRidePanel();
+        mainGUI.hideBookRide(false);
+        showLogRegButton();
         user_icon.setVisible(false);
+        businessLogic.closeMsgClient();
         lblUser.setText("Guest");
         hideLogoutBtn();
     }
@@ -144,7 +149,9 @@ public class MainGUIController implements Controller {
     public void showCreateRideBtn() {
         createRideBtn.setVisible(true);
     }
-
+    public void showLogRegButton() {
+        logregbtn.setVisible(true);
+    }
     public void showDriverRidePanel() {
         dRidePanelBtn.setVisible(true);
     }
