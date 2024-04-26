@@ -8,17 +8,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.ridesfx.uicontrollers.LoginController">
+<AnchorPane prefHeight="427.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.ridesfx.uicontrollers.LoginController">
 
       <TextField fx:id="emailField" layoutX="225.0" layoutY="160.0" styleClass="textfield" />
       <PasswordField fx:id="passwordField" layoutX="225.0" layoutY="218.0" styleClass="textfield" />
       <Button layoutX="277.0" layoutY="268.0" mnemonicParsing="false" onAction="#onLogin" text="Login" />
+      <Hyperlink layoutX="180.0" layoutY="329.0" onAction="#showRegister" text="Not registered yet? Create an account here!" />
       <Label layoutX="276.0" layoutY="103.0" text="Login">
       <font>
          <Font name="System Bold" size="18.0" />
       </font></Label>
       <Label layoutX="225.0" layoutY="142.0" text="%Email:" />
       <Label layoutX="225.0" layoutY="200.0" text="Password:" />
-      <Hyperlink layoutX="180.0" layoutY="329.0" onAction="#showRegister" text="Not registered yet? Create an account here!" />
-   <Label fx:id="lblErrorMessage" layoutX="284.0" layoutY="311.0" />
+   <Label fx:id="lblErrorMessage" layoutX="276.0" layoutY="380.0" prefHeight="17.0" prefWidth="48.0" />
 </AnchorPane>

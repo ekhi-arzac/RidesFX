@@ -6,6 +6,8 @@ This application is a desktop application that allows carpooling between individ
 
 The application is developed using JavaFX, Hibernate, H2, and Properties. 
 
+The use-cases, domain model and sequence diagrams are located in 
+
 ## Sprints
 
 
@@ -16,7 +18,7 @@ The application is developed using JavaFX, Hibernate, H2, and Properties.
 For this first sprint, we needed to do the requirements analysis and start designing some features for the application.
 
 * #### Requirements analysis:
-The requirement analysis has been done using Star UML and can be found [in the UML branch](https://github.com/ekhi-arzac/RidesFX/tree/UML). The requirements analysis is composed of the following documents:
+The requirement analysis has been done using Star UML and can be found ```src/documents```        The requirements analysis is composed of the following documents:
 * ##### Use Case Diagram: 
     There are four actors in our system: the guest, who can only view the rides; the user, who can offer and request rides, depending on the type of user it is, a driver or a traveler. The driver can offer rides, and the traveler can request rides.
 * ##### Domain model: 
@@ -34,12 +36,18 @@ The requirement analysis has been done using Star UML and can be found [in the U
   In the `MainGUI` class, we have created the `showSceneInCenter` which allows us to change the center pane of the application.
 ```Java
   public void showSceneInCenter(String window) {
-    switch (window) {
-      case "queryRides" -> mainPane.setCenter(queryRidesLag.ui);
-      case "createRide" -> mainPane.setCenter(createRideLag.ui);
-      case "login" -> mainPane.setCenter(loginLag.ui);
-      case "register" -> mainPane.setCenter(registerLag.ui);
-  }
+        switch (window) {
+            case "queryRides" -> mainPane.setCenter(queryRidesLag.ui);
+            case "createRide" -> mainPane.setCenter(createRideLag.ui);
+            case "login" -> mainPane.setCenter(loginLag.ui);
+            case "register" -> mainPane.setCenter(registerLag.ui);
+            case "dRidePanel" -> {
+                mainPane.setCenter(dRidePanelLag.ui);
+                ((DriverRidePanelController) dRidePanelLag.c).updateRides();
+            }
+        }
+
+    }
   ```
 Using this method we are able to change the center pane of the application to the desired one.
 

@@ -31,6 +31,6 @@
       <Button fx:id="bookRideButton" layoutX="85.0" layoutY="313.0" mnemonicParsing="false" stylesheets="@../main.css" text="Book " />
       <Label fx:id="passengersLbl" layoutX="39.0" layoutY="226.0" text="Passengers" />
       <ComboBox fx:id="numOfPassenger" layoutX="40.0" layoutY="257.0" prefWidth="150.0" styleClass="comb_bootstrap" stylesheets="@../main.css" />
-      <Label fx:id="lblErrorMsg" layoutX="600.0" layoutY="330.0" text="Label" />
+        <Label fx:id="lblErrorMessage" layoutX="580.0" layoutY="317.0" prefHeight="17.0" prefWidth="73.0" />
     </children>
 </AnchorPane>
