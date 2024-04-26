@@ -14,11 +14,12 @@
       <PasswordField fx:id="passwordField" layoutX="225.0" layoutY="218.0" styleClass="textfield" />
       <Button layoutX="277.0" layoutY="268.0" mnemonicParsing="false" onAction="#onLogin" text="Login" />
       <Hyperlink layoutX="180.0" layoutY="329.0" onAction="#showRegister" text="Not registered yet? Create an account here!" />
-      <Label layoutX="276.0" layoutY="103.0" text="Login">
-      <font>
-         <Font name="System Bold" size="18.0" />
-      </font></Label>
+      <Label layoutX="276.0" layoutY="103.0" text="Login" >
+            <font>
+               <Font name="System Bold" size="18.0" />
+            </font>
+      </Label>
+      <Label fx:id="lblErrorMessage" layoutX="100.0" layoutY="300.0" prefHeight="100" prefWidth="100"/>
       <Label layoutX="225.0" layoutY="142.0" text="%Email:" />
       <Label layoutX="225.0" layoutY="200.0" text="Password:" />
-   <Label fx:id="lblErrorMessage" layoutX="276.0" layoutY="380.0" prefHeight="17.0" prefWidth="48.0" />
 </AnchorPane>
