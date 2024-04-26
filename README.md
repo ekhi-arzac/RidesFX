@@ -6,7 +6,7 @@ This application is a desktop application that allows carpooling between individ
 
 The application is developed using JavaFX, Hibernate, H2, and Properties. 
 
-The use-cases, domain model and sequence diagrams are located in ``` src/documents ```
+The use-cases, domain model and sequence diagrams are located in 
 
 ## Sprints
 
@@ -18,7 +18,7 @@ The use-cases, domain model and sequence diagrams are located in ``` src/documen
 For this first sprint, we needed to do the requirements analysis and start designing some features for the application.
 
 * #### Requirements analysis:
-The requirement analysis has been done using Star UML and can be found [in the UML branch](https://github.com/ekhi-arzac/RidesFX/tree/UML). The requirements analysis is composed of the following documents:
+The requirement analysis has been done using Star UML and can be found ```src/documents```        The requirements analysis is composed of the following documents:
 * ##### Use Case Diagram: 
     There are four actors in our system: the guest, who can only view the rides; the user, who can offer and request rides, depending on the type of user it is, a driver or a traveler. The driver can offer rides, and the traveler can request rides.
 * ##### Domain model: 
