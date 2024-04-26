@@ -4,14 +4,16 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @DiscriminatorValue("TRAVELER")
 public class Traveler extends User implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @OneToMany
-    private ArrayList<RideBook> rideBook;
+    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+    private List<RideBook> rideBook;
 
     public Traveler(String email, String name) {
         super(email, name);
@@ -43,5 +45,11 @@ public class Traveler extends User implements Serializable {
 
     public String getPassword() {
         return super.getPassword();
+    }
+
+    public RideBook addRideBook(Ride ride, Date date, int passengers) {
+        RideBook rideBook = new RideBook(ride, date, passengers, this);
+        this.rideBook.add(rideBook);
+        return rideBook;
     }
 }
