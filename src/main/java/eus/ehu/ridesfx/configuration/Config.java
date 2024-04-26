@@ -47,5 +47,14 @@ public class Config {
     public boolean isDataAccessLocal() {
         return prop.getProperty("db.local").equals("true");
     }
+    public String getMail() {
+        return prop.getProperty("mail");
+    }
+    public String getPassword() {
+        return prop.getProperty("password");
+    }
 
+    public String getType() {
+        return prop.getProperty("type");
+    }
 }

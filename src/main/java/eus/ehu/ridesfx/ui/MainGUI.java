@@ -2,9 +2,7 @@ package eus.ehu.ridesfx.ui;
 
 import eus.ehu.ridesfx.businessLogic.BlFacade;
 import eus.ehu.ridesfx.domain.Ride;
-import eus.ehu.ridesfx.uicontrollers.CarPoolChatController;
-import eus.ehu.ridesfx.uicontrollers.DriverRidePanelController;
-import eus.ehu.ridesfx.uicontrollers.QueryRidesController;
+import eus.ehu.ridesfx.uicontrollers.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,8 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import eus.ehu.ridesfx.uicontrollers.Controller;
-import eus.ehu.ridesfx.uicontrollers.MainGUIController;
 import javafx.stage.WindowEvent;
 
 import java.io.IOException;
@@ -92,6 +88,10 @@ public class MainGUI {
 
     public void hideDriverRidePanel() {
         ((MainGUIController) mainLag.c).hideDriverRidePanel();
+    }
+
+    public void showLogoutButton() {
+        ((MainGUIController) mainLag.c).showLogoutButton();
     }
 
 
@@ -187,6 +187,7 @@ public class MainGUI {
         ((MainGUIController) mainLag.c) .removeLogRegButton();
     }
 
+
     public void showUserIcon() {
         ((MainGUIController) mainLag.c) .showUserIcon();
     }
@@ -194,6 +195,11 @@ public class MainGUI {
     public void setUserName(String name) {
         ((MainGUIController) mainLag.c) .setUserName(name);
     }
+
+    public void clearFields(){
+        ((LoginController) this.loginLag.c).clearFields();
+    }
+
 
 
 }

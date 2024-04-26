@@ -1,6 +1,7 @@
 package eus.ehu.ridesfx.uicontrollers;
 
 import eus.ehu.ridesfx.businessLogic.BlFacade;
+import eus.ehu.ridesfx.configuration.Config;
 import eus.ehu.ridesfx.domain.Driver;
 import eus.ehu.ridesfx.domain.Traveler;
 import eus.ehu.ridesfx.domain.User;
@@ -29,6 +30,7 @@ public class LoginController implements Controller {
 
     public LoginController(BlFacade bl) {
         businessLogic = bl;
+
     }
 
     @FXML
@@ -54,6 +56,7 @@ public class LoginController implements Controller {
             mainGUI.setUserName(user.getName());
             mainGUI.showSceneInCenter("queryRides");
             mainGUI.showUserIcon();
+            mainGUI.showLogoutButton();
             //this.displayMessage("Login successful", "success_msg");
             if (businessLogic.getCurrentUser() instanceof Driver) {
                 mainGUI.showCreateRide();
@@ -92,5 +95,16 @@ public class LoginController implements Controller {
         });
         thread.start();
 
+    }
+
+    public void clearFields() {
+        emailField.clear();
+        passwordField.clear();
+    }
+    @FXML
+    void initialize() {
+        Config config = Config.getInstance();
+        emailField.setText(config.getMail());
+        passwordField.setText(config.getPassword());
     }
 }

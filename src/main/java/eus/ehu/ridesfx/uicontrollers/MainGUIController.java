@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import eus.ehu.ridesfx.businessLogic.BlFacade;
+import eus.ehu.ridesfx.domain.Guest;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -45,6 +46,11 @@ public class MainGUIController implements Controller {
 
     @FXML
     private Button dRidePanelBtn;
+
+    @FXML
+    private Button logoutBtn;
+
+    private LoginController loginController;
 
     private MainGUI mainGUI;
 
@@ -94,7 +100,23 @@ public class MainGUIController implements Controller {
             if (businessLogic.getCurrentUser() instanceof eus.ehu.ridesfx.domain.Guest) {
                 createRideBtn.setVisible(false);
                 dRidePanelBtn.setVisible(false);
+                hideLogoutBtn();
             }
+    }
+
+    @FXML
+    void onLogout(ActionEvent event) {
+        mainGUI.showSceneInCenter("login");
+        businessLogic.setCurrentUser(new Guest("guest@gmail.com", "Guest"));
+        mainGUI.clearFields();
+        mainGUI.hideCreateRide();
+        mainGUI.hideDriverRidePanel();
+        mainGUI.hideBookRide(false);
+        showLogRegButton();
+        user_icon.setVisible(false);
+        businessLogic.closeMsgClient();
+        lblUser.setText("Guest");
+        hideLogoutBtn();
     }
 
     @Override
@@ -127,7 +149,9 @@ public class MainGUIController implements Controller {
     public void showCreateRideBtn() {
         createRideBtn.setVisible(true);
     }
-
+    public void showLogRegButton() {
+        logregbtn.setVisible(true);
+    }
     public void showDriverRidePanel() {
         dRidePanelBtn.setVisible(true);
     }
@@ -138,4 +162,14 @@ public class MainGUIController implements Controller {
     public void hideDriverRidePanel() {
         dRidePanelBtn.setVisible(false);
     }
+
+    public void hideLogoutBtn() {
+        logoutBtn.setVisible(false);
+    }
+
+    public void showLogoutButton() {
+        logoutBtn.setVisible(true);
+    }
+
+
 }
