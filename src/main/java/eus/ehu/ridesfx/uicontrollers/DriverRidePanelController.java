@@ -132,7 +132,9 @@ public class DriverRidePanelController implements Controller {
             return;
         }
         if (ride != null) {
+
             mainGUI.showChat(ride);
+            businessLogic.getMsgClient().joinChat(ride.getRideNumber(), true);
         }
     }
 
