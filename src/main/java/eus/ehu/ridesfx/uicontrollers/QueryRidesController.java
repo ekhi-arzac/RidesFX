@@ -150,11 +150,13 @@ public class QueryRidesController implements Controller {
             bookRideButton.setVisible(true);
             numOfPassenger.setVisible(true);
             passengersLbl.setVisible(true);
-        } else {
+        } else if (user instanceof Driver) {
             bookRideButton.setVisible(false);
             numOfPassenger.setVisible(false);
             passengersLbl.setVisible(false);
         }
+        // log instance of user
+        System.out.println(user instanceof Traveler);
 
         // Update DatePicker cells when ComboBox value changes
         comboArrivalCity.valueProperty().addListener(
@@ -213,9 +215,9 @@ public class QueryRidesController implements Controller {
             if (businessLogic.getCurrentUser() instanceof Traveler) {
                 Ride ride = tblRides.getSelectionModel().getSelectedItem();
                 if (ride != null) {
-                    int passengers = numOfPassenger.getValue();
+                    Integer passengers = numOfPassenger.getValue();
                     //correct  number of passengers
-                    if (passengers > 0 && passengers <= ride.getNumPlaces()) {
+                    if (passengers != null && passengers > 0 && passengers <= ride.getNumPlaces()) {
                         //date is later than today
                         if (datepicker.getValue().isAfter(LocalDate.now())) {
                             businessLogic.bookRide(ride, Dates.convertToDate(datepicker.getValue()), passengers, (Traveler)businessLogic.getCurrentUser());
@@ -312,12 +314,20 @@ public class QueryRidesController implements Controller {
         }
     }
     private void displayMessage(String message, String label) {
-        lblErrorMessage.setPrefHeight(50);
-        lblErrorMessage.setPrefWidth(200);
-        lblErrorMessage.setLayoutX(200);
+
         lblErrorMessage.setVisible(true);
         lblErrorMessage.setText(message);
         lblErrorMessage.getStyleClass().clear();
         lblErrorMessage.getStyleClass().add(label);
+
+        Thread thread = new Thread(() -> {
+            try {
+                Thread.sleep(3000);
+                lblErrorMessage.setVisible(false);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        thread.start();
     }
 }
