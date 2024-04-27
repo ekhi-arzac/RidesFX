@@ -36,7 +36,7 @@
 .tableview_column_bootstrap{
     -fx-effect: dropshadow(three-pass-box, #c7d6ff, 10, 0, 0, 0);
 }
-.error_msg{
+.error_msg {
     -fx-background-color: #ec9e97;
     -fx-border-color: #cb564d;
     -fx-text-fill: #cb564d;

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="427.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.ridesfx.uicontrollers.LoginController">
+<AnchorPane prefHeight="427.0" prefWidth="600.0" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.ridesfx.uicontrollers.LoginController">
 
       <TextField fx:id="emailField" layoutX="225.0" layoutY="160.0" styleClass="textfield" />
       <PasswordField fx:id="passwordField" layoutX="225.0" layoutY="218.0" styleClass="textfield" />
@@ -19,7 +19,7 @@
                <Font name="System Bold" size="18.0" />
             </font>
       </Label>
-      <Label fx:id="lblErrorMessage" layoutX="250.0" layoutY="373.0" prefHeight="23.0" prefWidth="100" />
+      <Label fx:id="lblErrorMessage" layoutX="186.0" layoutY="368.0" prefHeight="38.0" prefWidth="230.0" />
       <Label layoutX="225.0" layoutY="142.0" text="%Email:" />
       <Label layoutX="225.0" layoutY="200.0" text="Password:" />
 </AnchorPane>
