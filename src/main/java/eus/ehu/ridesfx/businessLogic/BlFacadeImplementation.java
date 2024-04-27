@@ -24,11 +24,14 @@ public class BlFacadeImplementation implements BlFacade {
 	DataAccess dbManager;
 	Config config = Config.getInstance();
 	private User currentUser;
+	boolean initialize;
 
 	public BlFacadeImplementation()  {
 		System.out.println("Creating BlFacadeImplementation instance");
-		boolean initialize = config.getDataBaseOpenMode().equals("initialize");
-		dbManager = new DataAccess(initialize);
+		dbManager = new DataAccess(true);
+		System.out.println("initialized");
+		initialize = config.getDataBaseOpenMode().equals("initialize");
+
 		if (initialize)
 			dbManager.initializeDB();
 
