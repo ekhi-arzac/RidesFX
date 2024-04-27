@@ -25,7 +25,7 @@
       <Label layoutX="223.0" layoutY="112.0" text="Username:" />
       <Label layoutX="225.0" layoutY="164.0" text="Password:" />
       <Label layoutX="226.0" layoutY="59.0" text="Email:" />
-      <Label fx:id="lblErrorMessage" layoutX="286.0" layoutY="319.0" />
+      <Label fx:id="lblErrorMessage" layoutX="184.0" layoutY="385.0" prefHeight="35.0" prefWidth="235.0" />
       <Label layoutX="223.0" layoutY="267.0" text="Role:" />
       <Label layoutX="223.0" layoutY="213.0" text="Repeat password:" />
    </children>

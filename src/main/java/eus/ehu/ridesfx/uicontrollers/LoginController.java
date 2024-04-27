@@ -108,9 +108,7 @@ public class LoginController implements Controller {
         Config config = Config.getInstance();
         emailField.setText(config.getMail());
         passwordField.setText(config.getPassword());
-        lblErrorMessage.setPrefHeight(50);
-        lblErrorMessage.setPrefWidth(200);
-        lblErrorMessage.setLayoutX(200);
+
 
     }
 }
