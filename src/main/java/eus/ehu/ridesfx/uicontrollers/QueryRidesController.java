@@ -135,9 +135,14 @@ public class QueryRidesController implements Controller {
             }
         });
     }
-
+    //the initialize method is called when the page is loaded
     @FXML
     void initialize() {
+
+        //initializes the error message label
+        lblErrorMessage.setVisible(false);
+
+
 
         //change the elements depending of the user when initializing the page
         User user = businessLogic.getCurrentUser();
@@ -214,22 +219,24 @@ public class QueryRidesController implements Controller {
                         //date is later than today
                         if (datepicker.getValue().isAfter(LocalDate.now())) {
                             businessLogic.bookRide(ride, Dates.convertToDate(datepicker.getValue()), passengers, (Traveler)businessLogic.getCurrentUser());
+                            displayMessage("Ride booked successfully", "success_msg");
                         } else {
+                            displayMessage("Please select a valid date", "error_msg");
                             System.out.println(">>Please select a valid date");
                         }
                     }
                     else{
-                        displayMessage("Please select a valid number of passengers", "error");
+                        displayMessage("Please select a valid number of passengers", "error_msg");
                         System.out.println(">>Please select a valid number of passengers");
                     }
                 }
                 else{
-                    displayMessage("Please select a ride", "error");
+                    displayMessage("Please select a ride", "error_msg");
                     System.out.println(">>Please select a ride");
                 }
             }
             else{
-                displayMessage("User is not a traveler", "error");
+                displayMessage("User is not a traveler", "error_msg");
                 System.out.println(">>user is not a traveler");
             }
 
@@ -305,6 +312,10 @@ public class QueryRidesController implements Controller {
         }
     }
     private void displayMessage(String message, String label) {
+        lblErrorMessage.setPrefHeight(50);
+        lblErrorMessage.setPrefWidth(200);
+        lblErrorMessage.setLayoutX(200);
+        lblErrorMessage.setVisible(true);
         lblErrorMessage.setText(message);
         lblErrorMessage.getStyleClass().clear();
         lblErrorMessage.getStyleClass().add(label);

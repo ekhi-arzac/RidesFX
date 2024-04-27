@@ -111,6 +111,5 @@ public class LoginController implements Controller {
         lblErrorMessage.setPrefHeight(50);
         lblErrorMessage.setPrefWidth(200);
         lblErrorMessage.setLayoutX(200);
-
     }
 }
