@@ -47,7 +47,7 @@ public class MsgClient {
                 while ((message = reader.readLine()) != null) {
                     String[] parts = message.split(":");
                     if (parts[0].equals(chatController.getRide().getRideNumber() + "") &&
-                            !parts[1].trim().equals(this.senderUsername)
+                            (!parts[1].trim().equals(this.senderUsername) && !parts[1].equals("sys"))
                             || parts[0].equals("0")) {
                         System.out.println(message);
                         String finalMessage = parts[2];
@@ -55,10 +55,19 @@ public class MsgClient {
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
-                                chatController.addMessage(sender, finalMessage, false);
+                                chatController.addMessage(sender, finalMessage, false, false);
+                            }
+                        });
+                    } else if (parts[0].equals(chatController.getRide().getRideNumber() + "") && parts[1].equals("sys")) {
+                        String finalMessage = parts[2];
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                chatController.addMessage("", finalMessage, false, true);
                             }
                         });
                     }
+
                 }
             } catch (IOException ex) {
                 System.out.println("Socket closed!");
@@ -68,7 +77,13 @@ public class MsgClient {
 
     public void sendMessage(int ridenumber, String message) {
         out.println(ridenumber + ":" + senderUsername + ":" + message);
-        chatController.addMessage(senderUsername, message, true);
+        chatController.addMessage(senderUsername, message, true, false);
+        out.flush();
+    }
+
+    public void joinChat(int ridenumber, boolean join) {
+        String message = join ? " has joined the chat" : " has left the chat";
+        out.println(ridenumber +":"+ "sys" + ":" + senderUsername + message);
         out.flush();
     }
 

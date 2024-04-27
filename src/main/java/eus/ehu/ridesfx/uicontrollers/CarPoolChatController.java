@@ -2,6 +2,7 @@ package eus.ehu.ridesfx.uicontrollers;
 
 import eus.ehu.ridesfx.businessLogic.BlFacade;
 import eus.ehu.ridesfx.domain.Ride;
+import eus.ehu.ridesfx.domain.User;
 import eus.ehu.ridesfx.ui.MainGUI;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 import java.util.*;
@@ -35,12 +37,14 @@ public class CarPoolChatController implements Controller {
     private VBox chatMessages;
     @FXML
     private ScrollPane scrollPane;
+    @FXML
 
     private List<Integer> rideNumbers = new ArrayList<>();
-    private record Msg(int rideNumber, String sender, String message) {}
+    private record Msg(int rideNumber, String sender, String message, boolean sys) {}
 
 
     private ConcurrentMap<Integer, List<Msg>> cache = new ConcurrentHashMap<>();
+    private ConcurrentMap<Integer, ConcurrentLinkedQueue<User>> onlineUsers = new ConcurrentHashMap<>();
     public CarPoolChatController(BlFacade businessLogic) {
         this.businessLogic = businessLogic;
         for (var ride : businessLogic.getRidesFromDriver(businessLogic.getCurrentUser().getEmail())) {
@@ -53,7 +57,7 @@ public class CarPoolChatController implements Controller {
         this.mainGui = mainGUI;
     }
 
-    public void addMessage(String sender, String message, boolean isSelf) {
+    public void addMessage(String sender, String message, boolean isSelf, boolean sysMsg) {
         Label lbl = new Label(sender + ":");
         lbl.setStyle("-fx-padding: 0 0 5 0; -fx-font-weight: bold;");
         Label txt = new Label(message);
@@ -64,13 +68,17 @@ public class CarPoolChatController implements Controller {
             hBox.setAlignment(Pos.CENTER_RIGHT);
             txt.setStyle("-fx-background-color: lightblue; -fx-border-color: #f4f4f4; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-padding: 5px; -fx-text-fill: #000000;");
             lbl.setText("You: ");
-        } else {
+        } else if (!sysMsg) {
             hBox.setAlignment(Pos.CENTER_LEFT);
             txt.setStyle("-fx-background-color: white; -fx-border-color: #f4f4f4; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-padding: 5px; -fx-text-fill: #000000;");
+        } else {
+            hBox.setAlignment(Pos.CENTER);
+            txt.setStyle("-fx-padding: 5px; -fx-text-fill: #000000; -fx-underline: true; -fx-font-weight: bold;");
         }
         int messageLength = message.split(" ").length;
         txt.setWrapText(true);
         txt.setMaxWidth(300);
+        txt.setMinHeight(Region.USE_PREF_SIZE);
         hBox.getChildren().addAll(lbl, txt);
         chatMessages.getChildren().add(hBox);
     }
@@ -91,7 +99,7 @@ public class CarPoolChatController implements Controller {
         Platform.runLater(() -> {
                     List<Msg> tempMsgList = new ArrayList<>(cache.get(ride.getRideNumber()));
                     tempMsgList.forEach(msg -> {
-                        addMessage(msg.sender(), msg.message(), msg.sender().equals(businessLogic.getCurrentUser().getName()));
+                        addMessage(msg.sender(), msg.message(), msg.sender().equals(businessLogic.getCurrentUser().getName()), msg.sys());
                     });
         });
     }
@@ -121,9 +129,11 @@ public class CarPoolChatController implements Controller {
 
 
     public void back(ActionEvent actionEvent) {
+        businessLogic.getMsgClient().joinChat(ride.getRideNumber(), false);
         mainGui.showSceneInCenter("dRidePanel");
     }
     public Ride getRide() {
         return this.ride;
     }
+
 }
