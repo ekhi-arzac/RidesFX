@@ -22,6 +22,8 @@ public class MainGUIController implements Controller {
     @FXML
     private Label lblUser;
 
+    @FXML
+    private Button viewBooksBtn;
 
     @FXML
     private Button queryRidesBtn;
@@ -100,6 +102,7 @@ public class MainGUIController implements Controller {
             if (businessLogic.getCurrentUser() instanceof eus.ehu.ridesfx.domain.Guest) {
                 createRideBtn.setVisible(false);
                 dRidePanelBtn.setVisible(false);
+                viewBooksBtn.setVisible(false);
                 hideLogoutBtn();
             }
     }
@@ -150,9 +153,11 @@ public class MainGUIController implements Controller {
     public void showCreateRideBtn() {
         createRideBtn.setVisible(true);
     }
+
     public void showLogRegButton() {
         logregbtn.setVisible(true);
     }
+
     public void showDriverRidePanel() {
         dRidePanelBtn.setVisible(true);
     }
@@ -160,6 +165,7 @@ public class MainGUIController implements Controller {
     public void hideCreateRideBtn() {
         createRideBtn.setVisible(false);
     }
+
     public void hideDriverRidePanel() {
         dRidePanelBtn.setVisible(false);
     }
@@ -172,5 +178,5 @@ public class MainGUIController implements Controller {
         logoutBtn.setVisible(true);
     }
 
-
+    public void showViewBooksBtn(boolean b) {viewBooksBtn.setVisible(b);}
 }

@@ -1,5 +1,6 @@
 package eus.ehu.ridesfx.ui;
 
+import com.sun.tools.javac.Main;
 import eus.ehu.ridesfx.businessLogic.BlFacade;
 import eus.ehu.ridesfx.domain.Ride;
 import eus.ehu.ridesfx.uicontrollers.*;
@@ -93,6 +94,8 @@ public class MainGUI {
     public void showLogoutButton() {
         ((MainGUIController) mainLag.c).showLogoutButton();
     }
+
+    public void showViewBooksBtn(boolean b) {((MainGUIController)mainLag.c).showViewBooksBtn(b);}
 
 
     class Window {

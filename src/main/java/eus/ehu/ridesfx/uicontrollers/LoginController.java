@@ -68,6 +68,7 @@ public class LoginController implements Controller {
                 mainGUI.hideCreateRide();
                 mainGUI.hideDriverRidePanel();
                 mainGUI.hideBookRide(false);
+                mainGUI.showViewBooksBtn(false);
             }
 
         } else {

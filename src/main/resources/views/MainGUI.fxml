@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainPane" prefHeight="450.0" prefWidth="1050.0" style="-fx-background-color: #F8F8FF;" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.ridesfx.uicontrollers.MainGUIController">
+<BorderPane fx:id="mainPane" prefHeight="513.0" prefWidth="1050.0" style="-fx-background-color: #F8F8FF;" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.ridesfx.uicontrollers.MainGUIController">
    <left>
       <VBox id="mainBorderpane" alignment="TOP_CENTER" styleClass="borderpane" stylesheets="@../main.css" BorderPane.alignment="TOP_CENTER">
          <children>
@@ -35,6 +35,11 @@
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
             </Button>
+            <Button fx:id="viewBooksBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="155.0" text="%ViewBooks">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </Button>
             <ImageView fx:id="user_icon" fitHeight="72.0" fitWidth="71.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@user_blue.png" />
@@ -43,13 +48,13 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </ImageView>
-            <Label fx:id="lblUser" text="Driver:">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
             <Label fx:id="lblDriver" prefHeight="18.0" prefWidth="82.0" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label fx:id="lblUser" text="Driver:">
+               <font>
+                  <Font size="14.0" />
                </font></Label>
             <Button fx:id="logregbtn" mnemonicParsing="false" onAction="#showLogin" prefHeight="26.0" prefWidth="156.0" stylesheets="@../main.css" text="%Login/Register">
                <VBox.margin>

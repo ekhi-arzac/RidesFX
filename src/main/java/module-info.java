@@ -8,6 +8,7 @@ module ridesfx {
     requires jbcrypt;
     requires com.google.gson;
     requires java.net.http;
+    requires jdk.compiler;
 
     opens eus.ehu.ridesfx.domain to org.hibernate.orm.core;
     opens eus.ehu.ridesfx.uicontrollers to javafx.fxml, com.google.gson;
