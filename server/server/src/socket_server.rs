@@ -5,7 +5,6 @@ use std::thread;
 use serde::{Serialize, Deserialize};
 use std::fs::{self, OpenOptions};
 use std::path::Path;
-use std::net::SocketAddr;
 
 #[derive(Serialize, Deserialize)]
 struct Message {
@@ -58,7 +57,7 @@ fn handle_client(mut stream: TcpStream, client_writers: &Arc<Mutex<Vec<Arc<Mutex
                 let message = std::str::from_utf8(&buffer[..bytes_read]).expect("Failed to parse message").to_string();
                 broadcast_message(&message, client_writers);
 
-                save_message_to_file(&message);
+                let _ = save_message_to_file(&message);
             }
             Err(ref e) if e.kind() == io::ErrorKind::ConnectionReset => {
                 println!("Client connection reset: {:?}", e);
@@ -88,7 +87,15 @@ fn broadcast_message(message: &str, client_writers: &Arc<Mutex<Vec<Arc<Mutex<Tcp
 
 fn save_message_to_file(message: &str) -> io::Result<()> {
     let parsed_msg: Vec<&str> = message.split(':').collect();
+    let mut msg_index: usize = 2;
     if parsed_msg.len() > 1 {
+        if parsed_msg[1] == "sys" {
+            msg_index += 1;
+            if parsed_msg[2] != "msg" {
+                return Ok(());
+            }
+        }
+
         let filename = parsed_msg[0].to_string() + ".json";
 
         let chats_folder = "../chats";
@@ -100,7 +107,7 @@ fn save_message_to_file(message: &str) -> io::Result<()> {
 
         let new_message = Message {
             sender: parsed_msg[1].to_string(),
-            content: parsed_msg[2].trim().to_string(),
+            content: parsed_msg[msg_index].trim().to_string(),
         };
 
         let json_contents = if file_path.exists() {
