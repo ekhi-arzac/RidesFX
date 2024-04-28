@@ -116,6 +116,7 @@ public class MainGUIController implements Controller {
         user_icon.setVisible(false);
         businessLogic.closeMsgClient();
         lblUser.setText("Guest");
+        businessLogic.getMsgClient().getChatController().clearCache();
         hideLogoutBtn();
     }
 

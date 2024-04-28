@@ -9,6 +9,7 @@ import eus.ehu.ridesfx.exceptions.RideMustBeLaterThanTodayException;
 import eus.ehu.ridesfx.msgClient.MsgClient;
 import eus.ehu.ridesfx.uicontrollers.CarPoolChatController;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
@@ -91,4 +92,6 @@ public interface BlFacade {
 	void closeMsgClient();
 
     MsgClient getMsgClient();
+
+
 }

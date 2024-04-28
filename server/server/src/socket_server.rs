@@ -5,19 +5,21 @@ use std::thread;
 use serde::{Serialize, Deserialize};
 use std::fs::{self, OpenOptions};
 use std::path::Path;
+use std::net::SocketAddr;
 
 #[derive(Serialize, Deserialize)]
 struct Message {
     sender: String,
     content: String,
 }
+
 const PORT: u16 = 25565;
 
 fn main() {
     let listener = TcpListener::bind(("0.0.0.0", PORT)).expect("Failed to bind to port");
     println!("Server started. Listening on port {}", PORT);
 
-    let client_writers = Arc::new(Mutex::new(Vec::<std::sync::Mutex<std::net::TcpStream>>::new()));
+    let client_writers = Arc::new(Mutex::new(Vec::<Arc<Mutex<TcpStream>>>::new()));
 
     for stream in listener.incoming() {
         match stream {
@@ -34,25 +36,38 @@ fn main() {
     }
 }
 
-fn handle_client(mut stream: TcpStream, client_writers: &Arc<Mutex<Vec<std::sync::Mutex<TcpStream>>>>) {
+fn handle_client(mut stream: TcpStream, client_writers: &Arc<Mutex<Vec<Arc<Mutex<TcpStream>>>>>) {
     println!("New client connected: {:?}", stream);
 
-    let client_writer = stream.try_clone().expect("Failed to clone client stream");
-    client_writers.lock().unwrap().push(Mutex::new(client_writer));
+    let client_writer = Arc::new(Mutex::new(stream.try_clone().expect("Failed to clone client stream")));
+    client_writers.lock().unwrap().push(Arc::clone(&client_writer));
 
     let mut buffer = [0; 1024];
     loop {
         match stream.read(&mut buffer) {
             Ok(0) => {
                 println!("Client disconnected");
+                let addr = stream.peer_addr().unwrap();
+                client_writers.lock().unwrap().retain(|writer| {
+                    let writer_addr = writer.lock().unwrap().peer_addr().unwrap();
+                    writer_addr != addr
+                });
                 break;
             }
             Ok(bytes_read) => {
                 let message = std::str::from_utf8(&buffer[..bytes_read]).expect("Failed to parse message").to_string();
-                println!("Received message from client: {}", message);
                 broadcast_message(&message, client_writers);
 
                 save_message_to_file(&message);
+            }
+            Err(ref e) if e.kind() == io::ErrorKind::ConnectionReset => {
+                println!("Client connection reset: {:?}", e);
+                let addr = stream.peer_addr().unwrap();
+                client_writers.lock().unwrap().retain(|writer| {
+                    let writer_addr = writer.lock().unwrap().peer_addr().unwrap();
+                    writer_addr != addr
+                });
+                break;
             }
             Err(e) => {
                 eprintln!("Error reading from client: {}", e);
@@ -62,7 +77,7 @@ fn handle_client(mut stream: TcpStream, client_writers: &Arc<Mutex<Vec<std::sync
     }
 }
 
-fn broadcast_message(message: &str, client_writers: &Arc<Mutex<Vec<std::sync::Mutex<TcpStream>>>>) {
+fn broadcast_message(message: &str, client_writers: &Arc<Mutex<Vec<Arc<Mutex<TcpStream>>>>>) {
     let mut writers = client_writers.lock().unwrap();
     for writer_mutex in writers.iter_mut() {
         let mut writer = writer_mutex.lock().unwrap();

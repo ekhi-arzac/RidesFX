@@ -117,6 +117,10 @@ public class RegisterController implements Controller {
      * @param label the style of the message
      */
     public void displayMessage(String message,  String label) {
+        displayMsg(message, label, lblErrorMessage);
+    }
+
+    static void displayMsg(String message, String label, Label lblErrorMessage) {
         lblErrorMessage.setVisible(true);
         lblErrorMessage.setText(message);
         lblErrorMessage.getStyleClass().clear();

@@ -315,19 +315,6 @@ public class QueryRidesController implements Controller {
     }
     private void displayMessage(String message, String label) {
 
-        lblErrorMessage.setVisible(true);
-        lblErrorMessage.setText(message);
-        lblErrorMessage.getStyleClass().clear();
-        lblErrorMessage.getStyleClass().add(label);
-
-        Thread thread = new Thread(() -> {
-            try {
-                Thread.sleep(3000);
-                lblErrorMessage.setVisible(false);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-        thread.start();
+        RegisterController.displayMsg(message, label, lblErrorMessage);
     }
 }

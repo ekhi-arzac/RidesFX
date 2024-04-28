@@ -6,9 +6,11 @@ module ridesfx {
     requires jakarta.persistence;
     requires org.hibernate.orm.core;
     requires jbcrypt;
+    requires com.google.gson;
+    requires java.net.http;
 
     opens eus.ehu.ridesfx.domain to org.hibernate.orm.core;
-    opens eus.ehu.ridesfx.uicontrollers to javafx.fxml;
+    opens eus.ehu.ridesfx.uicontrollers to javafx.fxml, com.google.gson;
     opens eus.ehu.ridesfx.ui to javafx.fxml;
 
     exports eus.ehu.ridesfx.ui;
