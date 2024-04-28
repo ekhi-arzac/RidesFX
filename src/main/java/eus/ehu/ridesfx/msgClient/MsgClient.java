@@ -10,6 +10,11 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
 public class MsgClient {
     private static final String SERVER_ADDRESS = "158.179.210.27";
     private static final int PORT = 25565;
@@ -30,6 +35,10 @@ public class MsgClient {
         Thread messageReaderThread = new Thread(new MessageReader(this.in, this.senderUsername));
         messageReaderThread.start();
 
+    }
+
+    public CarPoolChatController getChatController() {
+        return chatController;
     }
 
     private static class MessageReader implements Runnable {
@@ -59,13 +68,23 @@ public class MsgClient {
                             }
                         });
                     } else if (parts[0].equals(chatController.getRide().getRideNumber() + "") && parts[1].equals("sys")) {
-                        String finalMessage = parts[2];
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                chatController.addMessage("", finalMessage, false, true);
+                        String intent = parts[2];
+                        switch (intent) {
+                            case "join" -> {
+                                chatController.addOnline(parts[3]);
                             }
-                        });
+                            case "leave" -> {
+                                chatController.removeOnline(parts[3]);
+                            }
+                            case "cancel", "reenable" -> {
+                                Platform.runLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        chatController.addMessage("sys", parts[3], false, true);
+                                    }
+                                });
+                            }
+                        }
                     }
 
                 }
@@ -83,7 +102,7 @@ public class MsgClient {
 
     public void joinChat(int ridenumber, boolean join) {
         String message = join ? " has joined the chat" : " has left the chat";
-        out.println(ridenumber +":"+ "sys" + ":" + senderUsername + message);
+        out.println(ridenumber +":"+ "sys" + ":join:" + senderUsername + message);
         out.flush();
     }
 
@@ -96,7 +115,28 @@ public class MsgClient {
     }
 
     public void setChatController(CarPoolChatController chatController) {
-        this.chatController = chatController;
+        MsgClient.chatController = chatController;
+    }
+    public String getChat(int rideNumber) {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://158.179.210.27:8080/chat/" + rideNumber))
+                .build();
+
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            String jsonData = response.body();
+            if (jsonData == null || jsonData.equals("Chat not found")) {
+                System.out.println("Chat not found");
+                return null;
+            }
+            System.out.println(jsonData);
+            return response.body();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 }
