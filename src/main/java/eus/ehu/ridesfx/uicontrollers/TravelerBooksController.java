@@ -20,12 +20,6 @@ public class TravelerBooksController implements Controller {
     @FXML
     private TableView<Ride> tblRides;
     @FXML
-    private Button cancelBtn;
-
-    @FXML
-    private Button reenableBtn;
-
-    @FXML
     private TableColumn<RideBook, Date> qc1;
 
     @FXML
@@ -33,8 +27,6 @@ public class TravelerBooksController implements Controller {
 
     @FXML
     private TableColumn<RideBook, String> qc3;
-    @FXML
-    private Label lblErrorMessage;
 
     public TravelerBooksController() {
     }
@@ -46,7 +38,7 @@ public class TravelerBooksController implements Controller {
         // TODO implement here
     }
     void initialize() {
-        // TODO implement here
+
     }
 
     @Override

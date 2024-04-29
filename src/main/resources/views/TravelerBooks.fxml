@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="405.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.ridesfx.uicontrollers.QueryRidesController">
+<AnchorPane prefHeight="405.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.ridesfx.uicontrollers.TravelerBooksController">
     <children>
-        <DatePicker fx:id="datepicker" layoutX="39.0" layoutY="190.0" styleClass="date-picker" />
-        <Label layoutX="39.0" layoutY="161.0" stylesheets="@../main.css" text="%EventDate" />
         <TableView fx:id="tblRides" layoutX="382.0" layoutY="70.0" prefHeight="200.0" prefWidth="469.0" styleClass="tableview_bootstrap" stylesheets="@../main.css">
             <columns>
                 <TableColumn fx:id="qc1" prefWidth="223.5" styleClass="tableview_column_bootstrap" text="%FindRidesGUI.Driver" />
@@ -22,15 +16,6 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </TableView>
-        <Label layoutX="358.0" layoutY="49.0" text="  " />
-        <Label layoutX="751.0" layoutY="21.0" text="%RideDate" />
-        <Label layoutX="39.0" layoutY="58.0" text="%DepartCity" />
-        <Label layoutX="39.0" layoutY="106.0" text="%ArrivalCity" />
-        <ComboBox fx:id="comboDepartCity" layoutX="149.0" layoutY="54.0" prefWidth="150.0" styleClass="comb_bootstrap" />
-        <ComboBox fx:id="comboArrivalCity" layoutX="149.0" layoutY="102.0" prefWidth="150.0" styleClass="comb_bootstrap" />
-        <Button fx:id="bookRideButton" layoutX="85.0" layoutY="313.0" mnemonicParsing="false" stylesheets="@../main.css" text="Book " />
-        <Label fx:id="passengersLbl" layoutX="39.0" layoutY="226.0" text="Passengers" />
-        <ComboBox fx:id="numOfPassenger" layoutX="40.0" layoutY="257.0" prefWidth="150.0" styleClass="comb_bootstrap" stylesheets="@../main.css" />
-        <Label fx:id="lblErrorMessage" alignment="CENTER" layoutX="382.0" layoutY="317.0" prefHeight="42.0" prefWidth="287.0" stylesheets="@../main.css" />
+
     </children>
 </AnchorPane>
