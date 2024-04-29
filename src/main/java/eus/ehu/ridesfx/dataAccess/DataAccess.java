@@ -382,7 +382,7 @@ public class DataAccess {
         }
         assert user != null;
         user.setPassword(hashedPassword);
-        if (db.find(Driver.class, email) != null) {
+        if (db.find(User.class, email) != null) {
             db.getTransaction().commit();
             return "emailExists";
         }
