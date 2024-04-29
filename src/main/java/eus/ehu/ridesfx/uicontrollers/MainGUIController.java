@@ -95,6 +95,11 @@ public class MainGUIController implements Controller {
     }
 
     @FXML
+    void showTravelerBooks(ActionEvent event) {
+        mainGUI.showSceneInCenter("travelerBooks");
+    }
+
+    @FXML
     void initialize() {
             // set current driver name
             lblUser.setText(businessLogic.getCurrentUser().getName());

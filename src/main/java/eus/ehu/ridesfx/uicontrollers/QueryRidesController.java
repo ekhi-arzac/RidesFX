@@ -317,4 +317,5 @@ public class QueryRidesController implements Controller {
 
         RegisterController.displayMsg(message, label, lblErrorMessage);
     }
+
 }
