@@ -114,6 +114,7 @@ public class MainGUIController implements Controller {
         mainGUI.hideBookRide(false);
         showLogRegButton();
         user_icon.setVisible(false);
+        businessLogic.getMsgClient().getChatController().clearOnline();
         businessLogic.closeMsgClient();
         lblUser.setText("Guest");
         if (businessLogic.getMsgClient() != null && businessLogic.getMsgClient().getChatController() != null)

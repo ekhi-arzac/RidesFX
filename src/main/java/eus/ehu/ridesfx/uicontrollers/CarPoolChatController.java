@@ -57,7 +57,10 @@ public class CarPoolChatController implements Controller {
     public void removeOnline(String ride, String user) {
         Platform.runLater(() -> {
             int rideNum = Integer.parseInt(ride);
-            onlineUsers.getOrDefault(rideNum, FXCollections.emptyObservableList()).remove(user);
+            var list = onlineUsers.get(rideNum);
+            if (list != null) {
+                    list.remove(user);
+            }
         });
     }
 
@@ -126,7 +129,6 @@ public class CarPoolChatController implements Controller {
         }
 
         loadCache();
-        onlineUsersTable.setItems(onlineUsers.get(ride.getRideNumber()));
         chatName.setText( "[#"+ ride.getRideNumber() + "] " + ride.getFromLocation() + " - " + ride.getToLocation() + " (" + ride.getDate()+ ")");
         this.ride = ride;
     }
@@ -176,4 +178,15 @@ public class CarPoolChatController implements Controller {
         onlineUsers.clear();
     }
 
+    public void clearOnline() {
+        for (var ride : rideNumbers) {
+            ObservableList<String> list = onlineUsers.get(ride);
+
+            if (list == null) {
+                continue;
+            }
+
+            list.removeAll(businessLogic.getCurrentUser().getName());
+        }
+    }
 }

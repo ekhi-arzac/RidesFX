@@ -71,10 +71,10 @@ public class MsgClient {
                         String intent = parts[2];
                         switch (intent) {
                             case "join" -> {
-                                chatController.addOnline(parts[0], parts[3]);
+                                chatController.addOnline(parts[0],parts[3]);
                             }
                             case "leave" -> {
-                                chatController.removeOnline(parts[0], parts[3]);
+                                chatController.removeOnline(parts[0],parts[3]);
                             }
                             case "cancel", "reenable" -> {
                                 Platform.runLater(new Runnable() {
