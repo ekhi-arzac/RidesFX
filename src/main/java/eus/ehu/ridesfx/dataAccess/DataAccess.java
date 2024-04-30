@@ -75,6 +75,8 @@ public class DataAccess {
     public void reset() {
         db.getTransaction().begin();
         db.createNativeQuery("DELETE FROM USERS_RIDE").executeUpdate();
+        db.createNativeQuery("DELETE FROM Ride_RideBook").executeUpdate();
+        db.createNativeQuery("DELETE FROM RIDEBOOK").executeUpdate();
         db.createQuery("DELETE FROM Ride ").executeUpdate();
         db.createQuery("DELETE FROM User ").executeUpdate();
         db.getTransaction().commit();
@@ -414,6 +416,12 @@ public class DataAccess {
         Ride r = db.find(Ride.class, ride.getRideNumber());
         r.setStatus(Ride.STATUS.ACTIVE);
         db.getTransaction().commit();
+    }
+    //gets ridebooks of the user
+    public List<RideBook> getRideBooks(Traveler t) {
+        TypedQuery<RideBook> query = db.createQuery("SELECT rb FROM RideBook rb WHERE rb.traveler.email = :email", RideBook.class)
+                .setParameter("email", t.getEmail());
+        return query.getResultList();
     }
 }
 

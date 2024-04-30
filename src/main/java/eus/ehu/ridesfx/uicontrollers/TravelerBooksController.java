@@ -18,47 +18,29 @@ public class TravelerBooksController implements Controller {
     private Button bookRideButton;
 
     @FXML
-    private ComboBox<?> comboArrivalCity;
+    private Label totBooksCount;
 
     @FXML
-    private ComboBox<?> comboDepartCity;
+    private TableView<RideBook> rideBooksTbl;
 
     @FXML
-    private DatePicker datepicker;
+    private TableColumn<RideBook, ?> qc1;
 
     @FXML
-    private Label lblErrorMessage;
-
-    @FXML
-    private ComboBox<?> numOfPassenger;
-
-    @FXML
-    private Label passengersLbl;
-
-    @FXML
-    private TableColumn<?, ?> qc1;
-
-    @FXML
-    private TableColumn<?, ?> qc2;
-
-    @FXML
-    private TableColumn<?, ?> qc3;
-
-    @FXML
-    private TableView<?> tblRides;
+    private TableColumn<RideBook, ?> qc2;
 
     public TravelerBooksController(BlFacade bl) {
         businessLogic = bl;
     }
 
     public void updateBooks() {
-        // TODO implement here
-    }
-    public void init() {
-        // TODO implement here
+        rideBooksTbl.getItems().clear();
+        rideBooksTbl.getItems().addAll(businessLogic.getTravelerRideBooks());
+        totBooksCount.setText("Total books: " + rideBooksTbl.getItems().size());
     }
     void initialize() {
-
+        // update the tableview to display all the books
+        updateBooks();
     }
 
     @Override

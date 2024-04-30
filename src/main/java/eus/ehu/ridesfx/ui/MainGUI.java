@@ -165,7 +165,7 @@ public class MainGUI {
             }
             case "travelerBooks" -> {
                 mainPane.setCenter(travelerBooksLag.ui);
-                //((TravelerBooksController)travelerBooksLag.c).updateBooks();
+                ((TravelerBooksController)travelerBooksLag.c).updateBooks();
             }
         }
 

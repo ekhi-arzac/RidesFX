@@ -3,6 +3,7 @@ package eus.ehu.ridesfx.businessLogic;
 import eus.ehu.ridesfx.configuration.Config;
 import eus.ehu.ridesfx.dataAccess.DataAccess;
 import eus.ehu.ridesfx.domain.Ride;
+import eus.ehu.ridesfx.domain.RideBook;
 import eus.ehu.ridesfx.domain.Traveler;
 import eus.ehu.ridesfx.domain.User;
 import eus.ehu.ridesfx.exceptions.RideAlreadyExistException;
@@ -163,6 +164,13 @@ public class BlFacadeImplementation implements BlFacade {
 
 	public MsgClient getMsgClient() {
 		return msgClient;
+	}
+
+	//gets the ride books of the current traveler
+
+	public List<RideBook> getTravelerRideBooks() {
+		List<RideBook> rideBooks = dbManager.getRideBooks((Traveler)getCurrentUser());
+		return rideBooks;
 	}
 
 }
