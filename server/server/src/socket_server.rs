@@ -77,12 +77,28 @@ fn handle_client(mut stream: TcpStream, client_writers: &Arc<Mutex<Vec<Arc<Mutex
 }
 
 fn broadcast_message(message: &str, client_writers: &Arc<Mutex<Vec<Arc<Mutex<TcpStream>>>>>) {
-    let mut writers = client_writers.lock().unwrap();
-    for writer_mutex in writers.iter_mut() {
-        let mut writer = writer_mutex.lock().unwrap();
-        writer.write_all(message.as_bytes()).expect("Failed to broadcast message");
-        writer.write_all(b"\n").expect("Failed to broadcast message");
+    let writers = client_writers.lock().unwrap();
+    for writer_mutex in writers.iter() {
+        let writer = match writer_mutex.lock() {
+            Ok(writer) => writer,
+            Err(_) => continue, // Skip this stream if mutex is poisoned
+        };
+
+        // Write the message
+        if let Err(err) = std::panic::catch_unwind(|| {
+            write_message(&writer, message)
+        }) {
+            // If a panic occurred, print the error and continue
+            eprintln!("Panic occurred while broadcasting message: {:?}", err);
+            std::panic::resume_unwind(err);
+        }
     }
+}
+
+fn write_message(writer: &TcpStream, message: &str) -> Result<()> {
+    writer.write_all(message.as_bytes())?;
+    writer.write_all(b"\n")?;
+    Ok(())
 }
 
 fn save_message_to_file(message: &str) -> io::Result<()> {
