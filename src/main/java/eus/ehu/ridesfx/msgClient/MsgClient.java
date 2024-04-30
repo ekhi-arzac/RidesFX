@@ -71,10 +71,10 @@ public class MsgClient {
                         String intent = parts[2];
                         switch (intent) {
                             case "join" -> {
-                                chatController.addOnline(parts[3]);
+                                chatController.addOnline(parts[0], parts[3]);
                             }
                             case "leave" -> {
-                                chatController.removeOnline(parts[3]);
+                                chatController.removeOnline(parts[0], parts[3]);
                             }
                             case "cancel", "reenable" -> {
                                 Platform.runLater(new Runnable() {
@@ -101,8 +101,8 @@ public class MsgClient {
     }
 
     public void joinChat(int ridenumber, boolean join) {
-        String message = join ? " has joined the chat" : " has left the chat";
-        out.println(ridenumber +":"+ "sys" + ":join:" + senderUsername + message);
+        String message = join ? "join" : "leave";
+        out.println(ridenumber +":"+ "sys" + ":"+message+":" + senderUsername);
         out.flush();
     }
 

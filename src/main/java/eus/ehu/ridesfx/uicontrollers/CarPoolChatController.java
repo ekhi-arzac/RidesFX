@@ -2,15 +2,15 @@ package eus.ehu.ridesfx.uicontrollers;
 
 import eus.ehu.ridesfx.businessLogic.BlFacade;
 import eus.ehu.ridesfx.domain.Ride;
-import eus.ehu.ridesfx.domain.User;
 import eus.ehu.ridesfx.ui.MainGUI;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -18,7 +18,6 @@ import javafx.scene.layout.VBox;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ConcurrentMap;
 
 import com.google.gson.Gson;
@@ -26,6 +25,8 @@ public class CarPoolChatController implements Controller {
 
     @FXML
     private Label chatName;
+    @FXML
+    private ListView<String> onlineUsersTable;
     private MainGUI mainGui;
     private BlFacade businessLogic;
     private Ride ride;
@@ -37,16 +38,27 @@ public class CarPoolChatController implements Controller {
     private VBox chatMessages;
     @FXML
     private ScrollPane scrollPane;
-    @FXML
 
     private List<Integer> rideNumbers = new ArrayList<>();
 
-    public void addOnline(String part) {
-        // onlineUsers.get(ride.getRideNumber()).add(part);
+    public void addOnline(String ride, String user) {
+        Platform.runLater(() -> {
+            int rideNum = Integer.parseInt(ride);
+            if (!onlineUsers.containsKey(rideNum)) {
+                ObservableList<String> users = FXCollections.observableArrayList();
+                users.addListener((ListChangeListener<String>) c -> onlineUsersTable.setItems(users));
+                onlineUsers.put(rideNum, users);
+            }
+            onlineUsers.get(rideNum).add(user);
+        });
+
     }
 
-    public void removeOnline(String part) {
-        // onlineUsers.remove(part);
+    public void removeOnline(String ride, String user) {
+        Platform.runLater(() -> {
+            int rideNum = Integer.parseInt(ride);
+            onlineUsers.getOrDefault(rideNum, FXCollections.emptyObservableList()).remove(user);
+        });
     }
 
     private record Msg(int rideNumber, String sender, String message, boolean sys) {}
@@ -56,7 +68,7 @@ public class CarPoolChatController implements Controller {
     }
 
     private final ConcurrentMap<Integer, List<Msg>> cache = new ConcurrentHashMap<>();
-    private final ConcurrentMap<Integer, ConcurrentLinkedQueue<User>> onlineUsers = new ConcurrentHashMap<>();
+    private final ConcurrentMap<Integer, ObservableList<String>> onlineUsers = new ConcurrentHashMap<>();
     public CarPoolChatController(BlFacade businessLogic) {
         this.businessLogic = businessLogic;
         for (var ride : businessLogic.getRidesFromDriver(businessLogic.getCurrentUser().getEmail())) {
@@ -114,6 +126,7 @@ public class CarPoolChatController implements Controller {
         }
 
         loadCache();
+        onlineUsersTable.setItems(onlineUsers.get(ride.getRideNumber()));
         chatName.setText( "[#"+ ride.getRideNumber() + "] " + ride.getFromLocation() + " - " + ride.getToLocation() + " (" + ride.getDate()+ ")");
         this.ride = ride;
     }
@@ -149,7 +162,7 @@ public class CarPoolChatController implements Controller {
 
     }
 
-
+    @FXML
     public void back(ActionEvent actionEvent) {
         businessLogic.getMsgClient().joinChat(ride.getRideNumber(), false);
         mainGui.showSceneInCenter("dRidePanel");
