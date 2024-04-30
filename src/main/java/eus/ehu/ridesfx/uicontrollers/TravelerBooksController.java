@@ -5,10 +5,7 @@ import eus.ehu.ridesfx.domain.Ride;
 import eus.ehu.ridesfx.domain.RideBook;
 import eus.ehu.ridesfx.ui.MainGUI;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
 import java.awt.print.Book;
 import java.util.Date;
@@ -18,17 +15,40 @@ public class TravelerBooksController implements Controller {
     private BlFacade businessLogic;
 
     @FXML
-    private TableView<Ride> tblRides;
-    @FXML
-    private TableColumn<RideBook, Date> qc1;
+    private Button bookRideButton;
 
     @FXML
-    private TableColumn<RideBook, String> qc2;
+    private ComboBox<?> comboArrivalCity;
 
     @FXML
-    private TableColumn<RideBook, String> qc3;
+    private ComboBox<?> comboDepartCity;
 
-    public TravelerBooksController() {
+    @FXML
+    private DatePicker datepicker;
+
+    @FXML
+    private Label lblErrorMessage;
+
+    @FXML
+    private ComboBox<?> numOfPassenger;
+
+    @FXML
+    private Label passengersLbl;
+
+    @FXML
+    private TableColumn<?, ?> qc1;
+
+    @FXML
+    private TableColumn<?, ?> qc2;
+
+    @FXML
+    private TableColumn<?, ?> qc3;
+
+    @FXML
+    private TableView<?> tblRides;
+
+    public TravelerBooksController(BlFacade bl) {
+        businessLogic = bl;
     }
 
     public void updateBooks() {
