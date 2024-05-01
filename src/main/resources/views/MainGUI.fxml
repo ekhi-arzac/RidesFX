@@ -56,14 +56,14 @@
                <font>
                   <Font size="14.0" />
                </font></Label>
-            <Button fx:id="logregbtn" mnemonicParsing="false" onAction="#showLogin" prefHeight="26.0" prefWidth="156.0" stylesheets="@../main.css" text="%Login/Register">
-               <VBox.margin>
-                  <Insets top="100.0" />
-               </VBox.margin>
-            </Button>
             <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#onLogout" prefHeight="26.0" prefWidth="120.0" text="Logout">
                <VBox.margin>
                   <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="logregbtn" mnemonicParsing="false" onAction="#showLogin" prefHeight="26.0" prefWidth="156.0" stylesheets="@../main.css" text="%Login/Register">
+               <VBox.margin>
+                  <Insets top="100.0" />
                </VBox.margin>
             </Button>
          </children>

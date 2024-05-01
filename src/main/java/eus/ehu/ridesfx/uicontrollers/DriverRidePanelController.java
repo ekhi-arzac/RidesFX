@@ -46,7 +46,6 @@ public class DriverRidePanelController implements Controller {
         tblRides.getItems().clear();
         List<Ride> rides = businessLogic.getRidesFromDriver(businessLogic.getCurrentUser().getEmail());
         for (var ride : rides) {
-
             tblRides.getItems().add(ride);
         }
 

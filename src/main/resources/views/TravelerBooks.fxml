@@ -7,10 +7,14 @@
 
 <AnchorPane prefHeight="405.0" prefWidth="902.0" styleClass="anchorpane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.ridesfx.uicontrollers.TravelerBooksController">
    <children>
-      <TableView fx:id="rideBooksTbl" layoutX="431.0" layoutY="60.0" prefHeight="200.0" prefWidth="354.0" styleClass="tableview_bootstrap" stylesheets="@../main.css">
+      <TableView fx:id="rideBooksTbl" layoutX="112.0" layoutY="60.0" prefHeight="200.0" prefWidth="710.0" stylesheets="@../main.css">
         <columns>
-          <TableColumn fx:id="qc1" prefWidth="75.0" text="C1" />
-          <TableColumn fx:id="qc2" prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="qc1" prefWidth="45.0" text="RideID" />
+            <TableColumn fx:id="qc2" prefWidth="200.0" text="Driver" />
+            <TableColumn fx:id="qc3" prefWidth="50.0" text="Seats" />
+            <TableColumn fx:id="qc4" prefWidth="75.0" text="Status" />
+            <TableColumn fx:id="qc5" prefWidth="200.0" text="Date" />
+            <TableColumn fx:id="qc6" prefWidth="140.0" text="Contact Email" />
         </columns>
       </TableView>
       <Label layoutX="431.0" layoutY="260.0" text="Total Book: " />
