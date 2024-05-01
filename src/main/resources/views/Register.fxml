@@ -15,7 +15,7 @@
        <TextField fx:id="usernameField" layoutX="225.0" layoutY="130.0" styleClass="textfield" />
       <PasswordField fx:id="passwordField" layoutX="225.0" layoutY="182.0" styleClass="textfield" />
        <PasswordField fx:id="repeatPasswordField" layoutX="225.0" layoutY="231.0" styleClass="textfield" />
-      <ComboBox fx:id="role" layoutX="224.0" layoutY="285.0" prefWidth="150.0" />
+      <ComboBox fx:id="role" layoutX="224.0" layoutY="285.0" prefWidth="150.0" styleClass="comb_bootstrap" />
        <Hyperlink layoutX="200.0" layoutY="362.0" onAction="#showLogin" text="Already have an account? Click here!" />
        <Button layoutX="270.0" layoutY="328.0" mnemonicParsing="false" onAction="#onRegister" text="Register" />
        <Label layoutX="270.0" layoutY="24.0" text="Register">

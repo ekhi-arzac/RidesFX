@@ -200,7 +200,6 @@ public class QueryRidesController implements Controller {
 
         // a date has been chosen, update the combobox of Rides
         datepicker.setOnAction(actionEvent -> {
-
             tblRides.getItems().clear();
             // Vector<eus.ehu.ridesfx.domain.Ride> events = eus.ehu.ridesfx.businessLogic.getEvents(Dates.convertToDate(datepicker.getValue()));
             List<Ride> rides = businessLogic.getRides(comboDepartCity.getValue(), comboArrivalCity.getValue(), Dates.convertToDate(datepicker.getValue()));
@@ -317,4 +316,5 @@ public class QueryRidesController implements Controller {
 
         RegisterController.displayMsg(message, label, lblErrorMessage);
     }
+
 }

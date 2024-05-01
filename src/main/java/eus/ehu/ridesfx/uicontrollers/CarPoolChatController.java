@@ -1,7 +1,10 @@
 package eus.ehu.ridesfx.uicontrollers;
 
 import eus.ehu.ridesfx.businessLogic.BlFacade;
+import eus.ehu.ridesfx.domain.Driver;
 import eus.ehu.ridesfx.domain.Ride;
+import eus.ehu.ridesfx.domain.Traveler;
+import eus.ehu.ridesfx.domain.User;
 import eus.ehu.ridesfx.ui.MainGUI;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -167,7 +170,12 @@ public class CarPoolChatController implements Controller {
     @FXML
     public void back(ActionEvent actionEvent) {
         businessLogic.getMsgClient().joinChat(ride.getRideNumber(), false);
-        mainGui.showSceneInCenter("dRidePanel");
+        User user = businessLogic.getCurrentUser();
+        if (user == null) return;
+        if (user instanceof Driver)
+                mainGui.showSceneInCenter("dRidePanel");
+        else if (user instanceof Traveler)
+                mainGui.showSceneInCenter("travelerBooks");
     }
     public Ride getRide() {
         return this.ride;
