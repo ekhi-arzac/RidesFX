@@ -54,6 +54,7 @@ public class RegisterController implements Controller {
                     mainGUI.hideCreateRide();
                     mainGUI.hideDriverRidePanel();
                     mainGUI.hideBookRide(false);
+                    mainGUI.showViewBooksBtn(true);
                 } else {
                     businessLogic.setCurrentUser(new Driver(email, username));
                     mainGUI.showCreateRide();
@@ -117,9 +118,23 @@ public class RegisterController implements Controller {
      * @param label the style of the message
      */
     public void displayMessage(String message,  String label) {
+        displayMsg(message, label, lblErrorMessage);
+    }
+
+    static void displayMsg(String message, String label, Label lblErrorMessage) {
+        lblErrorMessage.setVisible(true);
         lblErrorMessage.setText(message);
         lblErrorMessage.getStyleClass().clear();
         lblErrorMessage.getStyleClass().add(label);
+        Thread thread = new Thread(() -> {
+            try {
+                Thread.sleep(3000);
+                lblErrorMessage.setVisible(false);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        thread.start();
     }
 
     @FXML

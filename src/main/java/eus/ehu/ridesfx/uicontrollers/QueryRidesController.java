@@ -35,7 +35,7 @@ public class QueryRidesController implements Controller {
     private ComboBox<Integer> numOfPassenger;
 
     @FXML
-    private Label lblErrorMsg;
+    private Label lblErrorMessage;
 
     @FXML
     private ResourceBundle resources;
@@ -138,9 +138,14 @@ public class QueryRidesController implements Controller {
             }
         });
     }
-
+    //the initialize method is called when the page is loaded
     @FXML
     void initialize() {
+
+        //initializes the error message label
+        lblErrorMessage.setVisible(false);
+
+
 
         //change the elements depending of the user when initializing the page
         User user = businessLogic.getCurrentUser();
@@ -148,11 +153,13 @@ public class QueryRidesController implements Controller {
             bookRideButton.setVisible(true);
             numOfPassenger.setVisible(true);
             passengersLbl.setVisible(true);
-        } else {
+        } else if (user instanceof Driver) {
             bookRideButton.setVisible(false);
             numOfPassenger.setVisible(false);
             passengersLbl.setVisible(false);
         }
+        // log instance of user
+        System.out.println(user instanceof Traveler);
         createAlertBtn.setVisible(false);
 
         // Update DatePicker cells when ComboBox value changes
@@ -197,7 +204,6 @@ public class QueryRidesController implements Controller {
 
         // a date has been chosen, update the combobox of Rides
         datepicker.setOnAction(actionEvent -> {
-
             tblRides.getItems().clear();
             // Vector<eus.ehu.ridesfx.domain.Ride> events = eus.ehu.ridesfx.businessLogic.getEvents(Dates.convertToDate(datepicker.getValue()));
             List<Ride> rides = businessLogic.getRides(comboDepartCity.getValue(), comboArrivalCity.getValue(), Dates.convertToDate(datepicker.getValue()));
@@ -215,22 +221,32 @@ public class QueryRidesController implements Controller {
         bookRideButton.setOnAction(actionEvent -> {
             if (businessLogic.getCurrentUser() instanceof Traveler) {
                 Ride ride = tblRides.getSelectionModel().getSelectedItem();
-                int passengers = numOfPassenger.getValue();
                 if (ride != null) {
+                    Integer passengers = numOfPassenger.getValue();
                     //correct  number of passengers
-                    if (passengers > 0 && passengers <= ride.getNumPlaces()) {
-                        businessLogic.bookRide(ride, Dates.convertToDate(datepicker.getValue()), passengers, (Traveler)businessLogic.getCurrentUser());
+                    if (passengers != null && passengers > 0 && passengers <= ride.getNumPlaces()) {
+                        //date is later than today
+                        if (datepicker.getValue().isAfter(LocalDate.now())) {
+                            businessLogic.bookRide(ride, Dates.convertToDate(datepicker.getValue()), passengers, (Traveler)businessLogic.getCurrentUser());
+                            displayMessage("Ride booked successfully", "success_msg");
+                        } else {
+                            displayMessage("Please select a valid date", "error_msg");
+                            System.out.println(">>Please select a valid date");
+                        }
                     }
                     else{
                         displayMessage("Please select a valid number of passengers", "error_msg");
-                        System.out.println("Please select a valid date");
+                        System.out.println(">>Please select a valid number of passengers");
                     }
                 }
                 else{
-                    System.out.println("Please select a ride");
+                    displayMessage("Please select a ride", "error_msg");
+                    System.out.println(">>Please select a ride");
                 }
             }
             else{
+                displayMessage("User is not a traveler", "error_msg");
+                System.out.println(">>user is not a traveler");
 
                 System.out.println("user is not a traveler");
             }
@@ -307,10 +323,10 @@ public class QueryRidesController implements Controller {
         }
     }
     private void displayMessage(String message, String label) {
-        lblErrorMsg.getStyleClass().clear();
-        lblErrorMsg.getStyleClass().setAll(label);
-        lblErrorMsg.setText(message);
+
+        RegisterController.displayMsg(message, label, lblErrorMessage);
     }
+
 
     @FXML
     void onCreateAlert(ActionEvent event) {

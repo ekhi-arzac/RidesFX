@@ -1,6 +1,7 @@
 package eus.ehu.ridesfx.uicontrollers;
 
 import eus.ehu.ridesfx.businessLogic.BlFacade;
+import eus.ehu.ridesfx.configuration.Config;
 import eus.ehu.ridesfx.domain.Driver;
 import eus.ehu.ridesfx.domain.Traveler;
 import eus.ehu.ridesfx.domain.User;
@@ -12,8 +13,7 @@ import eus.ehu.ridesfx.ui.MainGUI;
 
 public class LoginController implements Controller {
 
-    @FXML
-    private Label lblErrorMessage;
+
     private MainGUI mainGUI;
     private final BlFacade businessLogic;
 
@@ -21,6 +21,9 @@ public class LoginController implements Controller {
     private TextField emailField;
     @FXML
     private PasswordField passwordField;
+
+    @FXML
+    private Label lblErrorMessage;
 
     @Override
     public void setMainApp(MainGUI mainGUI) {
@@ -61,13 +64,16 @@ public class LoginController implements Controller {
                 mainGUI.showCreateRide();
                 mainGUI.showDriverRidePanel();
                 mainGUI.hideBookRide(true);
+
             } else if (businessLogic.getCurrentUser() instanceof Traveler) {
                 mainGUI.hideCreateRide();
                 mainGUI.hideDriverRidePanel();
                 mainGUI.hideBookRide(false);
+                mainGUI.showViewBooksBtn(true);
             }
 
         } else {
+            lblErrorMessage.setVisible(true);
             this.displayMessage("This email is not registered", "error_msg");
             System.out.println("Login failed");
 
@@ -81,9 +87,8 @@ public class LoginController implements Controller {
      */
     private void displayMessage(String message, String label) {
         lblErrorMessage.setVisible(true);
-        lblErrorMessage.getStyleClass().clear();
-        lblErrorMessage.getStyleClass().setAll("error_msg");
-        lblErrorMessage.setText("This email is not registered");
+        lblErrorMessage.setText(message);
+        lblErrorMessage.getStyleClass().add(label);
         Thread thread = new Thread(() -> {
             try {
                 Thread.sleep(3000);
@@ -100,5 +105,12 @@ public class LoginController implements Controller {
         emailField.clear();
         passwordField.clear();
     }
+    @FXML
+    void initialize() {
+        Config config = Config.getInstance();
+        emailField.setText(config.getMail());
+        passwordField.setText(config.getPassword());
 
+
+    }
 }

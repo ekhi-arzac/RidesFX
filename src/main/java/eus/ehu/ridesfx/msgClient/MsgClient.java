@@ -10,6 +10,11 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
 public class MsgClient {
     private static final String SERVER_ADDRESS = "158.179.210.27";
     private static final int PORT = 25565;
@@ -32,6 +37,10 @@ public class MsgClient {
 
     }
 
+    public CarPoolChatController getChatController() {
+        return chatController;
+    }
+
     private static class MessageReader implements Runnable {
         private BufferedReader reader;
         private String senderUsername;
@@ -47,7 +56,7 @@ public class MsgClient {
                 while ((message = reader.readLine()) != null) {
                     String[] parts = message.split(":");
                     if (parts[0].equals(chatController.getRide().getRideNumber() + "") &&
-                            !parts[1].trim().equals(this.senderUsername)
+                            (!parts[1].trim().equals(this.senderUsername) && !parts[1].equals("sys"))
                             || parts[0].equals("0")) {
                         System.out.println(message);
                         String finalMessage = parts[2];
@@ -55,10 +64,29 @@ public class MsgClient {
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
-                                chatController.addMessage(sender, finalMessage, false);
+                                chatController.addMessage(sender, finalMessage, false, false);
                             }
                         });
+                    } else if (parts[0].equals(chatController.getRide().getRideNumber() + "") && parts[1].equals("sys")) {
+                        String intent = parts[2];
+                        switch (intent) {
+                            case "join" -> {
+                                chatController.addOnline(parts[0],parts[3]);
+                            }
+                            case "leave" -> {
+                                chatController.removeOnline(parts[0],parts[3]);
+                            }
+                            case "cancel", "reenable" -> {
+                                Platform.runLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        chatController.addMessage("sys", parts[3], false, true);
+                                    }
+                                });
+                            }
+                        }
                     }
+
                 }
             } catch (IOException ex) {
                 System.out.println("Socket closed!");
@@ -68,7 +96,13 @@ public class MsgClient {
 
     public void sendMessage(int ridenumber, String message) {
         out.println(ridenumber + ":" + senderUsername + ":" + message);
-        chatController.addMessage(senderUsername, message, true);
+        chatController.addMessage(senderUsername, message, true, false);
+        out.flush();
+    }
+
+    public void joinChat(int ridenumber, boolean join) {
+        String message = join ? "join" : "leave";
+        out.println(ridenumber +":"+ "sys" + ":"+message+":" + senderUsername);
         out.flush();
     }
 
@@ -81,7 +115,28 @@ public class MsgClient {
     }
 
     public void setChatController(CarPoolChatController chatController) {
-        this.chatController = chatController;
+        MsgClient.chatController = chatController;
+    }
+    public String getChat(int rideNumber) {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://158.179.210.27:8080/chat/" + rideNumber))
+                .build();
+
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            String jsonData = response.body();
+            if (jsonData == null || jsonData.equals("Chat not found")) {
+                System.out.println("Chat not found");
+                return null;
+            }
+            System.out.println(jsonData);
+            return response.body();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 }

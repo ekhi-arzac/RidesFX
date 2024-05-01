@@ -111,9 +111,19 @@ public class CreateRideController implements Controller {
     }
 
     void displayMessage(String message, String label){
+        lblErrorMessage.setVisible(true);
         lblErrorMessage.getStyleClass().clear();
         lblErrorMessage.getStyleClass().setAll(label);
         lblErrorMessage.setText(message);
+        Thread thread = new Thread(() -> {
+            try {
+                Thread.sleep(5000);
+                lblErrorMessage.setVisible(false);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        thread.start();
     }
 
     @FXML
@@ -175,29 +185,6 @@ public class CreateRideController implements Controller {
 
     @FXML
     void initialize() {
-
-
-        // btnCreateRide.setDisable(true);
-
-        // only show the text of the event in the combobox (without the id)
-/*
-    Callback<ListView<Event>, ListCell<Event>> factory = lv -> new ListCell<>() {
-      @Override
-      protected void updateItem(Event item, boolean empty) {
-        super.updateItem(item, empty);
-        setText(empty ? "" : item.getDescription());
-      }
-    };
-
-
-     comboEvents.setCellFactory(factory);
-    comboEvents.setButtonCell(factory.call(null));
-
- */
-
-
-        // setEventsPrePost(LocalDate.now().getYear(), LocalDate.now().getMonth().getValue());
-
 
         // get a reference to datepicker inner content
         // attach a listener to the  << and >> buttons

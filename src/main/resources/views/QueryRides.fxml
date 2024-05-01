@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="405.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.ridesfx.uicontrollers.QueryRidesController">
     <children>
-        <DatePicker fx:id="datepicker" layoutX="39.0" layoutY="190.0" styleClass="date-picker" stylesheets="@../main.css" />
+        <DatePicker fx:id="datepicker" layoutX="39.0" layoutY="190.0" styleClass="date-picker" />
         <Label layoutX="39.0" layoutY="161.0" stylesheets="@../main.css" text="%EventDate" />
         <TableView fx:id="tblRides" layoutX="382.0" layoutY="70.0" prefHeight="200.0" prefWidth="469.0" styleClass="tableview_bootstrap" stylesheets="@../main.css">
             <columns>
@@ -31,7 +31,7 @@
       <Button fx:id="bookRideButton" layoutX="85.0" layoutY="313.0" mnemonicParsing="false" stylesheets="@../main.css" text="Book " />
       <Label fx:id="passengersLbl" layoutX="39.0" layoutY="226.0" text="Passengers" />
       <ComboBox fx:id="numOfPassenger" layoutX="40.0" layoutY="257.0" prefWidth="150.0" styleClass="comb_bootstrap" stylesheets="@../main.css" />
-      <Label fx:id="lblErrorMsg" layoutX="600.0" layoutY="330.0" text="Label" />
+        <Label fx:id="lblErrorMessage" alignment="CENTER" layoutX="382.0" layoutY="317.0" prefHeight="42.0" prefWidth="287.0" stylesheets="@../main.css" />
       <Button fx:id="createAlertBtn" layoutX="575.0" layoutY="283.0" mnemonicParsing="false" onAction="#onCreateAlert" text="Create alert" />
     </children>
 </AnchorPane>

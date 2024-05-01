@@ -22,6 +22,8 @@ public class MainGUIController implements Controller {
     @FXML
     private Label lblUser;
 
+    @FXML
+    private Button viewBooksBtn;
 
     @FXML
     private Button queryRidesBtn;
@@ -93,6 +95,11 @@ public class MainGUIController implements Controller {
     }
 
     @FXML
+    void showTravelerBooks(ActionEvent event) {
+        mainGUI.showSceneInCenter("travelerBooks");
+    }
+
+    @FXML
     void initialize() {
             // set current driver name
             lblUser.setText(businessLogic.getCurrentUser().getName());
@@ -100,6 +107,7 @@ public class MainGUIController implements Controller {
             if (businessLogic.getCurrentUser() instanceof eus.ehu.ridesfx.domain.Guest) {
                 createRideBtn.setVisible(false);
                 dRidePanelBtn.setVisible(false);
+                viewBooksBtn.setVisible(false);
                 hideLogoutBtn();
             }
     }
@@ -109,8 +117,18 @@ public class MainGUIController implements Controller {
         mainGUI.showSceneInCenter("login");
         businessLogic.setCurrentUser(new Guest("guest@gmail.com", "Guest"));
         mainGUI.clearFields();
+        mainGUI.hideCreateRide();
+        mainGUI.hideDriverRidePanel();
+        mainGUI.hideBookRide(false);
+        showLogRegButton();
         user_icon.setVisible(false);
+        if (businessLogic.getMsgClient() != null){
+            businessLogic.getMsgClient().getChatController().clearOnline();
+        }
+        businessLogic.closeMsgClient();
         lblUser.setText("Guest");
+        if (businessLogic.getMsgClient() != null && businessLogic.getMsgClient().getChatController() != null)
+            businessLogic.getMsgClient().getChatController().clearCache();
         this.businessLogic.closeMsgClient();
         hideLogoutBtn();
     }
@@ -146,6 +164,10 @@ public class MainGUIController implements Controller {
         createRideBtn.setVisible(true);
     }
 
+    public void showLogRegButton() {
+        logregbtn.setVisible(true);
+    }
+
     public void showDriverRidePanel() {
         dRidePanelBtn.setVisible(true);
     }
@@ -153,6 +175,7 @@ public class MainGUIController implements Controller {
     public void hideCreateRideBtn() {
         createRideBtn.setVisible(false);
     }
+
     public void hideDriverRidePanel() {
         dRidePanelBtn.setVisible(false);
     }
@@ -165,5 +188,5 @@ public class MainGUIController implements Controller {
         logoutBtn.setVisible(true);
     }
 
-
+    public void showViewBooksBtn(boolean b) {viewBooksBtn.setVisible(b);}
 }

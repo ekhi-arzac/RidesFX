@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @DiscriminatorValue("TRAVELER")
@@ -11,7 +12,7 @@ public class Traveler extends User implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @OneToMany
-    private ArrayList<RideBook> rideBook;
+    private List<RideBook> rideBook;
 
     public Traveler(String email, String name) {
         super(email, name);

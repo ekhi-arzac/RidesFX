@@ -47,14 +47,13 @@ public class DataAccess {
 
         System.out.println("Opening DataAccess instance => isDatabaseLocal: " +
                 config.isDataAccessLocal() + " getDatabBaseOpenMode: " + config.getDataBaseOpenMode());
-
         String fileName = config.getDatabaseName();
         if (initializeMode) {
             fileName = fileName + ";drop";
             System.out.println("Deleting the DataBase");
         }
-
-        if (config.isDataAccessLocal()) {
+        boolean local = config.isDataAccessLocal();
+        if (local) {
             final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                     .configure() // configures settings from hibernate.cfg.xml
                     .build();
@@ -66,7 +65,6 @@ public class DataAccess {
                 System.out.println("Error in DataAccess: " + e.getMessage());
                 //StandardServiceRegistryBuilder.destroy(registry);
             }
-
             db = emf.createEntityManager();
             System.out.println("DataBase opened");
         }
@@ -77,6 +75,8 @@ public class DataAccess {
     public void reset() {
         db.getTransaction().begin();
         db.createNativeQuery("DELETE FROM USERS_RIDE").executeUpdate();
+        db.createNativeQuery("DELETE FROM Ride_RideBook").executeUpdate();
+        db.createNativeQuery("DELETE FROM RIDEBOOK").executeUpdate();
         db.createQuery("DELETE FROM Ride ").executeUpdate();
         db.createQuery("DELETE FROM User ").executeUpdate();
         db.getTransaction().commit();
@@ -113,17 +113,27 @@ public class DataAccess {
             //Create rides
             driver1.addRide("Donostia", "Bilbo", UtilDate.newDate(year, month, 15), 4, 7);
             driver1.addRide("Donostia", "Bilbo", UtilDate.newDate(year, month + 1, 15), 4, 7);
-
             driver1.addRide("Donostia", "Gasteiz", UtilDate.newDate(year, month, 6), 4, 8);
             driver1.addRide("Bilbo", "Donostia", UtilDate.newDate(year, month, 25), 4, 4);
-
             driver1.addRide("Donostia", "Iruña", UtilDate.newDate(year, month, 7), 4, 8);
-
             driver2.addRide("Donostia", "Bilbo", UtilDate.newDate(year, month, 15), 3, 3);
             driver2.addRide("Bilbo", "Donostia", UtilDate.newDate(year, month, 25), 2, 5);
             driver2.addRide("Eibar", "Gasteiz", UtilDate.newDate(year, month, 6), 2, 5);
-
             driver3.addRide("Bilbo", "Donostia", UtilDate.newDate(year, month, 14), 1, 3);
+            driver1.addRide("Donostia", "Bilbo", UtilDate.newDate(year, month, 15), 4, 7);
+            driver1.addRide("Donostia", "Bilbo", UtilDate.newDate(year, month + 1, 15), 4, 7);
+            driver1.addRide("Donostia", "Gasteiz", UtilDate.newDate(year, month, 6), 4, 8);
+            driver1.addRide("Bilbo", "Donostia", UtilDate.newDate(year, month, 25), 4, 4);
+            // May 2024
+            driver1.addRide("Donostia", "Bilbo", UtilDate.newDate(2024, 5, 15), 4, 7);
+            driver1.addRide("Donostia", "Bilbo", UtilDate.newDate(2024, 6, 15), 4, 7);
+            driver1.addRide("Donostia", "Gasteiz", UtilDate.newDate(2024, 5, 6), 4, 8);
+            driver1.addRide("Bilbo", "Donostia", UtilDate.newDate(2024, 5, 25), 4, 4);
+            driver1.addRide("Donostia", "Iruña", UtilDate.newDate(2024, 5, 7), 4, 8);
+            driver2.addRide("Donostia", "Bilbo", UtilDate.newDate(2024, 5, 15), 3, 3);
+            driver2.addRide("Bilbo", "Donostia", UtilDate.newDate(2024, 5, 25), 2, 5);
+            driver2.addRide("Eibar", "Gasteiz", UtilDate.newDate(2024, 5, 6), 2, 5);
+            driver3.addRide("Bilbo", "Donostia", UtilDate.newDate(2024, 5, 14), 1, 3);
 
 
             db.persist(driver1);
@@ -133,10 +143,12 @@ public class DataAccess {
 
 
             db.getTransaction().commit();
+
             System.out.println("Db initialized");
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 
     }
 
@@ -372,7 +384,7 @@ public class DataAccess {
         }
         assert user != null;
         user.setPassword(hashedPassword);
-        if (db.find(Driver.class, email) != null) {
+        if (db.find(User.class, email) != null) {
             db.getTransaction().commit();
             return "emailExists";
         }
@@ -404,6 +416,12 @@ public class DataAccess {
         Ride r = db.find(Ride.class, ride.getRideNumber());
         r.setStatus(Ride.STATUS.ACTIVE);
         db.getTransaction().commit();
+    }
+    //gets ridebooks of the user
+    public List<RideBook> getRideBooks(Traveler t) {
+        TypedQuery<RideBook> query = db.createQuery("SELECT rb FROM RideBook rb WHERE rb.traveler.email = :email", RideBook.class)
+                .setParameter("email", t.getEmail());
+        return query.getResultList();
     }
 
     public void createAlert(String email, String from, String to, Date date, int numPlaces) {

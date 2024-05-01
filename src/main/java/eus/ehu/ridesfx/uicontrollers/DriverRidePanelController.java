@@ -46,7 +46,6 @@ public class DriverRidePanelController implements Controller {
         tblRides.getItems().clear();
         List<Ride> rides = businessLogic.getRidesFromDriver(businessLogic.getCurrentUser().getEmail());
         for (var ride : rides) {
-
             tblRides.getItems().add(ride);
         }
 
@@ -132,7 +131,9 @@ public class DriverRidePanelController implements Controller {
             return;
         }
         if (ride != null) {
+
             mainGUI.showChat(ride);
+            businessLogic.getMsgClient().joinChat(ride.getRideNumber(), true);
         }
     }
 

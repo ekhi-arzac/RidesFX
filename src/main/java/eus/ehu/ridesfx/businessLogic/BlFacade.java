@@ -1,14 +1,12 @@
 package eus.ehu.ridesfx.businessLogic;
 
-import eus.ehu.ridesfx.domain.Driver;
-import eus.ehu.ridesfx.domain.Ride;
-import eus.ehu.ridesfx.domain.Traveler;
-import eus.ehu.ridesfx.domain.User;
+import eus.ehu.ridesfx.domain.*;
 import eus.ehu.ridesfx.exceptions.RideAlreadyExistException;
 import eus.ehu.ridesfx.exceptions.RideMustBeLaterThanTodayException;
 import eus.ehu.ridesfx.msgClient.MsgClient;
 import eus.ehu.ridesfx.uicontrollers.CarPoolChatController;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
@@ -77,7 +75,7 @@ public interface BlFacade {
 
 	List<Date> getDatesWithRides(String value, String value1);
 
-	public User login(String email, String name);
+	public User login(String email, String password);
 
 	String register(String email, String username, String password, String repeatPassword, String role);
 
@@ -91,6 +89,9 @@ public interface BlFacade {
 	void closeMsgClient();
 
     MsgClient getMsgClient();
+
+
+   List <RideBook> getTravelerRideBooks();
 
 	void createAlert(String email, String from, String to, Date date, int numPlaces);
 }

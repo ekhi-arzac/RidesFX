@@ -3,6 +3,7 @@ package eus.ehu.ridesfx.businessLogic;
 import eus.ehu.ridesfx.configuration.Config;
 import eus.ehu.ridesfx.dataAccess.DataAccess;
 import eus.ehu.ridesfx.domain.Ride;
+import eus.ehu.ridesfx.domain.RideBook;
 import eus.ehu.ridesfx.domain.Traveler;
 import eus.ehu.ridesfx.domain.User;
 import eus.ehu.ridesfx.exceptions.RideAlreadyExistException;
@@ -24,11 +25,14 @@ public class BlFacadeImplementation implements BlFacade {
 	DataAccess dbManager;
 	Config config = Config.getInstance();
 	private User currentUser;
+	boolean initialize;
 
 	public BlFacadeImplementation()  {
 		System.out.println("Creating BlFacadeImplementation instance");
-		boolean initialize = config.getDataBaseOpenMode().equals("initialize");
-		dbManager = new DataAccess(initialize);
+		dbManager = new DataAccess(true);
+		System.out.println("initialized");
+		initialize = config.getDataBaseOpenMode().equals("initialize");
+
 		if (initialize)
 			dbManager.initializeDB();
 
@@ -110,6 +114,7 @@ public class BlFacadeImplementation implements BlFacade {
 	public User login(String email, String password) {
 		User user = dbManager.login(email,password);
 		if (user != null) {
+
 			try {
 				msgClient = new MsgClient(user.getName());
 				return user;
@@ -126,6 +131,7 @@ public class BlFacadeImplementation implements BlFacade {
 		} catch (IOException e) {
 			return "msgClientError";
 		}
+
 		return dbManager.register(email, name, password, repeatPassword, role);
 
 	}
@@ -162,6 +168,13 @@ public class BlFacadeImplementation implements BlFacade {
 	@Override
 	public void createAlert(String email, String from, String to, Date date, int numPlaces) {
 		dbManager.createAlert(email, from, to, date, numPlaces);
+	}
+
+	//gets the ride books of the current traveler
+
+	public List<RideBook> getTravelerRideBooks() {
+		List<RideBook> rideBooks = dbManager.getRideBooks((Traveler)getCurrentUser());
+		return rideBooks;
 	}
 
 }

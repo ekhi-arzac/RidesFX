@@ -1,29 +1,35 @@
 package eus.ehu.ridesfx.uicontrollers;
 
 import eus.ehu.ridesfx.businessLogic.BlFacade;
+import eus.ehu.ridesfx.domain.Driver;
 import eus.ehu.ridesfx.domain.Ride;
+import eus.ehu.ridesfx.domain.Traveler;
+import eus.ehu.ridesfx.domain.User;
 import eus.ehu.ridesfx.ui.MainGUI;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ConcurrentMap;
 
+import com.google.gson.Gson;
 public class CarPoolChatController implements Controller {
 
     @FXML
     private Label chatName;
+    @FXML
+    private ListView<String> onlineUsersTable;
     private MainGUI mainGui;
     private BlFacade businessLogic;
     private Ride ride;
@@ -37,10 +43,38 @@ public class CarPoolChatController implements Controller {
     private ScrollPane scrollPane;
 
     private List<Integer> rideNumbers = new ArrayList<>();
-    private record Msg(int rideNumber, String sender, String message) {}
 
+    public void addOnline(String ride, String user) {
+        Platform.runLater(() -> {
+            int rideNum = Integer.parseInt(ride);
+            if (!onlineUsers.containsKey(rideNum)) {
+                ObservableList<String> users = FXCollections.observableArrayList();
+                users.addListener((ListChangeListener<String>) c -> onlineUsersTable.setItems(users));
+                onlineUsers.put(rideNum, users);
+            }
+            onlineUsers.get(rideNum).add(user);
+        });
 
-    private ConcurrentMap<Integer, List<Msg>> cache = new ConcurrentHashMap<>();
+    }
+
+    public void removeOnline(String ride, String user) {
+        Platform.runLater(() -> {
+            int rideNum = Integer.parseInt(ride);
+            var list = onlineUsers.get(rideNum);
+            if (list != null) {
+                    list.remove(user);
+            }
+        });
+    }
+
+    private record Msg(int rideNumber, String sender, String message, boolean sys) {}
+    private class Message {
+        String sender;
+        String content;
+    }
+
+    private final ConcurrentMap<Integer, List<Msg>> cache = new ConcurrentHashMap<>();
+    private final ConcurrentMap<Integer, ObservableList<String>> onlineUsers = new ConcurrentHashMap<>();
     public CarPoolChatController(BlFacade businessLogic) {
         this.businessLogic = businessLogic;
         for (var ride : businessLogic.getRidesFromDriver(businessLogic.getCurrentUser().getEmail())) {
@@ -53,7 +87,7 @@ public class CarPoolChatController implements Controller {
         this.mainGui = mainGUI;
     }
 
-    public void addMessage(String sender, String message, boolean isSelf) {
+    public void addMessage(String sender, String message, boolean isSelf, boolean sysMsg) {
         Label lbl = new Label(sender + ":");
         lbl.setStyle("-fx-padding: 0 0 5 0; -fx-font-weight: bold;");
         Label txt = new Label(message);
@@ -64,26 +98,40 @@ public class CarPoolChatController implements Controller {
             hBox.setAlignment(Pos.CENTER_RIGHT);
             txt.setStyle("-fx-background-color: lightblue; -fx-border-color: #f4f4f4; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-padding: 5px; -fx-text-fill: #000000;");
             lbl.setText("You: ");
-        } else {
+        } else if (!sysMsg) {
             hBox.setAlignment(Pos.CENTER_LEFT);
             txt.setStyle("-fx-background-color: white; -fx-border-color: #f4f4f4; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-padding: 5px; -fx-text-fill: #000000;");
+        } else {
+            hBox.setAlignment(Pos.CENTER);
+            txt.setStyle("-fx-padding: 5px; -fx-text-fill: #000000; -fx-underline: true; -fx-font-weight: bold;");
         }
-        int messageLength = message.split(" ").length;
         txt.setWrapText(true);
         txt.setMaxWidth(300);
+        txt.setMinHeight(Region.USE_PREF_SIZE);
         hBox.getChildren().addAll(lbl, txt);
         chatMessages.getChildren().add(hBox);
     }
     public void setRide(Ride ride) {
-        if (this.ride != null && this.ride.getRideNumber() == ride.getRideNumber()){
+        if (this.ride != null && Objects.equals(this.ride.getRideNumber(), ride.getRideNumber())){
             return;
         }
         chatMessages.getChildren().clear();
+
         if (!cache.containsKey(ride.getRideNumber())) {
             cache.put(ride.getRideNumber(), Collections.synchronizedList(new ArrayList<>()));
-        } else {
-            loadCache();
+            String jsonData = businessLogic.getMsgClient().getChat(ride.getRideNumber());
+
+            if (jsonData != null) {
+
+                Gson gson = new Gson();
+                List<Message> messages = List.of(gson.fromJson(jsonData, Message[].class));
+                for (var msg : messages) {
+                    cache.get(ride.getRideNumber()).add(new Msg(ride.getRideNumber(), msg.sender, msg.content, msg.sender.equals("sys")));
+                }
+            }
         }
+
+        loadCache();
         chatName.setText( "[#"+ ride.getRideNumber() + "] " + ride.getFromLocation() + " - " + ride.getToLocation() + " (" + ride.getDate()+ ")");
         this.ride = ride;
     }
@@ -91,7 +139,7 @@ public class CarPoolChatController implements Controller {
         Platform.runLater(() -> {
                     List<Msg> tempMsgList = new ArrayList<>(cache.get(ride.getRideNumber()));
                     tempMsgList.forEach(msg -> {
-                        addMessage(msg.sender(), msg.message(), msg.sender().equals(businessLogic.getCurrentUser().getName()));
+                        addMessage(msg.sender(), msg.message(), msg.sender().equals(businessLogic.getCurrentUser().getName()), msg.sys());
                     });
         });
     }
@@ -119,11 +167,34 @@ public class CarPoolChatController implements Controller {
 
     }
 
-
+    @FXML
     public void back(ActionEvent actionEvent) {
-        mainGui.showSceneInCenter("dRidePanel");
+        businessLogic.getMsgClient().joinChat(ride.getRideNumber(), false);
+        User user = businessLogic.getCurrentUser();
+        if (user == null) return;
+        if (user instanceof Driver)
+                mainGui.showSceneInCenter("dRidePanel");
+        else if (user instanceof Traveler)
+                mainGui.showSceneInCenter("travelerBooks");
     }
     public Ride getRide() {
         return this.ride;
+    }
+
+    public void clearCache() {
+        cache.clear();
+        onlineUsers.clear();
+    }
+
+    public void clearOnline() {
+        for (var ride : rideNumbers) {
+            ObservableList<String> list = onlineUsers.get(ride);
+
+            if (list == null) {
+                continue;
+            }
+
+            list.removeAll(businessLogic.getCurrentUser().getName());
+        }
     }
 }

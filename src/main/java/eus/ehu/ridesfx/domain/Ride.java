@@ -14,7 +14,7 @@ public class Ride implements Serializable {
 		ACTIVE, CANCELLED, FINISHED
 	}
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer rideNumber;
 	private String fromLocation;
 	private String toLocation;
