@@ -26,6 +26,9 @@ import eus.ehu.ridesfx.utils.Dates;
 public class QueryRidesController implements Controller {
 
     @FXML
+    private Button createAlertBtn;
+
+    @FXML
     private Button bookRideButton;
 
     @FXML
@@ -150,6 +153,7 @@ public class QueryRidesController implements Controller {
             numOfPassenger.setVisible(false);
             passengersLbl.setVisible(false);
         }
+        createAlertBtn.setVisible(false);
 
         // Update DatePicker cells when ComboBox value changes
         comboArrivalCity.valueProperty().addListener(
@@ -198,6 +202,10 @@ public class QueryRidesController implements Controller {
             // Vector<eus.ehu.ridesfx.domain.Ride> events = eus.ehu.ridesfx.businessLogic.getEvents(Dates.convertToDate(datepicker.getValue()));
             List<Ride> rides = businessLogic.getRides(comboDepartCity.getValue(), comboArrivalCity.getValue(), Dates.convertToDate(datepicker.getValue()));
             // List<Ride> rides = Arrays.asList(new Ride("Bilbao", "Donostia", Dates.convertToDate(datepicker.getValue()), 3, 3.5f, new Driver("pepe@pepe.com", "pepe")));
+            if (rides.isEmpty() && businessLogic.getCurrentUser() instanceof Traveler) {
+                createAlertBtn.setVisible(true);
+                numOfPassenger.setItems(FXCollections.observableArrayList(1, 2, 3, 4));
+            }
             for (Ride ride : rides) {
                 tblRides.getItems().add(ride);
             }
@@ -223,6 +231,7 @@ public class QueryRidesController implements Controller {
                 }
             }
             else{
+
                 System.out.println("user is not a traveler");
             }
 
@@ -301,5 +310,14 @@ public class QueryRidesController implements Controller {
         lblErrorMsg.getStyleClass().clear();
         lblErrorMsg.getStyleClass().setAll(label);
         lblErrorMsg.setText(message);
+    }
+
+    @FXML
+    void onCreateAlert(ActionEvent event) {
+        //we want to store the alert into the database
+        int passengers = numOfPassenger.getValue();
+        businessLogic.createAlert(businessLogic.getCurrentUser().getEmail(), comboDepartCity.getValue(), comboArrivalCity.getValue(), Dates.convertToDate(datepicker.getValue()), passengers);
+
+
     }
 }

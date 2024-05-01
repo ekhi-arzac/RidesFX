@@ -32,5 +32,6 @@
       <Label fx:id="passengersLbl" layoutX="39.0" layoutY="226.0" text="Passengers" />
       <ComboBox fx:id="numOfPassenger" layoutX="40.0" layoutY="257.0" prefWidth="150.0" styleClass="comb_bootstrap" stylesheets="@../main.css" />
       <Label fx:id="lblErrorMsg" layoutX="600.0" layoutY="330.0" text="Label" />
+      <Button fx:id="createAlertBtn" layoutX="575.0" layoutY="283.0" mnemonicParsing="false" onAction="#onCreateAlert" text="Create alert" />
     </children>
 </AnchorPane>

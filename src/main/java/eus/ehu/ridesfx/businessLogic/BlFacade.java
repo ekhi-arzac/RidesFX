@@ -91,4 +91,6 @@ public interface BlFacade {
 	void closeMsgClient();
 
     MsgClient getMsgClient();
+
+	void createAlert(String email, String from, String to, Date date, int numPlaces);
 }

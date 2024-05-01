@@ -405,6 +405,14 @@ public class DataAccess {
         r.setStatus(Ride.STATUS.ACTIVE);
         db.getTransaction().commit();
     }
+
+    public void createAlert(String email, String from, String to, Date date, int numPlaces) {
+        Alert alert = new Alert(email, from, to, date, numPlaces);
+        db.getTransaction().begin();
+        db.persist(alert);
+        System.out.println(">> DataAccess: createAlert");
+        db.getTransaction().commit();
+    }
 }
 
 

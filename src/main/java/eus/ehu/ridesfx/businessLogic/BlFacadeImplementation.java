@@ -159,6 +159,10 @@ public class BlFacadeImplementation implements BlFacade {
 	public MsgClient getMsgClient() {
 		return msgClient;
 	}
+	@Override
+	public void createAlert(String email, String from, String to, Date date, int numPlaces) {
+		dbManager.createAlert(email, from, to, date, numPlaces);
+	}
 
 }
 
