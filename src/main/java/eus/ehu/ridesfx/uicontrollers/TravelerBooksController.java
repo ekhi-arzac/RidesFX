@@ -10,6 +10,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -79,6 +80,26 @@ public class TravelerBooksController implements Controller {
 
 
 
+    }
+    @FXML
+    public void onOpenChat(ActionEvent actionEvent) {
+        Ride ride = rideBooksTbl.getSelectionModel().getSelectedItem().getRide();
+        if (ride == null) {
+            displayMessage("Select a ride to open chat", "error_msg");
+            return;
+        }
+        if (ride.getDate().before(new Date())) {
+            displayMessage("Cannot open a chat for a completed ride", "error_msg");
+            return;
+        }
+        if (ride != null) {
+
+            mainGUI.showChat(ride);
+            businessLogic.getMsgClient().joinChat(ride.getRideNumber(), true);
+        }
+    }
+
+    private void displayMessage(String s, String errorMsg) {
     }
 
     @Override
