@@ -116,19 +116,18 @@ public class MainGUIController implements Controller {
     void onLogout(ActionEvent event) {
         mainGUI.showSceneInCenter("login");
         businessLogic.setCurrentUser(new Guest("guest@gmail.com", "Guest"));
-        mainGUI.clearFields();
-        mainGUI.hideCreateRide();
-        mainGUI.hideDriverRidePanel();
+        hideCreateRideBtn();
+        hideDriverRidePanel();
         mainGUI.hideBookRide(false);
+        hideViewBooks();
         showLogRegButton();
         user_icon.setVisible(false);
-        if (businessLogic.getMsgClient() != null){
-            businessLogic.getMsgClient().getChatController().clearOnline();
-        }
         businessLogic.closeMsgClient();
         lblUser.setText("Guest");
-        if (businessLogic.getMsgClient() != null && businessLogic.getMsgClient().getChatController() != null)
+        if (businessLogic.getMsgClient() != null && businessLogic.getMsgClient().getChatController() != null) {
             businessLogic.getMsgClient().getChatController().clearCache();
+            businessLogic.getMsgClient().getChatController().clearOnline();
+        }
         hideLogoutBtn();
     }
 
@@ -188,4 +187,8 @@ public class MainGUIController implements Controller {
     }
 
     public void showViewBooksBtn(boolean b) {viewBooksBtn.setVisible(b);}
+
+    public void hideViewBooks() {
+        viewBooksBtn.setVisible(false);
+    }
 }
