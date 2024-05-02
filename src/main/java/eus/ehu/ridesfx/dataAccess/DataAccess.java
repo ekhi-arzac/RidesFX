@@ -396,6 +396,14 @@ public class DataAccess {
     public RideBook bookRide (Ride ride, Date date, int passengers, Traveler traveler){
         db.getTransaction().begin();
         RideBook book = new RideBook(ride, date,passengers, traveler);
+        //update ride passengers
+        Ride rideOfBook = book.getRide();
+        rideOfBook.setNumPlaces(rideOfBook.getNumPlaces()-passengers);
+        System.out.println("This ride now has " + rideOfBook.getNumPlaces() + " places left");
+
+
+        db.persist(book.getRide());
+        //persist the created book
         db.persist(book);
         db.getTransaction().commit();
         System.out.println(">> DataAccess: bookRide");

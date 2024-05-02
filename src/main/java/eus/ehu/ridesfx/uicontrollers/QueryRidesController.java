@@ -136,6 +136,21 @@ public class QueryRidesController implements Controller {
         });
     }
     //the initialize method is called when the page is loaded
+
+    public void updateRidesTable() {
+        tblRides.getItems().clear();
+        // Vector<eus.ehu.ridesfx.domain.Ride> events = eus.ehu.ridesfx.businessLogic.getEvents(Dates.convertToDate(datepicker.getValue()));
+        List<Ride> rides = businessLogic.getRides(comboDepartCity.getValue(), comboArrivalCity.getValue(), Dates.convertToDate(datepicker.getValue()));
+        // List<Ride> rides = Arrays.asList(new Ride("Bilbao", "Donostia", Dates.convertToDate(datepicker.getValue()), 3, 3.5f, new Driver("pepe@pepe.com", "pepe")));
+
+        //the table will only search for rides that have more than one place available
+        for (Ride ride : rides) {
+            if (ride.getNumPlaces() <= 0){
+                continue;
+            }
+            tblRides.getItems().add(ride);
+        }
+    }
     @FXML
     void initialize() {
 
@@ -198,15 +213,11 @@ public class QueryRidesController implements Controller {
         });
 
 
+
+
         // a date has been chosen, update the combobox of Rides
         datepicker.setOnAction(actionEvent -> {
-            tblRides.getItems().clear();
-            // Vector<eus.ehu.ridesfx.domain.Ride> events = eus.ehu.ridesfx.businessLogic.getEvents(Dates.convertToDate(datepicker.getValue()));
-            List<Ride> rides = businessLogic.getRides(comboDepartCity.getValue(), comboArrivalCity.getValue(), Dates.convertToDate(datepicker.getValue()));
-            // List<Ride> rides = Arrays.asList(new Ride("Bilbao", "Donostia", Dates.convertToDate(datepicker.getValue()), 3, 3.5f, new Driver("pepe@pepe.com", "pepe")));
-            for (Ride ride : rides) {
-                tblRides.getItems().add(ride);
-            }
+            updateRidesTable();
         });
 
         // if the user is a traveler, he has the option to book an available ride, the ride will be set as pending
@@ -240,6 +251,8 @@ public class QueryRidesController implements Controller {
                 displayMessage("User is not a traveler", "error_msg");
                 System.out.println(">>user is not a traveler");
             }
+            //update the new values of the table
+            updateRidesTable();
 
         });
 
