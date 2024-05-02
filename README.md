@@ -6,7 +6,6 @@ This application is a desktop application that allows carpooling between individ
 
 The application is developed using JavaFX, Hibernate, H2, and Properties. 
 
-The use-cases, domain model and sequence diagrams are located in 
 
 ## Sprints
 
