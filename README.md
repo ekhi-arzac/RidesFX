@@ -83,6 +83,12 @@ On the other hand, we have implemented new event flows, for the: Check availabil
 * Therefore we will implement new functions for the program
 #### Logout feature:
 The users should have the option to Logout from the program whenever they want 
+
+#### Book Rides feature:
+The travelers can book a ride they want in the Query rides page, after getting all the available rides, they can select the ride they want and ask the booking
+
+#### View Traveler Books:
+The travelers, can also view all their books and the status of them: If it has been accepted or cancelled, or is pending yet
   
   
 
