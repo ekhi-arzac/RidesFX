@@ -50,9 +50,10 @@ public class MainGUIController implements Controller {
     private Button dRidePanelBtn;
 
     @FXML
-    private Button logoutBtn;
+    private Button queryAlertsBtn;
 
-    private LoginController loginController;
+    @FXML
+    private Button logoutBtn;
 
     private MainGUI mainGUI;
 
@@ -100,6 +101,11 @@ public class MainGUIController implements Controller {
     }
 
     @FXML
+    void showQueryAlerts(ActionEvent event) {
+        mainGUI.showSceneInCenter("queryAlerts");
+    }
+
+    @FXML
     void initialize() {
             // set current driver name
             lblUser.setText(businessLogic.getCurrentUser().getName());
@@ -110,6 +116,11 @@ public class MainGUIController implements Controller {
                 viewBooksBtn.setVisible(false);
                 hideLogoutBtn();
             }
+    }
+
+    @FXML
+    void onQueryAlerts(ActionEvent event) {
+        mainGUI.showSceneInCenter("queryAlerts");
     }
 
     @FXML

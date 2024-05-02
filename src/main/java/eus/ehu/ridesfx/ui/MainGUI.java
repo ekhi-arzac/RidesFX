@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 public class MainGUI {
 
     private Window mainLag, createRideLag, queryRidesLag, loginLag, registerLag, dRidePanelLag,
-            carPoolChatLag, travelerBooksLag;
+            carPoolChatLag, travelerBooksLag, queryAlertsLag;
 
     private BlFacade businessLogic;
     private Stage stage;
@@ -137,6 +137,7 @@ public class MainGUI {
         dRidePanelLag = load("/views/DriverRidePanel.fxml");
         carPoolChatLag = load("/views/CarPoolChat.fxml");
         travelerBooksLag = load("/views/TravelerBooks.fxml");
+        queryAlertsLag = load("/views/QueryAlerts.fxml");
         showMain();
 
     }
@@ -166,6 +167,9 @@ public class MainGUI {
             case "travelerBooks" -> {
                 mainPane.setCenter(travelerBooksLag.ui);
                 ((TravelerBooksController)travelerBooksLag.c).updateBooks();
+            }
+            case "queryAlerts" -> {
+                mainPane.setCenter(queryAlertsLag.ui);
             }
         }
 

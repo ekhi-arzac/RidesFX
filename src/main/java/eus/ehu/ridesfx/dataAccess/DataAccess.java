@@ -424,8 +424,8 @@ public class DataAccess {
         return query.getResultList();
     }
 
-    public void createAlert(String email, String from, String to, Date date, int numPlaces) {
-        Alert alert = new Alert(email, from, to, date, numPlaces);
+    public void createAlert(Traveler traveler, String from, String to, Date date, int numPlaces) {
+        Alert alert = new Alert(traveler, from, to, date, numPlaces);
         db.getTransaction().begin();
         db.persist(alert);
         System.out.println(">> DataAccess: createAlert");

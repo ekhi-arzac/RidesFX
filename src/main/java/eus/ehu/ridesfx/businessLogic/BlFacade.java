@@ -93,5 +93,5 @@ public interface BlFacade {
 
    List <RideBook> getTravelerRideBooks();
 
-	void createAlert(String email, String from, String to, Date date, int numPlaces);
+	void createAlert(Traveler traveler, String from, String to, Date date, int numPlaces);
 }

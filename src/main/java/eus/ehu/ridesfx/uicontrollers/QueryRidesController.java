@@ -211,6 +211,8 @@ public class QueryRidesController implements Controller {
             if (rides.isEmpty() && businessLogic.getCurrentUser() instanceof Traveler) {
                 createAlertBtn.setVisible(true);
                 numOfPassenger.setItems(FXCollections.observableArrayList(1, 2, 3, 4));
+            } else {
+                createAlertBtn.setVisible(false);
             }
             for (Ride ride : rides) {
                 tblRides.getItems().add(ride);
@@ -331,8 +333,14 @@ public class QueryRidesController implements Controller {
     @FXML
     void onCreateAlert(ActionEvent event) {
         //we want to store the alert into the database
-        int passengers = numOfPassenger.getValue();
-        businessLogic.createAlert(businessLogic.getCurrentUser().getEmail(), comboDepartCity.getValue(), comboArrivalCity.getValue(), Dates.convertToDate(datepicker.getValue()), passengers);
+        try {
+            int passengers = numOfPassenger.getValue();
+            businessLogic.createAlert((Traveler)businessLogic.getCurrentUser(), comboDepartCity.getValue(), comboArrivalCity.getValue(), Dates.convertToDate(datepicker.getValue()), passengers);
+            displayMessage("Alert created successfully", "success_msg");
+        } catch (Exception e) {
+            displayMessage("Please select every field", "error_msg");
+        }
+
 
 
     }

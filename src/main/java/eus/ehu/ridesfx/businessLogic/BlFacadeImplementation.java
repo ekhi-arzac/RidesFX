@@ -166,8 +166,8 @@ public class BlFacadeImplementation implements BlFacade {
 		return msgClient;
 	}
 	@Override
-	public void createAlert(String email, String from, String to, Date date, int numPlaces) {
-		dbManager.createAlert(email, from, to, date, numPlaces);
+	public void createAlert(Traveler traveler, String from, String to, Date date, int numPlaces) {
+		dbManager.createAlert(traveler, from, to, date, numPlaces);
 	}
 
 	//gets the ride books of the current traveler
