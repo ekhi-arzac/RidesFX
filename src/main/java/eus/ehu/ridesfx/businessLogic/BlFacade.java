@@ -5,6 +5,7 @@ import eus.ehu.ridesfx.exceptions.RideAlreadyExistException;
 import eus.ehu.ridesfx.exceptions.RideMustBeLaterThanTodayException;
 import eus.ehu.ridesfx.msgClient.MsgClient;
 import eus.ehu.ridesfx.uicontrollers.CarPoolChatController;
+import javafx.collections.ObservableList;
 
 import java.util.Collection;
 import java.util.Date;
@@ -94,4 +95,6 @@ public interface BlFacade {
    List <RideBook> getTravelerRideBooks();
 
 	void createAlert(Traveler traveler, String from, String to, Date date, int numPlaces);
+
+    List<Alert> getAlerts();
 }

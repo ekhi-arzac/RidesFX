@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="405.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.ridesfx.uicontrollers.QueryRidesController">
+<AnchorPane prefHeight="405.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.ridesfx.uicontrollers.QueryAlertsController">
    <children>
       <TableView fx:id="tblAlerts" layoutX="180.0" layoutY="79.0" prefHeight="200.0" prefWidth="494.0" styleClass="tableview_bootstrap" stylesheets="@../main.css">
          <columns>

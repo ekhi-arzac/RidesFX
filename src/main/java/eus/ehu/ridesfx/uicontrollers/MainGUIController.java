@@ -121,6 +121,7 @@ public class MainGUIController implements Controller {
     @FXML
     void onQueryAlerts(ActionEvent event) {
         mainGUI.showSceneInCenter("queryAlerts");
+
     }
 
     @FXML

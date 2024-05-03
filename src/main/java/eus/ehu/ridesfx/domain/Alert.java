@@ -89,8 +89,12 @@ public class Alert implements Serializable {
         this.date = date;
     }
 
-    public STATUS getStatus() {
-        return status;
+    public String getStatus() {
+        if (status == STATUS.AVAILABLE) {
+            return "Available";
+        } else {
+            return "Not Available";
+        }
     }
 
     public void setStatus(STATUS status) {

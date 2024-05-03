@@ -170,6 +170,7 @@ public class MainGUI {
             }
             case "queryAlerts" -> {
                 mainPane.setCenter(queryAlertsLag.ui);
+                ((QueryAlertsController)queryAlertsLag.c).updateAlerts();
             }
         }
 

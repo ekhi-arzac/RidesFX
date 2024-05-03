@@ -6,6 +6,7 @@ import eus.ehu.ridesfx.domain.*;
 import eus.ehu.ridesfx.exceptions.RideAlreadyExistException;
 import eus.ehu.ridesfx.exceptions.RideMustBeLaterThanTodayException;
 import jakarta.persistence.*;
+import javafx.collections.ObservableList;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -430,6 +431,12 @@ public class DataAccess {
         db.persist(alert);
         System.out.println(">> DataAccess: createAlert");
         db.getTransaction().commit();
+    }
+
+    public List<Alert> getAlerts(User user) {
+            TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a WHERE a.traveler.email = :email", Alert.class)
+                    .setParameter("email", user.getEmail());
+            return query.getResultList();
     }
 }
 
