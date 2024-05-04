@@ -119,16 +119,17 @@ public class MainGUIController implements Controller {
         hideCreateRideBtn();
         hideDriverRidePanel();
         mainGUI.hideBookRide(false);
-        hideViewBooks();
         showLogRegButton();
         user_icon.setVisible(false);
         businessLogic.closeMsgClient();
         lblUser.setText("Guest");
-        if (businessLogic.getMsgClient() != null && businessLogic.getMsgClient().getChatController() != null) {
+        hideLogoutBtn();
+        showViewBooksBtn(false);
+        if (businessLogic.getMsgClient() != null && businessLogic.getMsgClient().getChatController() != null){
             businessLogic.getMsgClient().getChatController().clearCache();
             businessLogic.getMsgClient().getChatController().clearOnline();
         }
-        hideLogoutBtn();
+
     }
 
     @Override

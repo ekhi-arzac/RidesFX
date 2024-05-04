@@ -72,14 +72,16 @@ On the other hand, we have implemented new event flows, for the: Check availabil
 * ### Sprint 3
   ---
 
-* For the third sprint we are going to fix fill the deficiencies that the project had in the last sprint:
+* In the third sprint we resolved the deficiencies of the last sprint.
   - Add the hours that we work in each issue in the second sprint
   - Do the planification of the third sprint 
   - Fix the sequence diagram
   - Implement a correct keyboard navigation through the text fields 
   - Update the documentation to do the understanding opf the structure easier
  
-* Therefore we will implement new functions for the program
+
+
+* Therefore we have implemented new functionalities for the application
 #### Logout feature:
 The users should have the option to Logout from the program whenever they want 
 
@@ -88,8 +90,18 @@ The travelers can book a ride they want in the Query rides page, after getting a
 
 #### View Traveler Books:
 The travelers, can also view all their books and the status of them: If it has been accepted or cancelled, or is pending yet
-  
-  
+
+####  Accept or Reject Bookings:
+The drivers can accept or reject the bookings they have received, they can do it in the Driver Ride Panel page
+
+#### Chat feature:
+The drivers can chat with the travelers that have booked their rides, they can do it in the Driver Ride Panel page
+
+[!] *For the chat, we used an external server to manage and send messages between users. But due to several uknown clients connected to the server at the same time, the chat may not work as expected, 
+for example sometimes the messages are duplicated or there are duplicated users*
+
+
+
 
 _Authors: Amets Martiarena, Ekhi Arzac, Jon Reboiro._
 

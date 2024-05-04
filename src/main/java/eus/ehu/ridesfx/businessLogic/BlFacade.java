@@ -92,4 +92,8 @@ public interface BlFacade {
 
 
    List <RideBook> getTravelerRideBooks();
+
+    List<RideBook> getRideBooks(Ride newSelection);
+
+    void manageBook(RideBook rideBook, RideBook.STATUS status);
 }

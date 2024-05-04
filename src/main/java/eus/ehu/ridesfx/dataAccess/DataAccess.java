@@ -431,6 +431,20 @@ public class DataAccess {
                 .setParameter("email", t.getEmail());
         return query.getResultList();
     }
+
+    public List<RideBook> getBooksOfRide(Ride newSelection) {
+        TypedQuery<RideBook> query = db.createQuery("SELECT rb FROM RideBook rb WHERE rb.ride.rideNumber = :rideNumber AND rb.status != ?1", RideBook.class)
+                .setParameter("rideNumber", newSelection.getRideNumber())
+                .setParameter(1, RideBook.STATUS.ACCEPTED);
+        return query.getResultList();
+    }
+
+    public void manageBook(RideBook rideBook, RideBook.STATUS status) {
+        db.getTransaction().begin();
+        rideBook.setStatus(status);
+        db.persist(rideBook);
+        db.getTransaction().commit();
+    }
 }
 
 
