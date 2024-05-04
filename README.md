@@ -102,6 +102,12 @@ for example sometimes the messages are duplicated or there are duplicated users*
 
 
 
+### Time Valoration:
+
+| Sprint 1 	| Sprint 2 	| Sprint 3 	|
+|----------	|----------	|----------	|
+|          	|          	|          	|
+|          	|          	|          	|
 
 _Authors: Amets Martiarena, Ekhi Arzac, Jon Reboiro._
 
