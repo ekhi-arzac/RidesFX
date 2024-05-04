@@ -50,6 +50,7 @@ public class DriverRidePanelController implements Controller {
 
     @FXML
     private TableColumn<RideBook, String> qc6;
+
     @FXML
     private Label lblErrorMessage;
     @Override
@@ -105,7 +106,7 @@ public class DriverRidePanelController implements Controller {
                 for (var rideBook : rideBooks) {
                     tblBooksOfRide.getItems().add(rideBook);
                 }
-                qc4.setCellValueFactory(new PropertyValueFactory<>("travelerName"));
+                qc4.setCellValueFactory(new PropertyValueFactory<>("date"));
                 qc5.setCellValueFactory(new PropertyValueFactory<>("fromLocation"));
                 qc6.setCellValueFactory(new PropertyValueFactory<>("toLocation"));
                 tblBooksOfRide.getSortOrder().add(qc4);
