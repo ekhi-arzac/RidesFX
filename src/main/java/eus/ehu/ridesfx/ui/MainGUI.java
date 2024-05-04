@@ -143,7 +143,7 @@ public class MainGUI {
 
 
     public void showMain() {
-        setupScene(mainLag.ui, "MainTitle", 1050, 500);
+        setupScene(mainLag.ui, "MainTitle", 1070, 550);
     }
 
     public void setMainPane(BorderPane mainPane) {
