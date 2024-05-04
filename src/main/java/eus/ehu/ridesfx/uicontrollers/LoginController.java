@@ -64,12 +64,13 @@ public class LoginController implements Controller {
                 mainGUI.showCreateRide();
                 mainGUI.showDriverRidePanel();
                 mainGUI.hideBookRide(true);
-
+                mainGUI.hideQueryRides();
             } else if (businessLogic.getCurrentUser() instanceof Traveler) {
                 mainGUI.hideCreateRide();
                 mainGUI.hideDriverRidePanel();
                 mainGUI.hideBookRide(false);
                 mainGUI.showViewBooksBtn(true);
+                mainGUI.showQueryAlerts();
             }
 
         } else {

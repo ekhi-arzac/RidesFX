@@ -445,6 +445,47 @@ public class DataAccess {
         db.persist(rideBook);
         db.getTransaction().commit();
     }
+
+    public void createAlert(Traveler traveler, String from, String to, Date date, int numPlaces) {
+        Alert alert = new Alert(traveler, from, to, date, numPlaces);
+        db.getTransaction().begin();
+        db.persist(alert);
+        System.out.println(">> DataAccess: createAlert");
+        db.getTransaction().commit();
+    }
+
+    public List<Alert> getAlerts(User user) {
+            TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a WHERE a.traveler.email = :email", Alert.class)
+                    .setParameter("email", user.getEmail());
+            return query.getResultList();
+    }
+
+    public void findAlert(Ride r) {
+        TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a WHERE a.fromLocation = :from AND a.toLocation = :to AND a.date = :date", Alert.class)
+                .setParameter("from", r.getFromLocation())
+                .setParameter("to", r.getToLocation())
+                .setParameter("date", r.getDate());
+        List<Alert> alerts = query.getResultList();
+        for (Alert a : alerts) {
+            a.setStatus(Alert.STATUS.AVAILABLE);
+        }
+    }
+
+    public Ride findRide(Alert alert) {
+        // To find the ride, use a query where the fromLocation, toLocation, date are equal to the alert's fromLocation, toLocation, date, and the number of places is greater than or equal to the alert's numPlaces
+        TypedQuery<Ride> query = db.createQuery("SELECT r FROM Ride r WHERE r.fromLocation = :from AND r.toLocation = :to AND r.date = :date AND r.numPlaces >= :numPlaces", Ride.class)
+                .setParameter("from", alert.getFromLocation())
+                .setParameter("to", alert.getToLocation())
+                .setParameter("date", alert.getDate())
+                .setParameter("numPlaces", alert.getNumPlaces());
+        return query.getResultList().get(0);
+    }
+
+    public void deleteAlert(Alert alert) {
+        db.getTransaction().begin();
+        db.remove(alert);
+        db.getTransaction().commit();
+    }
 }
 
 

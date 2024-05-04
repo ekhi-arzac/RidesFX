@@ -14,6 +14,9 @@ public class Traveler extends User implements Serializable {
     @OneToMany
     private List<RideBook> rideBook;
 
+    @OneToMany
+    private List<Alert> alerts;
+
     public Traveler(String email, String name) {
         super(email, name);
     }

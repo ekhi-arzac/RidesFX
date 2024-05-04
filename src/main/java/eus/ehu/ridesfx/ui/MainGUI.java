@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 public class MainGUI {
 
     private Window mainLag, createRideLag, queryRidesLag, loginLag, registerLag, dRidePanelLag,
-            carPoolChatLag, travelerBooksLag;
+            carPoolChatLag, travelerBooksLag, queryAlertsLag;
 
     private BlFacade businessLogic;
     private Stage stage;
@@ -98,6 +98,14 @@ public class MainGUI {
 
     public void showViewBooksBtn(boolean b) {((MainGUIController)mainLag.c).showViewBooksBtn(b);}
 
+    public void showQueryAlerts() {
+        ((MainGUIController) mainLag.c).showQueryAlertsBtn();
+    }
+
+    public void hideQueryAlerts() {
+        ((MainGUIController) mainLag.c).hideQueryAlertsBtn();
+    }
+
 
     class Window {
         Controller c;
@@ -137,6 +145,7 @@ public class MainGUI {
         dRidePanelLag = load("/views/DriverRidePanel.fxml");
         carPoolChatLag = load("/views/CarPoolChat.fxml");
         travelerBooksLag = load("/views/TravelerBooks.fxml");
+        queryAlertsLag = load("/views/QueryAlerts.fxml");
         showMain();
 
     }
@@ -166,6 +175,10 @@ public class MainGUI {
             case "travelerBooks" -> {
                 mainPane.setCenter(travelerBooksLag.ui);
                 ((TravelerBooksController)travelerBooksLag.c).updateBooks();
+            }
+            case "queryAlerts" -> {
+                mainPane.setCenter(queryAlertsLag.ui);
+                ((QueryAlertsController)queryAlertsLag.c).updateAlerts();
             }
         }
 
@@ -208,6 +221,7 @@ public class MainGUI {
     public void clearFields(){
         ((LoginController) this.loginLag.c).clearFields();
     }
+
 
 
 

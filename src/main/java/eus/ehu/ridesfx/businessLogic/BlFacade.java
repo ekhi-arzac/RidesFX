@@ -96,4 +96,14 @@ public interface BlFacade {
     List<RideBook> getRideBooks(Ride newSelection);
 
     void manageBook(RideBook rideBook, RideBook.STATUS status);
+
+	void createAlert(Traveler traveler, String from, String to, Date date, int numPlaces);
+
+    List<Alert> getAlerts();
+
+	public void findAlert (Ride r);
+
+	Ride findRide(Alert alert);
+
+	void deleteAlert(Alert alert);
 }

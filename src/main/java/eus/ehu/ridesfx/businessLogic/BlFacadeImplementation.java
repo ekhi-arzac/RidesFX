@@ -2,10 +2,7 @@ package eus.ehu.ridesfx.businessLogic;
 
 import eus.ehu.ridesfx.configuration.Config;
 import eus.ehu.ridesfx.dataAccess.DataAccess;
-import eus.ehu.ridesfx.domain.Ride;
-import eus.ehu.ridesfx.domain.RideBook;
-import eus.ehu.ridesfx.domain.Traveler;
-import eus.ehu.ridesfx.domain.User;
+import eus.ehu.ridesfx.domain.*;
 import eus.ehu.ridesfx.exceptions.RideAlreadyExistException;
 import eus.ehu.ridesfx.exceptions.RideMustBeLaterThanTodayException;
 import eus.ehu.ridesfx.msgClient.MsgClient;
@@ -165,6 +162,16 @@ public class BlFacadeImplementation implements BlFacade {
 	public MsgClient getMsgClient() {
 		return msgClient;
 	}
+	@Override
+	public void createAlert(Traveler traveler, String from, String to, Date date, int numPlaces) {
+		dbManager.createAlert(traveler, from, to, date, numPlaces);
+	}
+
+	@Override
+	public List<Alert> getAlerts() {
+		List<Alert> alerts = dbManager.getAlerts(currentUser);
+		return alerts;
+	}
 
 	//gets the ride books of the current traveler
 
@@ -182,5 +189,19 @@ public class BlFacadeImplementation implements BlFacade {
 		dbManager.manageBook(rideBook, status);
 	}
 
+	@Override
+	public void findAlert(Ride r) {
+		dbManager.findAlert(r);
+	}
+
+	@Override
+	public Ride findRide(Alert alert) {
+		return dbManager.findRide(alert);
+	}
+
+	@Override
+	public void deleteAlert(Alert alert) {
+		dbManager.deleteAlert(alert);
+	}
 }
 
