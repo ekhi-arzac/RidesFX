@@ -102,4 +102,8 @@ public interface BlFacade {
     List<Alert> getAlerts();
 
 	public void findAlert (Ride r);
+
+	Ride findRide(Alert alert);
+
+	void deleteAlert(Alert alert);
 }

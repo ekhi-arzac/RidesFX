@@ -111,11 +111,13 @@ public class MainGUIController implements Controller {
     void initialize() {
             // set current driver name
             lblUser.setText(businessLogic.getCurrentUser().getName());
+            lblUser.setVisible(false);
             user_icon.setVisible(false);
             if (businessLogic.getCurrentUser() instanceof eus.ehu.ridesfx.domain.Guest) {
                 createRideBtn.setVisible(false);
                 dRidePanelBtn.setVisible(false);
                 viewBooksBtn.setVisible(false);
+                queryAlertsBtn.setVisible(false);
                 hideLogoutBtn();
             }
     }
@@ -131,12 +133,13 @@ public class MainGUIController implements Controller {
         mainGUI.showSceneInCenter("login");
         businessLogic.setCurrentUser(new Guest("guest@gmail.com", "Guest"));
         hideCreateRideBtn();
+        this.queryAlertsBtn.setVisible(false);
         hideDriverRidePanel();
         mainGUI.hideBookRide(false);
         showLogRegButton();
         user_icon.setVisible(false);
         businessLogic.closeMsgClient();
-        lblUser.setText("Guest");
+        lblUser.setVisible(false);
         hideLogoutBtn();
         showViewBooksBtn(false);
         if (businessLogic.getMsgClient() != null && businessLogic.getMsgClient().getChatController() != null){
@@ -162,6 +165,7 @@ public class MainGUIController implements Controller {
      * @param name the name of the driver
      */
     public void setUserName(String name) {
+        lblUser.setVisible(true);
         lblUser.setText(name);
     }
 
@@ -205,5 +209,13 @@ public class MainGUIController implements Controller {
 
     public void hideViewBooks() {
         viewBooksBtn.setVisible(false);
+    }
+
+    public void showQueryAlertsBtn() {
+        queryAlertsBtn.setVisible(true);
+    }
+
+    public void hideQueryAlertsBtn() {
+        queryAlertsBtn.setVisible(false);
     }
 }

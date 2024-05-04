@@ -5,10 +5,7 @@ import java.time.*;
 import java.util.*;
 
 import eus.ehu.ridesfx.businessLogic.BlFacade;
-import eus.ehu.ridesfx.domain.Driver;
-import eus.ehu.ridesfx.domain.Ride;
-import eus.ehu.ridesfx.domain.Traveler;
-import eus.ehu.ridesfx.domain.User;
+import eus.ehu.ridesfx.domain.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -220,6 +217,7 @@ public class QueryRidesController implements Controller {
         // a date has been chosen, update the combobox of Rides
         datepicker.setOnAction(actionEvent -> {
             tblRides.getItems().clear();
+            this.updateRidesTable();
             // Vector<eus.ehu.ridesfx.domain.Ride> events = eus.ehu.ridesfx.businessLogic.getEvents(Dates.convertToDate(datepicker.getValue()));
             List<Ride> rides = businessLogic.getRides(comboDepartCity.getValue(), comboArrivalCity.getValue(), Dates.convertToDate(datepicker.getValue()));
             // List<Ride> rides = Arrays.asList(new Ride("Bilbao", "Donostia", Dates.convertToDate(datepicker.getValue()), 3, 3.5f, new Driver("pepe@pepe.com", "pepe")));
@@ -259,7 +257,7 @@ public class QueryRidesController implements Controller {
                 }
             }
             else{
-                displayMessage("User is not a traveler", "error_msg");
+                this.mainGUI.showSceneInCenter("login");
                 System.out.println(">>user is not a traveler");
             }
             //update the new values of the table

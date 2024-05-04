@@ -193,5 +193,15 @@ public class BlFacadeImplementation implements BlFacade {
 	public void findAlert(Ride r) {
 		dbManager.findAlert(r);
 	}
+
+	@Override
+	public Ride findRide(Alert alert) {
+		return dbManager.findRide(alert);
+	}
+
+	@Override
+	public void deleteAlert(Alert alert) {
+		dbManager.deleteAlert(alert);
+	}
 }
 

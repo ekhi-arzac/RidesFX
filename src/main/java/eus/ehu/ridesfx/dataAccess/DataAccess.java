@@ -470,6 +470,22 @@ public class DataAccess {
             a.setStatus(Alert.STATUS.AVAILABLE);
         }
     }
+
+    public Ride findRide(Alert alert) {
+        // To find the ride, use a query where the fromLocation, toLocation, date are equal to the alert's fromLocation, toLocation, date, and the number of places is greater than or equal to the alert's numPlaces
+        TypedQuery<Ride> query = db.createQuery("SELECT r FROM Ride r WHERE r.fromLocation = :from AND r.toLocation = :to AND r.date = :date AND r.numPlaces >= :numPlaces", Ride.class)
+                .setParameter("from", alert.getFromLocation())
+                .setParameter("to", alert.getToLocation())
+                .setParameter("date", alert.getDate())
+                .setParameter("numPlaces", alert.getNumPlaces());
+        return query.getResultList().get(0);
+    }
+
+    public void deleteAlert(Alert alert) {
+        db.getTransaction().begin();
+        db.remove(alert);
+        db.getTransaction().commit();
+    }
 }
 
 

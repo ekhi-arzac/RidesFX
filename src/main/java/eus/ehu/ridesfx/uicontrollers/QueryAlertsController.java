@@ -2,10 +2,13 @@ package eus.ehu.ridesfx.uicontrollers;
 
 import eus.ehu.ridesfx.businessLogic.BlFacade;
 import eus.ehu.ridesfx.domain.Alert;
+import eus.ehu.ridesfx.domain.Ride;
 import eus.ehu.ridesfx.domain.RideBook;
+import eus.ehu.ridesfx.domain.Traveler;
 import eus.ehu.ridesfx.ui.MainGUI;
 import jakarta.persistence.Entity;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,6 +18,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.Date;
 import java.util.List;
+
+import static eus.ehu.ridesfx.domain.Alert.STATUS.AVAILABLE;
+import static eus.ehu.ridesfx.domain.Alert.STATUS.NOT_AVAILABLE;
 
 
 public class QueryAlertsController implements Controller {
@@ -78,5 +84,30 @@ public class QueryAlertsController implements Controller {
         } else {
             lblErrorMsg.setText("No alerts found");
         }
+    }
+
+    @FXML
+    void onBookRide(ActionEvent event) {
+        Alert alert = tblAlerts.getSelectionModel().getSelectedItem();
+        if (alert != null && alert.getStatus().equals("Available")) {
+            Ride r = this.businessLogic.findRide(alert);
+            if (r != null) {
+                this.businessLogic.bookRide(r, alert.getDate(), alert.getNumPlaces(), (Traveler)businessLogic.getCurrentUser());
+                tblAlerts.getItems().remove(alert);
+                this.businessLogic.deleteAlert(alert);
+                displayMessage("Ride booked successfully", "success_msg");
+            } else {
+                displayMessage("No ride found for the selected alert", "error_msg");
+            }
+
+        } else {
+            displayMessage("Select an available alert", "error_msg");
+        }
+
+    }
+
+    private void displayMessage(String message, String label) {
+
+        RegisterController.displayMsg(message, label, lblErrorMsg);
     }
 }

@@ -98,6 +98,14 @@ public class MainGUI {
 
     public void showViewBooksBtn(boolean b) {((MainGUIController)mainLag.c).showViewBooksBtn(b);}
 
+    public void showQueryAlerts() {
+        ((MainGUIController) mainLag.c).showQueryAlertsBtn();
+    }
+
+    public void hideQueryAlerts() {
+        ((MainGUIController) mainLag.c).hideQueryAlertsBtn();
+    }
+
 
     class Window {
         Controller c;
@@ -213,6 +221,7 @@ public class MainGUI {
     public void clearFields(){
         ((LoginController) this.loginLag.c).clearFields();
     }
+
 
 
 
