@@ -52,6 +52,12 @@ public class DriverRidePanelController implements Controller {
     private TableColumn<RideBook, String> qc6;
 
     @FXML
+    private Button acceptBookBtn;
+
+    @FXML
+    private Button rejectBookBtn;
+
+    @FXML
     private Label lblErrorMessage;
     @Override
     public void setMainApp(MainGUI mainGUI) {
@@ -69,7 +75,18 @@ public class DriverRidePanelController implements Controller {
         qc2.setCellValueFactory(new PropertyValueFactory<>("fromLocation"));
         qc3.setCellValueFactory(new PropertyValueFactory<>("toLocation"));
         tblRides.getSortOrder().add(qc1);
+    }
 
+    public void updateRideBooks(Ride ride){
+        tblBooksOfRide.getItems().clear();
+        List<RideBook> rideBooks = businessLogic.getRideBooks(ride);
+        for (var rideBook : rideBooks) {
+            tblBooksOfRide.getItems().add(rideBook);
+        }
+        qc4.setCellValueFactory(new PropertyValueFactory<>("travelerName"));
+        qc5.setCellValueFactory(new PropertyValueFactory<>("travelerEmail"));
+        qc6.setCellValueFactory(new PropertyValueFactory<>("status"));
+        tblBooksOfRide.getSortOrder().add(qc4);
     }
 
     @FXML
@@ -98,18 +115,39 @@ public class DriverRidePanelController implements Controller {
         });
         qc1.setSortType(TableColumn.SortType.DESCENDING);
 
+
+        acceptBookBtn.setOnAction(event -> {
+            RideBook rideBook = tblBooksOfRide.getSelectionModel().getSelectedItem();
+            if (rideBook == null) {
+                displayMessage("Select a book to accept", "error_msg");
+                return;
+            }
+            if (rideBook.getStatus() == RideBook.STATUS.PENDING) {
+                //change the DB
+                businessLogic.manageBook(rideBook, RideBook.STATUS.ACCEPTED);
+                displayMessage("Book accepted", "success_msg");
+                updateRideBooks(tblRides.getSelectionModel().getSelectedItem());
+            }
+        });
+
+        rejectBookBtn.setOnAction(event -> {
+            RideBook rideBook = tblBooksOfRide.getSelectionModel().getSelectedItem();
+            if (rideBook == null) {
+                displayMessage("Select a book to reject", "error_msg");
+                return;
+            }
+            if (rideBook.getStatus() == RideBook.STATUS.PENDING) {
+                //change the DB
+                businessLogic.manageBook(rideBook, RideBook.STATUS.CANCELLED);
+                displayMessage("Book rejected", "success_msg");
+                updateRideBooks(tblRides.getSelectionModel().getSelectedItem());
+            }
+        });
+
         //when selecting a ride in the table, show the ride books for that ride in the other table
         tblRides.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                tblBooksOfRide.getItems().clear();
-                List<RideBook> rideBooks = businessLogic.getRideBooks(newSelection);
-                for (var rideBook : rideBooks) {
-                    tblBooksOfRide.getItems().add(rideBook);
-                }
-                qc4.setCellValueFactory(new PropertyValueFactory<>("date"));
-                qc5.setCellValueFactory(new PropertyValueFactory<>("fromLocation"));
-                qc6.setCellValueFactory(new PropertyValueFactory<>("toLocation"));
-                tblBooksOfRide.getSortOrder().add(qc4);
+                updateRideBooks(newSelection);
             }
         });
     }

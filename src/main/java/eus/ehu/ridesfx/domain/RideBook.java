@@ -65,6 +65,11 @@ public class RideBook {
     public String getFromLocation() { return ride.getFromLocation(); }
     public String getToLocation() { return ride.getToLocation(); }
 
+    //getters from the traveler object
+    public Traveler getTraveler() { return traveler; }
+    public void setTraveler(Traveler traveler) { this.traveler = traveler; }
+    public String getTravelerEmail() { return traveler.getEmail(); }
+
 
 
     public String toString() {

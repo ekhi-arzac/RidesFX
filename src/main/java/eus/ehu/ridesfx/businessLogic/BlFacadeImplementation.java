@@ -178,5 +178,9 @@ public class BlFacadeImplementation implements BlFacade {
 		return dbManager.getBooksOfRide(newSelection);
 	}
 
+	public void manageBook(RideBook rideBook, RideBook.STATUS status) {
+		dbManager.manageBook(rideBook, status);
+	}
+
 }
 
