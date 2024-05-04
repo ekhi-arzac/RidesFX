@@ -70,11 +70,14 @@ public class QueryAlertsController implements Controller {
         qc4.setCellValueFactory(new PropertyValueFactory<Alert, Integer>("numPlaces"));
         qc5.setCellValueFactory(new PropertyValueFactory<Alert, String>("status"));
         List<Alert> alerts = businessLogic.getAlerts();
+        lblErrorMsg.setVisible(false);
         if (alerts != null) {
             tblAlerts.getItems().setAll(alerts);
         } else {
+            lblErrorMsg.setVisible(true);
             lblErrorMsg.setText("No alerts found");
         }
+
     }
 
     public void updateAlerts() {
@@ -107,7 +110,7 @@ public class QueryAlertsController implements Controller {
     }
 
     private void displayMessage(String message, String label) {
-
+        lblErrorMsg.setVisible(true);
         RegisterController.displayMsg(message, label, lblErrorMsg);
     }
 }

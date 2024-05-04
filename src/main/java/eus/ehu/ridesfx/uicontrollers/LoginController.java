@@ -65,6 +65,7 @@ public class LoginController implements Controller {
                 mainGUI.showDriverRidePanel();
                 mainGUI.hideBookRide(true);
                 mainGUI.hideQueryRides();
+                mainGUI.showSceneInCenter("dRidePanel");
             } else if (businessLogic.getCurrentUser() instanceof Traveler) {
                 mainGUI.hideCreateRide();
                 mainGUI.hideDriverRidePanel();
