@@ -431,6 +431,12 @@ public class DataAccess {
                 .setParameter("email", t.getEmail());
         return query.getResultList();
     }
+
+    public List<RideBook> getBooksOfRide(Ride newSelection) {
+        TypedQuery<RideBook> query = db.createQuery("SELECT rb FROM RideBook rb WHERE rb.ride.rideNumber = :rideNumber", RideBook.class)
+                .setParameter("rideNumber", newSelection.getRideNumber());
+        return query.getResultList();
+    }
 }
 
 

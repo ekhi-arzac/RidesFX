@@ -173,5 +173,10 @@ public class BlFacadeImplementation implements BlFacade {
 		return rideBooks;
 	}
 
+	@Override
+	public List<RideBook> getRideBooks(Ride newSelection) {
+		return dbManager.getBooksOfRide(newSelection);
+	}
+
 }
 
