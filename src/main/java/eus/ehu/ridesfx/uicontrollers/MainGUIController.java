@@ -141,6 +141,7 @@ public class MainGUIController implements Controller {
         businessLogic.closeMsgClient();
         lblUser.setVisible(false);
         hideLogoutBtn();
+        queryRidesBtn.setVisible(true);
         showViewBooksBtn(false);
         if (businessLogic.getMsgClient() != null && businessLogic.getMsgClient().getChatController() != null){
             businessLogic.getMsgClient().getChatController().clearCache();

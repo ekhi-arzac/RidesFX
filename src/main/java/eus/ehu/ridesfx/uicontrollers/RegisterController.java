@@ -62,6 +62,7 @@ public class RegisterController implements Controller {
                     mainGUI.showCreateRide();
                     mainGUI.showDriverRidePanel();
                     mainGUI.hideQueryAlerts();
+                    mainGUI.showSceneInCenter("dRidePanel");
                 }
                 mainGUI.removeLogRegButton();
                 mainGUI.setUserName(username);

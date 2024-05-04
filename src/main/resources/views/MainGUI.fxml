@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -13,57 +14,33 @@
    <left>
       <VBox id="mainBorderpane" alignment="TOP_CENTER" centerShape="false" styleClass="borderpane" stylesheets="@../main.css" BorderPane.alignment="TOP_CENTER">
          <children>
-            <Label prefHeight="18.0" prefWidth="0.0" />
-            <Button fx:id="queryRidesBtn" mnemonicParsing="false" onAction="#showQueryRides" prefHeight="26.0" prefWidth="156.0" stylesheets="@../main.css" text="%QueryRides">
-               <VBox.margin>
-                  <Insets bottom="20.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="createRideBtn" mnemonicParsing="false" onAction="#showCreateRide" prefHeight="26.0" prefWidth="155.0" text="%CreateRide">
-               <VBox.margin>
-                  <Insets bottom="20.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="dRidePanelBtn" mnemonicParsing="false" onAction="#showDRidePanel" prefHeight="26.0" prefWidth="155.0" text="%RidePanel">
-               <VBox.margin>
-                  <Insets left="10.0" right="10.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="viewBooksBtn" mnemonicParsing="false" onAction="#showTravelerBooks" prefWidth="155.0" text="%ViewBooks">
-               <VBox.margin>
-                  <Insets bottom="20.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="queryAlertsBtn" mnemonicParsing="false" onAction="#onQueryAlerts" prefWidth="155.0" text="Query alerts" />
-            <ImageView fx:id="user_icon" fitHeight="72.0" fitWidth="71.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@user_blue.png" />
-               </image>
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </ImageView>
-            <Label fx:id="lblDriver" prefHeight="18.0" prefWidth="82.0" textAlignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font></Label>
-            <Label fx:id="lblUser" text="Driver:">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin></Label>
-            <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#onLogout" prefHeight="26.0" prefWidth="120.0" text="Logout">
-               <VBox.margin>
-                  <Insets top="30.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="logregbtn" mnemonicParsing="false" onAction="#showLogin" prefHeight="26.0" prefWidth="156.0" stylesheets="@../main.css" text="%Login/Register">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </Button>
+            <AnchorPane>
+               <children>
+                  <Label layoutX="86.60000002384186" prefHeight="18.0" prefWidth="0.0" />
+                  <Button fx:id="queryRidesBtn" layoutX="8.999999642372131" layoutY="18.399999618530273" mnemonicParsing="false" onAction="#showQueryRides" prefHeight="26.0" prefWidth="156.0" stylesheets="@../main.css" text="%QueryRides" />
+                  <Button fx:id="createRideBtn" layoutX="8.999999642372131" layoutY="64.80000305175781" mnemonicParsing="false" onAction="#showCreateRide" prefHeight="26.0" prefWidth="155.0" text="%CreateRide" />
+                  <Button fx:id="dRidePanelBtn" layoutX="8.999999642372131" layoutY="111.19999694824219" mnemonicParsing="false" onAction="#showDRidePanel" prefHeight="26.0" prefWidth="155.0" text="%RidePanel" />
+                  <Button fx:id="viewBooksBtn" layoutX="8.999999642372131" layoutY="137.60000610351562" mnemonicParsing="false" onAction="#showTravelerBooks" prefWidth="155.0" text="%ViewBooks" />
+                  <Button fx:id="queryAlertsBtn" layoutX="8.999999642372131" layoutY="183.1999969482422" mnemonicParsing="false" onAction="#onQueryAlerts" prefWidth="155.0" text="Query alerts" />
+                  <ImageView fx:id="user_icon" fitHeight="72.0" fitWidth="71.0" layoutX="51.399999260902405" layoutY="228.8000030517578" opacity="0.6" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@user_blue.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="lblDriver" layoutX="45.80000078678131" layoutY="300.0" prefHeight="18.0" prefWidth="82.0" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblUser" layoutX="66.60000002384186" layoutY="328.79998779296875" text="Driver:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="logoutBtn" layoutX="26.600000023841858" layoutY="379.20001220703125" mnemonicParsing="false" onAction="#onLogout" prefHeight="26.0" prefWidth="120.0" text="Logout" />
+                  <Button fx:id="logregbtn" layoutX="8.999999642372131" layoutY="405.6000061035156" mnemonicParsing="false" onAction="#showLogin" prefHeight="26.0" prefWidth="156.0" stylesheets="@../main.css" text="%Login/Register" />
+               </children>
+            </AnchorPane>
          </children>
          <opaqueInsets>
             <Insets />
