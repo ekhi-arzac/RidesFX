@@ -290,7 +290,7 @@ public class DataAccess {
         System.out.println(">> DataAccess: getEventsFromTo");
         List<Date> res = new ArrayList<>();
 
-        TypedQuery<Date> query = db.createQuery("SELECT DISTINCT r.date FROM Ride r WHERE r.fromLocation=?1 AND r.toLocation=?2 AND r.status=?3",Date.class);
+        TypedQuery<Date> query = db.createQuery("SELECT DISTINCT r.date FROM Ride r WHERE r.fromLocation=?1 AND r.toLocation=?2 AND r.status=?3 AND r.numPlaces > 0",Date.class);
 
         query.setParameter(1, from);
         query.setParameter(2, to);

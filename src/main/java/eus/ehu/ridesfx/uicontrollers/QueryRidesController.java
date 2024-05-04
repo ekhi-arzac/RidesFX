@@ -106,6 +106,8 @@ public class QueryRidesController implements Controller {
 
 
     private void updateDatePickerCellFactory(DatePicker datePicker) {
+        //update the dates with rides where the seats are >= 0
+
 
         List<Date> dates = businessLogic.getDatesWithRides(comboDepartCity.getValue(), comboArrivalCity.getValue());
 

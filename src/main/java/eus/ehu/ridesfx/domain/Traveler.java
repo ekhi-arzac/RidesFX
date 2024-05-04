@@ -11,10 +11,10 @@ import java.util.List;
 public class Traveler extends User implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @OneToMany
+    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
     private List<RideBook> rideBook;
 
-    @OneToMany
+    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
     private List<Alert> alerts;
 
     public Traveler(String email, String name) {
