@@ -240,6 +240,7 @@ public class QueryRidesController implements Controller {
                         //date is later than today
                         if (datepicker.getValue().isAfter(LocalDate.now())) {
                             businessLogic.bookRide(ride, Dates.convertToDate(datepicker.getValue()), passengers, (Traveler)businessLogic.getCurrentUser());
+                            updateDatePickerCellFactory(datepicker);
                             displayMessage("Ride booked successfully", "success_msg");
                         } else {
                             displayMessage("Please select a valid date", "error_msg");

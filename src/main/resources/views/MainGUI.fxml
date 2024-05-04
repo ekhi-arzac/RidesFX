@@ -11,15 +11,9 @@
 
 <BorderPane fx:id="mainPane" prefHeight="513.0" prefWidth="1050.0" style="-fx-background-color: #F8F8FF;" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.ridesfx.uicontrollers.MainGUIController">
    <left>
-      <VBox id="mainBorderpane" alignment="TOP_CENTER" styleClass="borderpane" stylesheets="@../main.css" BorderPane.alignment="TOP_CENTER">
+      <VBox id="mainBorderpane" alignment="TOP_CENTER" centerShape="false" styleClass="borderpane" stylesheets="@../main.css" BorderPane.alignment="TOP_CENTER">
          <children>
-            <Label fx:id="selectOptionLbl" text="%SelectUseCase">
-               <padding>
-                  <Insets top="20.0" />
-               </padding>
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
+            <Label prefHeight="18.0" prefWidth="0.0" />
             <Button fx:id="queryRidesBtn" mnemonicParsing="false" onAction="#showQueryRides" prefHeight="26.0" prefWidth="156.0" stylesheets="@../main.css" text="%QueryRides">
                <VBox.margin>
                   <Insets bottom="20.0" />
