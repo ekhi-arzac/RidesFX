@@ -146,7 +146,7 @@ public class CreateRideController implements Controller {
                 User user = businessLogic.getCurrentUser();
                 Ride r = businessLogic.createRide(txtDepartCity.getText(), txtArrivalCity.getText(), Dates.convertToDate(datePicker.getValue()), inputSeats, price, user.getEmail());
                 displayMessage(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.RideCreated"), "success_msg");
-
+                this.businessLogic.findAlert(r);
 
             } catch (RideMustBeLaterThanTodayException e1) {
                 displayMessage(e1.getMessage(), "error_msg");

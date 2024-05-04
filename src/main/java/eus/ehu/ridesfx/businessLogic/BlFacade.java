@@ -97,4 +97,6 @@ public interface BlFacade {
 	void createAlert(Traveler traveler, String from, String to, Date date, int numPlaces);
 
     List<Alert> getAlerts();
+
+	public void findAlert (Ride r);
 }

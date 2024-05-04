@@ -438,6 +438,17 @@ public class DataAccess {
                     .setParameter("email", user.getEmail());
             return query.getResultList();
     }
+
+    public void findAlert(Ride r) {
+        TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a WHERE a.fromLocation = :from AND a.toLocation = :to AND a.date = :date", Alert.class)
+                .setParameter("from", r.getFromLocation())
+                .setParameter("to", r.getToLocation())
+                .setParameter("date", r.getDate());
+        List<Alert> alerts = query.getResultList();
+        for (Alert a : alerts) {
+            a.setStatus(Alert.STATUS.AVAILABLE);
+        }
+    }
 }
 
 

@@ -181,5 +181,9 @@ public class BlFacadeImplementation implements BlFacade {
 		return rideBooks;
 	}
 
+	@Override
+	public void findAlert(Ride r) {
+		dbManager.findAlert(r);
+	}
 }
 
