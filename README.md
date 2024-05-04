@@ -97,6 +97,9 @@ The drivers can accept or reject the bookings they have received, they can do it
 #### Chat feature:
 The drivers can chat with the travelers that have booked their rides, they can do it in the Driver Ride Panel page
 
+#### Alerts feature:
+The travelers can create alerts for the rides they want, they can see them in the query alerts option, and if a driver offers a ride that matches with the alert, the traveler will be able to directly book it from there.
+
 [!] *For the chat, we used an external server to manage and send messages between users. But due to several uknown clients connected to the server at the same time, the chat may not work as expected, 
 for example sometimes the messages are duplicated or there are duplicated users*
 
