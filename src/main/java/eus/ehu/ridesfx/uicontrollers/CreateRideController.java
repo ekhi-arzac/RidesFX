@@ -51,13 +51,13 @@ public class CreateRideController implements Controller {
     private Button btnCreateRide;
 
     @FXML
-    private TextField txtArrivalCity;
+    private ComboBox<String> departBox;
 
     @FXML
-    private TextField txtDepartCity;
+    private ComboBox<String> arrivalBox;
 
     @FXML
-    private TextField txtNumberOfSeats;
+    private Spinner<Integer> nSeatsSpinner;
 
     @FXML
     private TextField txtPrice;
@@ -80,12 +80,14 @@ public class CreateRideController implements Controller {
     private String field_Errors() {
 
         try {
-            if ((txtDepartCity.getText().length() == 0) || (txtArrivalCity.getText().length() == 0) || (txtNumberOfSeats.getText().length() == 0) || (txtPrice.getText().length() == 0))
+
+            if ((departBox.getSelectionModel().isEmpty()) || arrivalBox.getSelectionModel().isEmpty() || (datePicker.getValue() == null
+                    || nSeatsSpinner.getValue() == 0 || (txtPrice.getText().isEmpty())))
                 return ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.ErrorQuery");
             else {
 
                 // trigger an exception if the introduced string is not a number
-                int inputSeats = Integer.parseInt(txtNumberOfSeats.getText());
+                int inputSeats = nSeatsSpinner.getValue();
 
                 if (inputSeats <= 0) {
                     return ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.SeatsMustBeGreaterThan0");
@@ -141,10 +143,11 @@ public class CreateRideController implements Controller {
         } else {
             try {
 
-                int inputSeats = Integer.parseInt(txtNumberOfSeats.getText());
+                int inputSeats = Integer.parseInt(nSeatsSpinner.getValue().toString());
+
                 float price = Float.parseFloat(txtPrice.getText());
                 User user = businessLogic.getCurrentUser();
-                Ride r = businessLogic.createRide(txtDepartCity.getText(), txtArrivalCity.getText(), Dates.convertToDate(datePicker.getValue()), inputSeats, price, user.getEmail());
+                Ride r = businessLogic.createRide(departBox.getValue(), arrivalBox.getValue(), Dates.convertToDate(datePicker.getValue()), inputSeats, price, user.getEmail());
                 displayMessage(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.RideCreated"), "success_msg");
                 this.businessLogic.findAlert(r);
 
@@ -155,33 +158,11 @@ public class CreateRideController implements Controller {
             }
         }
 
-/*
-    if (lblErrorMinBet.getText().length() > 0 && showErrors) {
-      lblErrorMinBet.getStyleClass().setAll("lbl", "lbl-error_msg");
-    }
-    if (lblErrorQuestion.getText().length() > 0 && showErrors) {
-      lblErrorQuestion.getStyleClass().setAll("lbl", "lbl-error_msg");
-    }
- */
     }
 
     private List<LocalDate> holidays = new ArrayList<>();
 
-  /*private void setEventsPrePost(int year, int month) {
-    LocalDate date = LocalDate.of(year, month, 1);
-    setEvents(date.getYear(), date.getMonth().getValue());
-    setEvents(date.plusMonths(1).getYear(), date.plusMonths(1).getMonth().getValue());
-    setEvents(date.plusMonths(-1).getYear(), date.plusMonths(-1).getMonth().getValue());
-  }*/
 
- /* private void setEvents(int year, int month) {
-
-    Date date = Dates.toDate(year, month);
-
-    for (Date day : eus.ehu.ridesfx.businessLogic.getEventsMonth(date)) {
-      holidays.add(Dates.convertToLocalDateViaInstant(day));
-    }
-  }*/
 
     @FXML
     void initialize() {
@@ -203,6 +184,15 @@ public class CreateRideController implements Controller {
 
 
         });
+        departBox.getItems().addAll(businessLogic.getDepartCities());
+
+        departBox.setOnAction(e -> {
+            arrivalBox.getItems().clear();
+            arrivalBox.getItems().addAll(businessLogic.getDestinationCities(departBox.getValue()));
+        });
+        // nseats spinner value between 1 and max of inf
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE, 1);
+        nSeatsSpinner.setValueFactory(valueFactory);
 
         datePicker.setDayCellFactory(new Callback<DatePicker, DateCell>() {
             @Override
@@ -222,24 +212,6 @@ public class CreateRideController implements Controller {
             }
         });
 
-        // when a date is selected...
-        datePicker.setOnAction(actionEvent -> {
-     /* comboEvents.getItems().clear();
-
-      oListEvents = FXCollections.observableArrayList(new ArrayList<>());
-      oListEvents.setAll(eus.ehu.ridesfx.businessLogic.getEvents(Dates.convertToDate(datePicker.getValue())));
-
-      comboEvents.setItems(oListEvents);
-
-      if (comboEvents.getItems().size() == 0)
-        btnCreateRide.setDisable(true);
-      else {
-         btnCreateRide.setDisable(false);
-        // select first option
-        comboEvents.getSelectionModel().select(0);
-      }
-*/
-        });
 
     }
 

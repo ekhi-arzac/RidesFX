@@ -6,7 +6,6 @@ import eus.ehu.ridesfx.domain.*;
 import eus.ehu.ridesfx.exceptions.RideAlreadyExistException;
 import eus.ehu.ridesfx.exceptions.RideMustBeLaterThanTodayException;
 import jakarta.persistence.*;
-import javafx.collections.ObservableList;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -397,6 +396,14 @@ public class DataAccess {
     public RideBook bookRide (Ride ride, Date date, int passengers, Traveler traveler){
         db.getTransaction().begin();
         RideBook book = new RideBook(ride, date,passengers, traveler);
+        //update ride passengers
+        Ride rideOfBook = book.getRide();
+        rideOfBook.setNumPlaces(rideOfBook.getNumPlaces()-passengers);
+        System.out.println("This ride now has " + rideOfBook.getNumPlaces() + " places left");
+
+
+        db.persist(book.getRide());
+        //persist the created book
         db.persist(book);
         db.getTransaction().commit();
         System.out.println(">> DataAccess: bookRide");
@@ -423,6 +430,20 @@ public class DataAccess {
         TypedQuery<RideBook> query = db.createQuery("SELECT rb FROM RideBook rb WHERE rb.traveler.email = :email", RideBook.class)
                 .setParameter("email", t.getEmail());
         return query.getResultList();
+    }
+
+    public List<RideBook> getBooksOfRide(Ride newSelection) {
+        TypedQuery<RideBook> query = db.createQuery("SELECT rb FROM RideBook rb WHERE rb.ride.rideNumber = :rideNumber AND rb.status != ?1", RideBook.class)
+                .setParameter("rideNumber", newSelection.getRideNumber())
+                .setParameter(1, RideBook.STATUS.ACCEPTED);
+        return query.getResultList();
+    }
+
+    public void manageBook(RideBook rideBook, RideBook.STATUS status) {
+        db.getTransaction().begin();
+        rideBook.setStatus(status);
+        db.persist(rideBook);
+        db.getTransaction().commit();
     }
 
     public void createAlert(Traveler traveler, String from, String to, Date date, int numPlaces) {

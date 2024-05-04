@@ -1,25 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.ridesfx.uicontrollers.CreateRideController">
    <children>
-      <DatePicker fx:id="datePicker" layoutX="156.0" layoutY="56.0" />
-      <TextField fx:id="txtDepartCity" layoutX="156.0" layoutY="96.0" prefHeight="26.0" prefWidth="359.0" styleClass="textfield" />
-      <TextField fx:id="txtArrivalCity" layoutX="156.0" layoutY="138.0" prefHeight="26.0" prefWidth="359.0" styleClass="textfield" />
-      <TextField fx:id="txtNumberOfSeats" layoutX="156.0" layoutY="181.0" prefHeight="26.0" prefWidth="106.0" styleClass="textfield" />
-      <TextField fx:id="txtPrice" layoutX="156.0" layoutY="217.0" prefHeight="26.0" prefWidth="106.0" styleClass="textfield" />
-      <Button fx:id="btnCreateRide" layoutX="120.0" layoutY="320.0" mnemonicParsing="false" onAction="#createRideClick" prefHeight="26.0" prefWidth="130.0" text="%CreateRide" />
+      <!-- If I find out you change this order in any point of the project, I will find you -->
+      <!-- 1. Date      -->
       <Label layoutX="53.0" layoutY="60.0" text="%RideDate" />
+      <DatePicker fx:id="datePicker" layoutX="156.0" layoutY="56.0" />
+
+      <!-- 2. Departure city -->
       <Label layoutX="54.0" layoutY="100.0" text="%DepartCity" />
-      <Label layoutX="24.0" layoutY="185.0" text="%NumberOfSeats" />
-      <Label fx:id="lblErrorMessage" layoutX="250.0" layoutY="274.0" />
-      <Label fx:id="lblErrorMinBet" layoutX="250.0" layoutY="265.0" />
+      <ComboBox fx:id="departBox" editable="true" layoutX="156.0" layoutY="96.0" prefHeight="25.0" prefWidth="174.0" />
+
+      <!-- 3. Arrival city -->
       <Label layoutX="56.0" layoutY="142.0" text="%ArrivalCity" />
+      <ComboBox fx:id="arrivalBox" editable="true" layoutX="156.0" layoutY="138.0" prefHeight="25.0" prefWidth="174.0" />
+
+      <!-- 4. Number of seats -->
+      <Label layoutX="24.0" layoutY="185.0" text="%NumberOfSeats" />
+      <Spinner fx:id="nSeatsSpinner" layoutX="156.0" layoutY="181.0" prefHeight="25.0" prefWidth="106.0" />
+
+      <!-- 5. Price -->
       <Label layoutX="71.0" layoutY="221.0" text="%Price" />
+      <TextField fx:id="txtPrice" layoutX="156.0" layoutY="217.0" prefHeight="26.0" prefWidth="106.0" styleClass="textfield" />
+
+      <!-- 6. Create Ride button -->
+      <Label fx:id="lblErrorMinBet" layoutX="250.0" layoutY="265.0" />
+      <Button fx:id="btnCreateRide" layoutX="120.0" layoutY="320.0" mnemonicParsing="false" onAction="#createRideClick" prefHeight="26.0" prefWidth="130.0" text="%CreateRide" />
+
+      <!-- 7. Error message (whatever) -->
+      <Label fx:id="lblErrorMessage" layoutX="250.0" layoutY="274.0" />
+
    </children>
 </AnchorPane>

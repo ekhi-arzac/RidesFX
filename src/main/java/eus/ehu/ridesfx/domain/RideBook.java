@@ -52,7 +52,7 @@ public class RideBook {
     public void setDate(Date date) { this.date = date; }
     public int getPassengers() { return passengers; }
     public void setPassengers(int passengers) { this.passengers = passengers; }
-
+    public String getTravelerName() { return traveler.getName(); }
 
     //getters from the ride object
     public Ride getRide() { return ride; }
@@ -62,6 +62,15 @@ public class RideBook {
     public int getNSeats() { return ride.getNumPlaces(); }
     public String getDriverName() { return ride.getDriver().getName(); }
     public String getContactEmail() { return ride.getDriver().getEmail(); }
+    public String getFromLocation() { return ride.getFromLocation(); }
+    public String getToLocation() { return ride.getToLocation(); }
+
+    //getters from the traveler object
+    public Traveler getTraveler() { return traveler; }
+    public void setTraveler(Traveler traveler) { this.traveler = traveler; }
+    public String getTravelerEmail() { return traveler.getEmail(); }
+
+
 
     public String toString() {
         return "RideBook{" +

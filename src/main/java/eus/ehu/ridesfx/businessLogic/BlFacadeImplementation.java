@@ -7,7 +7,6 @@ import eus.ehu.ridesfx.exceptions.RideAlreadyExistException;
 import eus.ehu.ridesfx.exceptions.RideMustBeLaterThanTodayException;
 import eus.ehu.ridesfx.msgClient.MsgClient;
 import eus.ehu.ridesfx.uicontrollers.CarPoolChatController;
-import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.util.Date;
@@ -179,6 +178,15 @@ public class BlFacadeImplementation implements BlFacade {
 	public List<RideBook> getTravelerRideBooks() {
 		List<RideBook> rideBooks = dbManager.getRideBooks((Traveler)getCurrentUser());
 		return rideBooks;
+	}
+
+	@Override
+	public List<RideBook> getRideBooks(Ride newSelection) {
+		return dbManager.getBooksOfRide(newSelection);
+	}
+
+	public void manageBook(RideBook rideBook, RideBook.STATUS status) {
+		dbManager.manageBook(rideBook, status);
 	}
 
 	@Override

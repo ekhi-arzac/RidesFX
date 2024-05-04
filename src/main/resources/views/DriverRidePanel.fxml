@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="399.0" prefWidth="813.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.ridesfx.uicontrollers.DriverRidePanelController">
-    <TableView fx:id="tblRides" layoutX="148.0" layoutY="58.0" prefHeight="200.0" prefWidth="469.0" styleClass="tableview_bootstrap" stylesheets="@../main.css">
+    <TableView fx:id="tblRides" layoutX="13.0" layoutY="67.0" prefHeight="200.0" prefWidth="421.0" styleClass="tableview_bootstrap" stylesheets="@../main.css">
         <columns>
             <TableColumn fx:id="qc1" prefWidth="207.0" styleClass="tableview_column_bootstrap" text="%EventDate" />
             <TableColumn fx:id="qc2" prefWidth="145.0" styleClass="tableview_column_bootstrap" text="%CreateRideGUI.LeavingFrom" />
@@ -17,9 +17,19 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
         </columnResizePolicy>
     </TableView>
-   <Button fx:id="cancelBtn" layoutX="369.0" layoutY="295.0" mnemonicParsing="false" onAction="#cancelRide" style="-fx-background-color: red; -fx-text-fill: white;" text="Cancel Ride" />
-    <Button fx:id="reenableBtn" layoutX="247.0" layoutY="295.0" mnemonicParsing="false" onAction="#reenableRide" style="-fx-background-color: green; -fx-text-fill: white;" text="Re-enable Ride" />
-    <Button fx:id="carPoolChatBtn" layoutX="148.0" layoutY="295.0" mnemonicParsing="false" onAction="#openChat" text="Open Chat" visible="true" />
-   <Label fx:id="lblErrorMessage" layoutX="369.0" layoutY="342.0" text="Label" visible="false"/>
-
+   <Button fx:id="cancelBtn" layoutX="305.0" layoutY="295.0" mnemonicParsing="false" onAction="#cancelRide" style="-fx-background-color:#ec9e97; -fx-text-fill: white; -fx-border-color:#cb564d  " text="Cancel Ride" />
+    <Button fx:id="reenableBtn" layoutX="175.0" layoutY="295.0" mnemonicParsing="false" onAction="#reenableRide" style="-fx-background-color: #a3d9c9; -fx-text-fill: white; -fx-border-color:#5e9e99" text="Re-enable Ride" />
+    <Button fx:id="carPoolChatBtn" layoutX="74.0" layoutY="295.0" mnemonicParsing="false" onAction="#openChat" text="Open Chat" visible="true" />
+   <Label fx:id="lblErrorMessage" layoutX="369.0" layoutY="342.0" text="Label" visible="false" />
+   <TableView fx:id="tblBooksOfRide" layoutX="449.0" layoutY="67.0" prefHeight="200.0" prefWidth="350.0" styleClass="tableview_bootstrap" stylesheets="@../main.css">
+     <columns>
+       <TableColumn fx:id="qc4" prefWidth="150.0" text="Traveler" />
+       <TableColumn fx:id="qc5" prefWidth="100.0" text="Email" />
+         <TableColumn fx:id="qc6" prefWidth="100.0" text="Status" />
+     </columns>
+   </TableView>
+   <Label layoutX="14.0" layoutY="37.0" stylesheets="@../main.css" text="Your Rides" />
+   <Label layoutX="446.0" layoutY="37.0" stylesheets="@../fontstyle.css" text="Book Requests" />
+   <Button fx:id="acceptBookBtn" layoutX="505.0" layoutY="295.0" mnemonicParsing="false" onAction="#reenableRide" prefHeight="27.0" prefWidth="99.0" style="-fx-background-color: #a3d9c9; -fx-text-fill: white; -fx-border-color:#5e9e99" text="Accept Book" />
+   <Button fx:id="rejectBookBtn" layoutX="653.0" layoutY="295.0" mnemonicParsing="false" onAction="#cancelRide" prefHeight="27.0" prefWidth="99.0" style="-fx-background-color:#ec9e97; -fx-text-fill: white; -fx-border-color:#cb564d  " text="Reject Book" />
 </AnchorPane>
