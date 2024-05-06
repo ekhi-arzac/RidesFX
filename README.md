@@ -106,9 +106,12 @@ for example sometimes the messages are duplicated or there are duplicated users*
 
 
 ### Time Valoration:
-| Sprint 1   	| Sprint 2   	| Sprint 3   	|
-|------------	|------------	|------------	|
-| Loading... 	| Loading... 	| Loading... 	|
+
+| .        | Expexted | Actual |
+|----------|----------|-------|
+| Sprint 1 | 37.7     | 28,6  |
+| Sprint 2 | 25.8     | 22,8  |
+| Sprint 3 | 40.25    | 41,25 |
 
 _Authors: Amets Martiarena, Ekhi Arzac, Jon Reboiro._
 
