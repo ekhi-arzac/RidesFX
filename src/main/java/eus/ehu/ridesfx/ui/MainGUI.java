@@ -70,9 +70,19 @@ public class MainGUI {
             businessLogic.setChatController(((CarPoolChatController) carPoolChatLag.c));
 
             mainPane.setCenter(carPoolChatLag.ui);
+            hideCreateRide();
+            hideDriverRidePanel();
+            hideQueryRides();
+            hideBookRide(true);
+            hideViewBooks();
+            hideQueryAlerts();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void hideViewBooks() {
+        ((MainGUIController) mainLag.c).showViewBooksBtn(false);
     }
 
 
@@ -104,6 +114,10 @@ public class MainGUI {
 
     public void hideQueryAlerts() {
         ((MainGUIController) mainLag.c).hideQueryAlertsBtn();
+    }
+
+    public void showQueryRides() {
+        ((MainGUIController) mainLag.c).showQueryRidesBtn();
     }
 
 

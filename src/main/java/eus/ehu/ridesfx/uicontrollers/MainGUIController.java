@@ -219,4 +219,8 @@ public class MainGUIController implements Controller {
     public void hideQueryAlertsBtn() {
         queryAlertsBtn.setVisible(false);
     }
+
+    public void showQueryRidesBtn() {
+        queryRidesBtn.setVisible(true);
+    }
 }

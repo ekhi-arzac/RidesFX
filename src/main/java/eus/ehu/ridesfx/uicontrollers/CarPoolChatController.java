@@ -172,10 +172,17 @@ public class CarPoolChatController implements Controller {
         businessLogic.getMsgClient().joinChat(ride.getRideNumber(), false);
         User user = businessLogic.getCurrentUser();
         if (user == null) return;
-        if (user instanceof Driver)
-                mainGui.showSceneInCenter("dRidePanel");
-        else if (user instanceof Traveler)
-                mainGui.showSceneInCenter("travelerBooks");
+        if (user instanceof Driver) {
+            mainGui.showSceneInCenter("dRidePanel");
+            mainGui.showDriverRidePanel();
+            mainGui.showCreateRide();
+        }
+        else if (user instanceof Traveler) {
+            mainGui.showSceneInCenter("travelerBooks");
+            mainGui.showQueryAlerts();
+            mainGui.showQueryRides();
+            mainGui.showViewBooksBtn(true);
+        }
     }
     public Ride getRide() {
         return this.ride;
