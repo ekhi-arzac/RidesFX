@@ -81,7 +81,7 @@ public class CreateRideController implements Controller {
 
         try {
 
-            if ((departBox.getSelectionModel().isEmpty()) || arrivalBox.getSelectionModel().isEmpty() || (datePicker.getValue() == null
+            if ((departBox.getValue().isEmpty()) || arrivalBox.getValue().isEmpty() || (datePicker.getValue() == null
                     || nSeatsSpinner.getValue() == 0 || (txtPrice.getText().isEmpty())))
                 return ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.ErrorQuery");
             else {
@@ -147,6 +147,8 @@ public class CreateRideController implements Controller {
 
                 float price = Float.parseFloat(txtPrice.getText());
                 User user = businessLogic.getCurrentUser();
+                //get value of combobox the one written by user
+                System.out.println("HELLO NI-" + departBox.getValue());
                 Ride r = businessLogic.createRide(departBox.getValue(), arrivalBox.getValue(), Dates.convertToDate(datePicker.getValue()), inputSeats, price, user.getEmail());
                 displayMessage(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.RideCreated"), "success_msg");
                 this.businessLogic.findAlert(r);
