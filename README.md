@@ -112,6 +112,9 @@ for example sometimes the messages are duplicated or there are duplicated users*
 | Sprint 1 | 37.7     | 28,6  |
 | Sprint 2 | 25.8     | 22,8  |
 | Sprint 3 | 40.25    | 41,25 |
+| Total    | 103,75   | 92,65 |
+
+There is a server folder with further information about the messaging system (API and Scoket server).
 
 _Authors: Amets Martiarena, Ekhi Arzac, Jon Reboiro._
 
